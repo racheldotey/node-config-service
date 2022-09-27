@@ -1,37 +1,69 @@
 {
-  "name": "nodejs-config-service",
-  "version": "1.0.0",
-  "description": "Manage a set of config variables that are dependent upon node environmental variables set on the server.",
-  "keywords": [
-    "config",
-    "env",
-    "nodeenv",
-    "dotenv"
-  ],
-  "main": "src/index.js",
-  "author": "Rachel Dotey <hello@racheldotey.com>",
-  "homepage": "https://github.com/racheldotey/nodejs-config-service",
-  "bugs": "https://github.com/racheldotey/nodejs-config-service/issues",
-  "license": "MIT",
-  "dependencies": {
-    "dotenv": "^16.0.2",
-    "path": "^0.12.7"
-  },
-  "devDependencies": {
-    "clean-jsdoc-theme": "^4.1.8",
-    "jsdoc": "^3.6.11",
-    "jsdoc-to-markdown": "^7.1.1",
-    "nodemon": "^2.0.20",
-    "open": "^8.4.0",
-    "open-cli": "^7.0.1",
-    "open-editor": "^4.0.0"
-  },
-  "scripts": {
-    "watch": "./node_modules/.bin/nodemon src/index.js && yarn docs:build",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "docs": "yarn docs:build && yarn docs:view",
-    "docs:view": "./node_modules/.bin/open-cli docs/jsdoc/index.html",
-    "docs:build": "./node_modules/.bin/jsdoc ./src/ --configure jsdoc.json --destination docs/jsdoc --readme README.md --access all --recurse",
-    "docs:help": "./node_modules/.bin/jsdoc --help"
-  }
+	"name": "nodejs-config-service",
+	"version": "1.0.0",
+	"description": "Manage a set of config variables that are dependent upon node environmental variables set on the server.",
+	"keywords": [
+		"config",
+		"env",
+		"nodeenv",
+		"dotenv"
+	],
+	"main": "./src/index.js",
+	"author": "Rachel Dotey <hello@racheldotey.com>",
+	"homepage": "https://github.com/racheldotey/nodejs-config-service",
+	"bugs": "https://github.com/racheldotey/nodejs-config-service/issues",
+	"license": "MIT",
+	"dependencies": {
+		"dotenv": "^16.0.2",
+		"path": "^0.12.7"
+	},
+	"devDependencies": {
+		"clean-jsdoc-theme": "^4.1.8",
+		"jsdoc": "^3.6.11",
+		"jsdoc-to-markdown": "^7.1.1",
+		"nodemon": "^2.0.20",
+		"ntl": "^5.1.0",
+		"open": "^8.4.0",
+		"open-cli": "^7.0.1",
+		"open-editor": "^4.0.0"
+	},
+	"nodemonConfig": {
+		"delay": 1000,
+		"env": {
+			"NODE_ENV": "development"
+		},
+		"execMap": {
+			"js": "node"
+		},
+		"ext": "js,json,mjs",
+		"events": {
+			"restart": "osascript -e 'display notification \"App restarted due to:\n'$FILENAME'\" with title \"nodemon\"'"
+		},
+		"ignore": [
+			".git",
+			"*.gitignore",
+			"*.log",
+			"**/test/**",
+			"**/docs/**",
+			"**/logs/**",
+			"**/node_modules/**"
+		],
+		"restartable": "rs",
+		"verbose": true,
+		"watch": [
+			"*.*"
+		]
+	},
+	"scripts": {
+		"start": "ntl",
+		"help": "ntl --descriptions",
+		"run": "node",
+		"watch": "nodemon",
+		"watch:docs": "npm run docs:build && npm run docs:view && nodemon --exec 'npm run docs:build'",
+		"build:check": "node --check",
+		"build:test": "echo \"Error: no test specified\" && exit 1",
+		"docs:view": "open-cli ./docs/jsdoc/nodejs-config-service/1.0.0/index.html",
+		"docs:build": "jsdoc --configure jsdoc.json",
+		"docs:help": "jsdoc --help"
+	}
 }
