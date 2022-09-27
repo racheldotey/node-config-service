@@ -1,0 +1,21 @@
+{
+  "name": "nodejs-config-service",
+  "version": "1.0.0",
+  "description": "Manage a set of config variables that are dependent upon node environmental variables set on the server.",
+  "keywords": [
+    "config",
+    "env",
+    "nodeenv",
+    "dotenv"
+  ],
+  "main": "index.js",
+  "author": "Rachel Dotey <hello@racheldotey.com>",
+  "homepage": "https://github.com/racheldotey/nodejs-config-service",
+  "bugs": "https://github.com/racheldotey/nodejs-config-service/issues",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.0.2",
+    "path": "^0.12.7",
+    "slugify": "^1.6.5"
+  }
+}
