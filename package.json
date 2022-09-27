@@ -8,14 +8,30 @@
     "nodeenv",
     "dotenv"
   ],
-  "main": "index.js",
+  "main": "src/index.js",
   "author": "Rachel Dotey <hello@racheldotey.com>",
   "homepage": "https://github.com/racheldotey/nodejs-config-service",
   "bugs": "https://github.com/racheldotey/nodejs-config-service/issues",
   "license": "MIT",
   "dependencies": {
     "dotenv": "^16.0.2",
-    "path": "^0.12.7",
-    "slugify": "^1.6.5"
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "clean-jsdoc-theme": "^4.1.8",
+    "jsdoc": "^3.6.11",
+    "jsdoc-to-markdown": "^7.1.1",
+    "nodemon": "^2.0.20",
+    "open": "^8.4.0",
+    "open-cli": "^7.0.1",
+    "open-editor": "^4.0.0"
+  },
+  "scripts": {
+    "watch": "./node_modules/.bin/nodemon src/index.js && yarn docs:build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs": "yarn docs:build && yarn docs:view",
+    "docs:view": "./node_modules/.bin/open-cli docs/jsdoc/index.html",
+    "docs:build": "./node_modules/.bin/jsdoc ./src/ --configure jsdoc.json --destination docs/jsdoc --readme README.md --access all --recurse",
+    "docs:help": "./node_modules/.bin/jsdoc --help"
   }
 }
