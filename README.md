@@ -6,6 +6,17 @@ Manage a set of config variables that are dependent upon node environmental vari
 
 -  [dotenv](https://github.com/motdotla/dotenv)
 -  [path](https://nodejs.org/docs/latest/api/path.html)
+-  [prettier](https://prettier.io/docs/en/index.html)
+-  [nodemon](https://prettier.io/docs/en/index.html)
+-  [Node Task List](https://github.com/ruyadorno/ntl)
+
+## Scripts
+
+View the interactive cli tool that lists and run package.json scripts by using:
+
+```
+yarn start
+```
 
 ## Usage
 
@@ -27,3 +38,14 @@ require('config-service');
 ```
 console.log(process.env);
 ```
+
+## Developer Notes
+
+### Cross-platform Shell Reference
+A quick reference of the shell operators & commands that work the same on Unix and Windows.
+
+Use && to run commands in sequence. If a command fails, the script exits.
+Use | to pipe the stdout of one command into the stdin of the next. (do-something | something else)
+Use > to write the stdout of a command to a file. (do-something > file)
+Use < to send the contents of a file to a command's stdin. (command < file)
+Use cd <dir> to change the current working directory to <dir>. Note that cd alone prints the current working directory on windows, but changes the working directory to ~ on *nix.
