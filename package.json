@@ -19,6 +19,8 @@
 	},
 	"devDependencies": {
 		"clean-jsdoc-theme": "^4.1.8",
+		"concurrently": "^7.4.0",
+		"connect-livereload": "^0.6.1",
 		"express": "^4.18.1",
 		"jsdoc": "^3.6.11",
 		"jsdoc-to-markdown": "^7.1.1",
@@ -49,21 +51,23 @@
 		"restartable": "rs",
 		"verbose": true,
 		"watch": [
-			"*.*", "docs/server.js"
+			"*.*",
+			"docs/server.js"
 		]
 	},
 	"scripts": {
+		"help": "npm run",
 		"start": "ntl",
-		"help": "ntl --descriptions",
-		"run": "node",
-		"watch": "nodemon",
-		"watch:docs": "npm run docs:build && npm run docs:view && nodemon --exec 'npm run docs:build'",
-		"watch:docs:ready": "npm run docs:build && npm run docs:view && npm run watch:docs:go",
-		"watch:docs:go": "nodemon --exec 'npm run docs:build && npm run watch:docs:ready'",
+		"start:dev": "concurrently \"npm:docs:watch\" \"npm:docs:run\"",
+		"serve": "nodemon ./src/index.js",
+		"dev": "npm run docs:build:auto",
 		"build:check": "node --check",
 		"build:test": "echo \"Error: no test specified\" && exit 1",
-		"docs:run": "nodemon docs/server.js",
-		"docs:view": "open-cli ./docs/v1/index.html",
-		"docs:build": "jsdoc --configure jsdoc.json --debug"
+		"docs:run": "nodemon ./docs/server.js",
+		"docs:view": "open-cli http://localhost:5555/",
+		"docs:build": "jsdoc --configure jsdoc.json --debug",
+		"docs:watch": "nodemon --exec \"jsdoc --configure jsdoc.json\""
 	}
 }
+
+
