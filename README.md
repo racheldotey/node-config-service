@@ -1,16 +1,14 @@
-<h1 align="center">nodejs-config-service</h1>
+<h1 align="center">node-config-service</h1>
 <div align="center">
-  Config manager for <code>node.js</code>.<br />
+  Config manager for <pre><code>node.js</code></pre>.<br />
   <a href="/issues/new">Report a Bug</a>
   ·
   <a href="/subscription">Watch this Project</a>
-  .
+  ·
   <a href="/fork">Fork this Repository</a>
 </div>
-<br/>
-<hr/>
-<br/>
-<details open="open">
+
+<details open="close">
 <summary>Table of Contents</summary>
 
 - [About](#about)
@@ -18,26 +16,21 @@
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
 - [Installation](#installation)
-    - [Module requirements:](#module-requirements)
     - [Dev requirements:](#dev-requirements)
     - [Dev tools:](#dev-tools)
 - [Scripts](#scripts)
 - [Usage](#usage)
-  - [Expanded .env](#expanded-env)
+  - [Example Env Variables](#example-env-variables)
 - [Issues](#issues)
 - [Contributing](#contributing)
 - [Contact](#contact)
 - [License](#license)
   
 </details>
-<br/>
-<hr/>
-<br/>
-<br/>
 
 ## About
 
-Manage a set of config variables that are dependent upon node environmental variables set on the server. 
+`ConfigService` is a `node` module used to manage a set of config variables that are dependent upon node environmental variables set on the server. 
 
 Merge several configuration sources into a portable `get` method used throughout the app.
 
@@ -49,10 +42,10 @@ Merge several configuration sources into a portable `get` method used throughout
 
 ## Getting Started
 
+### Prerequisites
+
 > Note : You must have `git`, `node` and `npm` installed on your machine.
 > `Yarn` is also recommended but not required.
-
-### Prerequisites
 
 
 Usage
@@ -66,16 +59,11 @@ Variables reference
 In a terminal, type :
 
 ```bash
-npm install clean-jsdoc-theme --save-dev
+npm install node-config-service --save-dev
 # or
 yarn add clean-jsdoc-theme -D
 ```
 
-#### Module requirements:
-
-[dotenv](https://github.com/motdotla/dotenv) - Loads environment variables from a `.env` file into [`process.env`](https://nodejs.org/docs/latest/api/process.html#process_process_env).
-[dotenv-expand](https://github.com/motdotla/dotenv-expand) - Adds variable expansion on top of dotenv.
-[path](https://nodejs.org/docs/latest/api/path.html) - Utilities for working with file and directory paths.
 
 #### Dev requirements:
 
@@ -106,49 +94,76 @@ yarn start
 
 ## Usage
 
-Create a `.env` file in the root of your project:
+Process environmental variables can be set in a number of ways including the command line interface, in the `package.json` and using `.env` files in the root of your project. 
+
+Under the hood ConfigService uses [dotenv](https://github.com/motdotla/dotenv) to populate the node `process.env` object with the defined variables.
 
 ```
-NODE_ENV="development"
-APP_ROOT_DIR="/srv/your-app/src/"
-```
-
-As early as possible in your application, import the `config-service` module to include environmental variables into node.
-
-```
-require('config-service');
-```
-
-Note: This populates the node `process.env` object with the contents of the `.env` file.
-
-```
+require('node-config-service');
 console.log(process.env);
 ```
 
-### Expanded .env
-
-[Dotenv-expand](https://github.com/motdotla/dotenv-expand) adds variable expansion on top of dotenv.
-
-See [tests/.env](https://github.com/motdotla/dotenv-expand/blob/master/tests/.env) for simple and complex examples of variable expansion in your `.env`
+[Dotenv-expand](https://github.com/motdotla/dotenv-expand) adds variable expansion on top of `dotenv`. This allows the use of simple and complex examples of variable expansion in your `.env`
 file.
 
-```
-# github.com/motdotla/dotenv-expand/blob/master/tests/.env
+### Example Env Variables
 
+<details open="open">
+<summary>Example .env Variables</summary>
+<blockquote>
+
+<details open="close">
+<summary>Basic Example</summary>
+<blockquote>
+<pre><code>
+NODE_ENV=development
+PROPERTY_KEY=property_value
+</code></pre>
+</blockquote>
+</details>
+
+<details open="close">
+<summary>Example DB Config</summary>
+<blockquote>
+<pre><code>
+NODE_ENV=production
+
+MONGOLAB_DATABASE=heroku_db
+MONGOLAB_USER=username
+MONGOLAB_PASSWORD=password
+MONGOLAB_DOMAIN=abcd1234.mongolab.com
+MONGOLAB_PORT=12345
+MONGOLAB_URI=mongodb://${MONGOLAB_USER}:${MONGOLAB_PASSWORD}@${MONGOLAB_DOMAIN}:${MONGOLAB_PORT}/${MONGOLAB_DATABASE}
+</code></pre>
+</blockquote>
+</details>
+
+<details open="close">
+<summary>Full Dotenv Expanded Example</summary>
+<blockquote>
+<p>See <a href="https://github.com/motdotla/dotenv-expand#examples" target="_blank">dotenv-expand#examples</a> for more information.</p>
+<pre><code>
 NODE_ENV=test
 BASIC=basic
+
 BASIC_EXPAND=$BASIC
+
 MACHINE=machine_env
 MACHINE_EXPAND=$MACHINE
+
 UNDEFINED_EXPAND=$UNDEFINED_ENV_KEY
+
 ESCAPED_EXPAND=\$ESCAPED
+
 DEFINED_EXPAND_WITH_DEFAULT=${MACHINE:-default}
 DEFINED_EXPAND_WITH_DEFAULT_NESTED=${MACHINE:-${UNDEFINED_ENV_KEY:-default}}
+
 UNDEFINED_EXPAND_WITH_DEFINED_NESTED=${UNDEFINED_ENV_KEY:-${MACHINE:-default}}
 UNDEFINED_EXPAND_WITH_DEFAULT=${UNDEFINED_ENV_KEY:-default}
 UNDEFINED_EXPAND_WITH_DEFAULT_NESTED=${UNDEFINED_ENV_KEY:-${UNDEFINED_ENV_KEY_2:-default}}
 UNDEFINED_EXPAND_WITH_DEFAULT_NESTED_TWICE=${UNDEFINED_ENV_KEY:-${UNDEFINED_ENV_KEY_2${UNDEFINED_ENV_KEY_3:-default}}}
 UNDEFINED_EXPAND_WITH_DEFAULT_WITH_SPECIAL_CHARACTERS=${UNDEFINED_ENV_KEY:-/default/path}
+
 MONGOLAB_DATABASE=heroku_db
 MONGOLAB_USER=username
 MONGOLAB_PASSWORD=password
@@ -163,32 +178,36 @@ WITHOUT_CURLY_BRACES_URI=mongodb://$MONGOLAB_USER:$MONGOLAB_PASSWORD@$MONGOLAB_D
 WITHOUT_CURLY_BRACES_USER_RECURSIVELY=$MONGOLAB_USER:$MONGOLAB_PASSWORD
 WITHOUT_CURLY_BRACES_URI_RECURSIVELY=mongodb://$MONGOLAB_USER_RECURSIVELY@$MONGOLAB_DOMAIN:$MONGOLAB_PORT/$MONGOLAB_DATABASE
 WITHOUT_CURLY_BRACES_UNDEFINED_EXPAND_WITH_DEFAULT_WITH_SPECIAL_CHARACTERS=$UNDEFINED_ENV_KEY:-/default/path
-```
+</code></pre>
+</blockquote>
+</details>
+
+</blockquote>
+</details>
 
 ## Issues
 
-If you experience unexpected behavior please [create a GitHub issue](https://github.com/user/repository/issues/new). 
+If you experience unexpected behavior please <a href="/issues/new" target="_blank">let the maintainers know</a>. 
 
 To help us quickly find and solve your problem, pease try to create bug reports that are:
 
 - _Reproducible._ Include steps to reproduce the problem.
 - _Specific._ Include as much detail as possible: which version, what environment, etc.
-- _Unique._ Do not duplicate existing opened issues.
+- _Unique._ Do not duplicate  <a href="/issues" target="_blank">existing opened issues</a>.
 - _Scoped to a Single Bug._ One bug per report.
 
 ## Contributing
 
-First off, thanks for taking the time to contribute! Contributions are what makes the open-source community such an amazing place to learn, inspire, and create. Any contributions you make will benefit everybody else and are **greatly appreciated**.
+First off, thanks for taking the time to contribute! Pull requests are welcome. For major changes, please [open an issue](#issues) first to discuss what you would like to change.
 
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+<a href="https://github.com/racheldotey/node-config-service/fork" target="_blank">Fork this Repository</a>.
 
 ## Contact
 
-If you like my work, then give me a [star](/). I also appreciate a [GitHub profile](https://github.com/racheldotey).
-
-- <a href="https://racheldotey.ninja" target="_blank">GitHub discussions](https://github.com/racheldotey/nodejs-config-service/issues)
-I can also be found  for more ways to 
+If you like my work, then give me a <a href="https://github.com/racheldotey/node-config-service/" target="_blank">star</a>. I also appreciate a <a href="https://github.com/racheldotey" target="_blank">follow</a>.
 
 ## License
 
-Copyright (C) 2022-present <a href="https://racheldotey.ninja" target="_blank">Rachel Dotey</a>, released under the <a href="/blob/main/LICENSE" target="_blank">MIT License</a>.
+May be freely distributed under the <a href="https://github.com/racheldotey/node-config-service/blob/main/LICENSE" target="_blank">MIT License</a>.
+
+Copyright (C) 2022-present <a href="https://racheldotey.ninja" target="_blank">Rachel Dotey</a>.
