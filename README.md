@@ -1,6 +1,6 @@
 <h1 align="center">node-config-service</h1>
 <div align="center">
-  Config manager for <code>node.js</code>.<br />
+  Simple config config management for `node` apps.<br />
   <a href="/issues/new">Report a Bug</a>
   ·
   <a href="/subscription">Watch this Project</a>
@@ -16,12 +16,14 @@
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
-    - [Dev requirements:](#dev-requirements)
-    - [Dev tools:](#dev-tools)
-- [Scripts](#scripts)
 - [Usage](#usage)
   - [Example Env Variables](#example-env-variables)
 - [Issues](#issues)
+- [Development](#development)
+    - [Dev requirements:](#dev-requirements)
+    - [Dev tools:](#dev-tools)
+- [Scripts](#scripts)
+- [Documentation](#documentation)
 - [Contributing](#contributing)
 - [Contact](#contact)
 - [License](#license)
@@ -44,64 +46,17 @@ Merge several configuration sources into a portable `get` method used throughout
 
 ### Prerequisites
 
-> Note : You must have `git`, `node` and `npm` installed on your machine.
-> `Yarn` is also recommended but not required.
+> Note : You must have <a href="https://git-scm.com/" target="_blank">git</a>, <a href="https://nodejs.org/" target="_blank">node</a> and <a href="https://www.npmjs.com/" target="_blank">npm</a> installed on your machine.  <a href="https://yarnpkg.com/" target="_blank">Yarn</a> is recommended but not required.
 
 ### Installation
-
 
 In a terminal, type :
 
 ```bash
-npm install node-config-service --save-dev
+$ npm install node-config-service --save-dev
 # or
-yarn add node-config-service --dev
+$ yarn add node-config-service --dev
 ```
-
-
-#### Dev requirements:
-
-- <a href="" target="_blank">clean-jsdoc-theme</a> -
-- <a href="https://github.com/open-cli-tools/concurrently" target="_blank">Concurrently</a> - Run server commands concurrently.
-- <a href="https://github.com/intesso/connect-livereload" target="_blank">Connect-livereload</a> - Middleware for adding the livereload script to the response. no browser plugin is needed.
-- <a href="https://expressjs.com/" target="_blank">Express</a> - Used to server the docs locally.
-- <a href="https://jsdoc.app/" target="_blank">Jsdoc</a> - API documentation generator for JavaScript.
-- <a href="" target="_blank">Jsdoc-to-markdown</a> -
-- <a href="https://github.com/mmichelli/node-livereload" target="_blank">Livereload</a> - LiveReload server in Node.js.
-- <a href="https://github.com/remy/nodemon" target="_blank">Nodemon</a> - Auto restart the app when file changes are detected.
-- <a href="https://github.com/ruyadorno/ntl" target="_blank">Node Task List</a> - Interactive cli tool that lists and run `package.json` scripts.
-- <a href="https://github.com/sindresorhus/open-cli" target="_blank">Open-cli</a> - Cross-platform command line, open urls, files, etc.
-
-
-#### Dev tools:
--  <a href="https://git-scm.com/" target="_blank">Git</a> or <a href="https://desktop.github.com/" target="_blank">GitHub Desktop</a> - Code management.
--  <a href="https://prettier.io/docs/en/index.html" target="_blank">Yarn</a> - Dependency management.
--  <a href="https://prettier.io/docs/en/index.html" target="_blank">Prettier</a> - Code formatter.
-
-## Scripts
-
-Using either `npm` or `yarn` 
-
-View the interactive cli tool that lists and run package.json scripts by using:
-
-
-		"help": "npm run",
-		"start": "ntl",
-		"start:dev": "concurrently \"npm:docs:watch\" \"npm:docs:run\"",
-		"serve": "nodemon ./src/index.js",
-		"dev": "npm run docs:build:auto",
-		"build:check": "node --check",
-		"build:test": "echo \"Error: no test specified\" && exit 1",
-		"docs:run": "nodemon ./docs/server.js",
-		"docs:view": "open-cli http://localhost:5555/",
-		"docs:build": "jsdoc --configure jsdoc.json --debug",
-		"docs:watch": "nodemon --exec \"jsdoc --configure jsdoc.json\""
-
-```bash
-yarn start
-```
-
-
 
 ## Usage
 
@@ -213,6 +168,57 @@ To help us quickly find and solve your problem, pease try to create bug reports 
 - _Specific._ Include as much detail as possible: which version, what environment, etc.
 - _Unique._ Do not duplicate  <a href="https://github.com/racheldotey/node-config-service/issues" target="_blank">existing opened issues</a>.
 - _Scoped to a Single Bug._ One bug per report.
+
+
+## Development
+
+
+
+#### Dev requirements:
+
+- <a href="" target="_blank">clean-jsdoc-theme</a> -
+- <a href="https://github.com/open-cli-tools/concurrently" target="_blank">Concurrently</a> - Run server commands concurrently.
+- <a href="https://github.com/intesso/connect-livereload" target="_blank">Connect-livereload</a> - Middleware for adding the livereload script to the response. no browser plugin is needed.
+- <a href="https://expressjs.com/" target="_blank">Express</a> - Used to server the docs locally.
+- <a href="https://jsdoc.app/" target="_blank">Jsdoc</a> - API documentation generator for JavaScript.
+- <a href="" target="_blank">Jsdoc-to-markdown</a> -
+- <a href="https://github.com/mmichelli/node-livereload" target="_blank">Livereload</a> - LiveReload server in Node.js.
+- <a href="https://github.com/remy/nodemon" target="_blank">Nodemon</a> - Auto restart the app when file changes are detected.
+- <a href="https://github.com/ruyadorno/ntl" target="_blank">Node Task List</a> - Interactive cli tool that lists and run `package.json` scripts.
+- <a href="https://github.com/sindresorhus/open-cli" target="_blank">Open-cli</a> - Cross-platform command line, open urls, files, etc.
+
+
+#### Dev tools:
+-  <a href="https://git-scm.com/" target="_blank">Git</a> or <a href="https://desktop.github.com/" target="_blank">GitHub Desktop</a> - Code management.
+-  <a href="https://prettier.io/docs/en/index.html" target="_blank">Yarn</a> - Dependency management.
+-  <a href="https://prettier.io/docs/en/index.html" target="_blank">Prettier</a> - Code formatter.
+
+
+
+## Scripts
+
+Using either `npm` or `yarn` 
+
+View the interactive cli tool that lists and run package.json scripts by using:
+
+
+		"help": "npm run",
+		"start": "ntl",
+		"start:dev": "concurrently \"npm:docs:watch\" \"npm:docs:run\"",
+		"serve": "nodemon ./src/index.js",
+		"dev": "npm run docs:build:auto",
+		"build:check": "node --check",
+		"build:test": "echo \"Error: no test specified\" && exit 1",
+		"docs:run": "nodemon ./docs/server.js",
+		"docs:view": "open-cli http://localhost:5555/",
+		"docs:build": "jsdoc --configure jsdoc.json --debug",
+		"docs:watch": "nodemon --exec \"jsdoc --configure jsdoc.json\""
+
+```bash
+yarn start
+```
+
+## Documentation
 
 ## Contributing
 
