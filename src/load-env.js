@@ -1,7 +1,5 @@
-// NOTE: Should be placed as early as possible on startup.
-// Loads environment variables from a .env file into process.env. 
-// https://www.npmjs.com/package/dotenv
-console.count('dotenv wasInitialized');
-require('dotenv').config();
+var envVars;
 
-module.exports = process.env;
+if(!envVars) envVars = require('dotenv').config();
+
+module.exports = envVars;
