@@ -1,4 +1,6 @@
 {
+	"name": "docs",
+	"version": "v1",
 	"sourceType": "module",
 	"source": {
 		"include": ["src", "README.md", "package.json"]
@@ -11,13 +13,14 @@
 	"opts": {
 		"encoding": "utf8",
 		"readme": "README.md",
-		"destination": "docs/jsdoc",
+		"package": "jsdoc.json",
+		"destination": "./",
 		"recurse": true,
 		"verbose": true,
 		"template": "node_modules/clean-jsdoc-theme",
 		"theme_opts": {
 			"base_url": "/",
-			"homepageTitle": "NodeConfigService Docs",
+			"homepageTitle": "NodeConfigService",
 			"default_theme": "dark"
 		}
 	}
