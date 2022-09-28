@@ -19,13 +19,14 @@
 	},
 	"devDependencies": {
 		"clean-jsdoc-theme": "^4.1.8",
+		"express": "^4.18.1",
 		"jsdoc": "^3.6.11",
 		"jsdoc-to-markdown": "^7.1.1",
+		"livereload": "^0.9.3",
 		"nodemon": "^2.0.20",
 		"ntl": "^5.1.0",
 		"open": "^8.4.0",
-		"open-cli": "^7.0.1",
-		"open-editor": "^4.0.0"
+		"open-cli": "^7.0.1"
 	},
 	"nodemonConfig": {
 		"delay": 1000,
@@ -36,22 +37,19 @@
 			"js": "node"
 		},
 		"ext": "js,json,mjs",
-		"events": {
-			"restart": "osascript -e 'display notification \"App restarted due to:\n'$FILENAME'\" with title \"nodemon\"'"
-		},
 		"ignore": [
 			".git",
 			"*.gitignore",
 			"*.log",
 			"**/test/**",
-			"**/docs/**",
+			"**/docs/*/**",
 			"**/logs/**",
 			"**/node_modules/**"
 		],
 		"restartable": "rs",
 		"verbose": true,
 		"watch": [
-			"*.*"
+			"*.*", "docs/server.js"
 		]
 	},
 	"scripts": {
@@ -60,10 +58,12 @@
 		"run": "node",
 		"watch": "nodemon",
 		"watch:docs": "npm run docs:build && npm run docs:view && nodemon --exec 'npm run docs:build'",
+		"watch:docs:ready": "npm run docs:build && npm run docs:view && npm run watch:docs:go",
+		"watch:docs:go": "nodemon --exec 'npm run docs:build && npm run watch:docs:ready'",
 		"build:check": "node --check",
 		"build:test": "echo \"Error: no test specified\" && exit 1",
-		"docs:view": "open-cli ./docs/jsdoc/nodejs-config-service/1.0.0/index.html",
-		"docs:build": "jsdoc --configure jsdoc.json",
-		"docs:help": "jsdoc --help"
+		"docs:run": "nodemon docs/server.js",
+		"docs:view": "open-cli ./docs/v1/index.html",
+		"docs:build": "jsdoc --configure jsdoc.json --debug"
 	}
 }
