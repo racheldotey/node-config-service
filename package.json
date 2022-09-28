@@ -15,6 +15,7 @@
 	"license": "MIT",
 	"dependencies": {
 		"dotenv": "^16.0.2",
+		"dotenv-expand": "^9.0.0",
 		"path": "^0.12.7"
 	},
 	"devDependencies": {
@@ -27,7 +28,6 @@
 		"livereload": "^0.9.3",
 		"nodemon": "^2.0.20",
 		"ntl": "^5.1.0",
-		"open": "^8.4.0",
 		"open-cli": "^7.0.1"
 	},
 	"nodemonConfig": {
@@ -69,5 +69,3 @@
 		"docs:watch": "nodemon --exec \"jsdoc --configure jsdoc.json\""
 	}
 }
-
-
