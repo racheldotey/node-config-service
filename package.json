@@ -1,7 +1,7 @@
 {
 	"name": "nodejs-config-service",
 	"version": "1.0.0",
-	"description": "Manage a set of config variables that are dependent upon node environmental variables set on the server.",
+	"description": "A config management service for your next node app.",
 	"keywords": [
 		"config",
 		"env",
