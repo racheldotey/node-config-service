@@ -67,7 +67,7 @@
 		"dev:format": "prettier --write src/**/*.{js,jsx",
 		"dev:serve": "nodemon ./scripts/dev-server.js",
 		"docs:build:html": "jsdoc --configure ./scripts/jsdoc.json",
-		"docs:build:md": "jsdoc2md DOCS.md src/*.js index.js > DOCS.md",
+		"docs:build:md": "jsdoc2md -t README.hbs src/*.js index.js > README.md",
 		"docs:open": "open-cli http://localhost:5555/",
 		"develop": "npm run build:dev && npm run test && npm run dev:serve"
 	}
