@@ -57,9 +57,6 @@
 		"open-cli": "^7.0.1",
 		"prettier": "^2.7.1"
 	},
-	"config": {
-		"urlLocalDocs": "http://localhost:5555/"
-	},
 	"scripts": {
 		"start": "ntl",
 		"menu": "ntl",
