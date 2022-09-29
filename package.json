@@ -57,15 +57,18 @@
 		"prettier": "^2.7.1"
 	},
 	"scripts": {
-		"start": "ntl",
+		"start": "mpm run menu",
 		"menu": "ntl",
 		"info": "npm run",
+		"help": "npm run info",
 		"test": "bash ./scripts/run-tests.sh",
-		"format": "prettier --write src/**/*.{js,jsx",
-		"build": "bash ./scripts/build-dist.sh && npm run docs-build",
-		"build-docs": "jsdoc --configure ./scripts/jsdoc.json",
-		"serve": "nodemon ./scripts/dev-server.js",
-		"develop": "npm run test && npm run build && npm run serve",
-		"view-docs-in-browser": "open-cli http://localhost:5555/"
+		"build:dist": "bash ./scripts/build-dist.sh",
+		"build:dev": "concurrently \"npm:docs:build:md\" \"npm:docs:build:html\"",
+		"dev:format": "prettier --write src/**/*.{js,jsx",
+		"dev:serve": "nodemon ./scripts/dev-server.js",
+		"docs:build:html": "jsdoc --configure ./scripts/jsdoc.json",
+		"docs:build:md": "jsdoc2md DOCS.md src/*.js index.js > DOCS.md",
+		"docs:open": "open-cli http://localhost:5555/",
+		"develop": "npm run build:dev && npm run test && npm run dev:serve"
 	}
 }
