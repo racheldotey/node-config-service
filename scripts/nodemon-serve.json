@@ -1,0 +1,21 @@
+{
+	"delay": 1000,
+	"env": {
+		"NODE_ENV": "development"
+	},
+	"execMap": {
+		"js": "node"
+	},
+	"ext": "js,json,mjs",
+	"ignore": [
+		".git",
+		"*.gitignore",
+		"*.log",
+		"*.lock",
+		"**/logs/**",
+		"**/node_modules/**"
+	],
+	"restartable": "rs",
+	"verbose": true,
+	"watch": ["*.*"]
+}
