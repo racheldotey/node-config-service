@@ -1,5 +1,5 @@
 {
-	"name": "nodejs-config-service",
+	"name": "node-config-service",
 	"version": "1.0.0",
 	"description": "A config management service for your next node app.",
 	"keywords": [
@@ -10,8 +10,8 @@
 	],
 	"main": "./src/index.js",
 	"author": "Rachel Dotey <hello@racheldotey.com>",
-	"homepage": "https://github.com/racheldotey/nodejs-config-service",
-	"bugs": "https://github.com/racheldotey/nodejs-config-service/issues",
+	"homepage": "https://github.com/racheldotey/node-config-service",
+	"bugs": "https://github.com/racheldotey/node-config-service/issues",
 	"license": "MIT",
 	"dependencies": {
 		"dotenv": "^16.0.2",
@@ -30,42 +30,21 @@
 		"ntl": "^5.1.0",
 		"open-cli": "^7.0.1"
 	},
-	"nodemonConfig": {
-		"delay": 1000,
-		"env": {
-			"NODE_ENV": "development"
-		},
-		"execMap": {
-			"js": "node"
-		},
-		"ext": "js,json,mjs",
-		"ignore": [
-			".git",
-			"*.gitignore",
-			"*.log",
-			"**/test/**",
-			"**/docs/*/**",
-			"**/logs/**",
-			"**/node_modules/**"
-		],
-		"restartable": "rs",
-		"verbose": true,
-		"watch": [
-			"*.*",
-			"docs/server.js"
-		]
-	},
 	"scripts": {
-		"help": "npm run",
-		"start": "ntl",
 		"start:dev": "concurrently \"npm:docs:watch\" \"npm:docs:run\"",
-		"serve": "nodemon ./src/index.js",
-		"dev": "npm run docs:build:auto",
-		"build:check": "node --check",
-		"build:test": "echo \"Error: no test specified\" && exit 1",
-		"docs:run": "nodemon ./docs/server.js",
-		"docs:view": "open-cli http://localhost:5555/",
-		"docs:build": "jsdoc --configure jsdoc.json --debug",
-		"docs:watch": "nodemon --exec \"jsdoc --configure jsdoc.json\""
+		"docs:run": "nodemon --config ./scripts/nodemon-dev-server.json ./docs/server.js",
+		"docs:watch": "nodemon --config ./scripts/nodemon-docs-build.json --exec \"jsdoc --configure jsdoc.json\"",
+		
+		"start": "ntl",
+		"info": "ntl --info",
+		
+		"run": "node ./scripts/dev-server.js",
+		"serve": "nodemon ./scripts/dev-server.js",
+		"test": "echo 'Error: no test specified'",
+		"build": "npm run docs-build",
+		"dev": "npm run test && npm run build && npm run serve",
+
+		"docs-build": "jsdoc --configure jsdoc.json",
+		"docs-view": "open-cli http://localhost:5555/"
 	}
 }
