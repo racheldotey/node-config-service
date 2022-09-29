@@ -14,7 +14,7 @@
 		"encoding": "utf8",
 		"readme": "README.md",
 		"package": "jsdoc.json",
-		"destination": "./",
+		"destination": "./static",
 		"recurse": true,
 		"verbose": true,
 		"template": "node_modules/clean-jsdoc-theme",
@@ -27,7 +27,7 @@
 			"menu": [
 			  {
 				"title": "GitHub",
-				"link": "https://github.com/racheldotey/nodejs-config-service",
+				"link": "https://github.com/racheldotey/node-config-service",
 				"target": "_blank",
 				"class": "link",
 				"id": "link-github"
