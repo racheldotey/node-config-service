@@ -1,6 +1,6 @@
 {
 	"name": "node-config-service",
-	"version": "1.0.0",
+	"version": "0.9.0",
 	"private": false,
 	"keywords": [
 		"config",
