@@ -198,20 +198,21 @@ Using either `npm` or `yarn`
 
 View the interactive cli tool that lists and run package.json scripts by using:
 
-     "help": "npm run",
-     "start": "ntl",
-     "start:dev": "concurrently \"npm:docs:watch\" \"npm:docs:run\"",
-     "serve": "nodemon ./src/index.js",
-     "dev": "npm run docs:build:auto",
-     "build:check": "node --check",
-     "build:test": "echo \"Error: no test specified\" && exit 1",
-     "docs:run": "nodemon ./docs/server.js",
-     "docs:view": "open-cli http://localhost:5555/",
-     "docs:build": "jsdoc --configure jsdoc.json --debug",
-     "docs:watch": "nodemon --exec \"jsdoc --configure jsdoc.json\""
-
 ```bash
-yarn start
+$ yarn run info
+yarn run v1.22.4
+warning ..\..\..\package.json: No license field
+$ ntl --info
+√  Node Task List
+? Select a task to run: (Use arrow keys)
+>      start › ntl
+        info › ntl --info
+         run › node ./scripts/dev-server.js
+       serve › nodemon ./scripts/dev-server.js
+        test › echo 'Error: no test specified'
+       build › npm run docs-build
+         dev › npm run test && npm run build && npm run serve
+
 ```
 
 ## Contributing
