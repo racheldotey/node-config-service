@@ -9,14 +9,13 @@
 	"ext": "js,json,mjs",
 	"ignore": [
 		"**/static/**",
-		".git",
-		"*.gitignore",
+		"*.git",
+		"*.md",
 		"*.log",
-		"*.lock",
 		"**/logs/**",
 		"**/node_modules/**"
 	],
 	"restartable": "rs",
 	"verbose": true,
-	"watch": ["*.*"]
+	"watch": ["../*.*"]
 }
