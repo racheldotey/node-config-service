@@ -1,0 +1,1 @@
+echo "jsdoc --configure jsdoc.json"
