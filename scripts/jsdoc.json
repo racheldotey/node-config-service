@@ -3,16 +3,7 @@
 	"version": "v1",
 	"sourceType": "module",
 	"source": {
-		"include": ["../*.*"],
-		"ignore": [
-			"../static",
-			"**/.git",
-			"**/*.gitignore",
-			"**/*.lock",
-			"**/*.log",
-			"**/logs/**",
-			"**/node_modules/**"
-		]
+		"include": ["src", "README.md", "package.json"]
 	},
 	"plugins": ["plugins/markdown"],
 	"markdown": {
@@ -23,7 +14,7 @@
 		"encoding": "utf8",
 		"readme": "README.md",
 		"package": "jsdoc.json",
-		"destination": "../static",
+		"destination": "static",
 		"recurse": true,
 		"verbose": true,
 		"template": "node_modules/clean-jsdoc-theme",
