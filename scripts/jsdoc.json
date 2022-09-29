@@ -4,7 +4,15 @@
 	"sourceType": "module",
 	"source": {
 		"include": ["../*.*"],
-		"ignore": ["../static", "**/.git", "**/*.gitignore", "**/*.lock", "**/*.log", "**/logs/**", "**/node_modules/**"]
+		"ignore": [
+			"../static",
+			"**/.git",
+			"**/*.gitignore",
+			"**/*.lock",
+			"**/*.log",
+			"**/logs/**",
+			"**/node_modules/**"
+		]
 	},
 	"plugins": ["plugins/markdown"],
 	"markdown": {
