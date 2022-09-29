@@ -1,6 +1,6 @@
 # Changelog
 
 
-## [1.0.0] - 2022-09-28
+## [0.9.0] - 2022-09-28
 
-🌱 Initial release. ([**@racheldotey**](https://github.com/racheldotey))
+🌱 Initial pre release. ([**@racheldotey**](https://github.com/racheldotey))
