@@ -36,8 +36,7 @@
 		"not ie <= 8"
 	],
 	"engines": {
-		"node": ">= 6.0.0",
-		"npm": ">= 3.0.0"
+		"node": "^14.17.0 || >=16.0.0"
 	},
 	"dependencies": {
 		"dotenv": "^16.0.2",
@@ -64,7 +63,7 @@
 		"test": "bash ./scripts/run-tests.sh",
 		"format": "prettier --write src/**/*.{js,jsx",
 		"build": "bash ./scripts/build-dist.sh && npm run docs-build",
-		"build-docs": "bash ./scripts/build-docs.sh",
+		"build-docs": "jsdoc --configure ./scripts/jsdoc.json",
 		"serve": "nodemon ./scripts/dev-server.js",
 		"develop": "npm run test && npm run build && npm run serve",
 		"view-docs-in-browser": "open-cli http://localhost:5555/"
