@@ -3,24 +3,32 @@
 
 **Simple config config management for `node` apps.**
 
-[![GitHub last commit](https://img.shields.io/github/last-commit/racheldotey/node-config-service?style=flat-square)](https://github.com/racheldotey/node-config-service/commits/main) [![GitHub all releases](https://img.shields.io/github/downloads/racheldotey/node-config-service/total?style=flat-square)](https://github.com/racheldotey/node-config-service/releases) [![GitHub issues](https://img.shields.io/github/issues/racheldotey/node-config-service?style=flat-square)](https://github.com/racheldotey/node-config-service/issues) [![GitHub watchers](https://img.shields.io/github/watchers/racheldotey/node-config-service?style=flat-square)](https://github.com/racheldotey/node-config-service/watchers/) [![GitHub forks](https://img.shields.io/github/forks/racheldotey/node-config-service?style=flat-square)](https://github.com/racheldotey/node-config-service/fork)
+[![npm](https://img.shields.io/npm/v/node-config-service.svg?style=flat-square)](https://www.npmjs.com/package/node-config-service) [![GitHub all releases](https://img.shields.io/github/downloads/racheldotey/node-config-service/total?style=flat-square)](https://github.com/racheldotey/node-config-service/releases) [![GitHub issues](https://img.shields.io/github/issues/racheldotey/node-config-service?style=flat-square)](https://github.com/racheldotey/node-config-service/issues) [![GitHub last commit](https://img.shields.io/github/last-commit/racheldotey/node-config-service?style=flat-square)](https://github.com/racheldotey/node-config-service/commits/main) 
+
+[![NPM](https://nodei.co/npm/node-config-service.png)](https://nodei.co/npm/node-config-service/)
 
 </div>
+
+```js
+const configService = require('node-config-service');
+console.log(process.env);
+```
 
 <details>
 <summary>Table of Contents</summary>
 
 - [About](#about)
-- [Built With](#built-with)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
+- [Features](#features)
 - [Usage](#usage)
   - [Example Env Variables](#example-env-variables)
 - [Issues](#issues)
 - [Development](#development)
     - [Dev requirements](#dev-requirements)
 - [Scripts](#scripts)
+- [Running Tests](#running-tests)
 - [Contributing](#contributing)
 - [Contact](#contact)
 - [License](#license)
@@ -35,25 +43,23 @@
 
 Merge several configuration sources into a portable `get` method used throughout the app.
 
-## Built With
-
-<ul>
-<li><a href="https://github.com/motdotla/dotenv" target="_blank" rel="noopener">Dotenv</a> - Loads environment variables from a <code>.env</code> file into <a href="https://nodejs.org/docs/latest/api/process.html#process_process_env" target="_blank" rel="noopener">process.env</a>.</li>
-<li><a href="https://github.com/motdotla/dotenv-expand" target="_blank" rel="noopener">Dotenv-expand</a> - Adds variable expansion on top of dotenv.</li>
-<li><a href="https://github.com/motdotla/path" target="_blank" rel="noopener">Path</a> - Utilities for working with file and directory paths.</li>
-</ul>
-
 ## Getting Started
 
 ### Prerequisites
 
-> Note : You must have <a href="https://git-scm.com/" target="_blank" rel="noopener">git</a>, 
-> <a href="https://nodejs.org/" target="_blank" rel="noopener">node</a> and
-> <a href="https://www.npmjs.com/" target="_blank" rel="noopener">npm</a> installed on your machine.
-> <a href="https://yarnpkg.com/" target="_blank" rel="noopener">Yarn</a> is recommended but not
-> required.
+> Before starting, <a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">download and install Node.js</a>. Node.js 14.0 or higher is required. <a href="https://git-scm.com/" target="_blank" rel="noopener">Git</a> is required to [contribute](#contributing) to the project.
+> 
+> Optional tools include install <a href="https://classic.yarnpkg.com/en/docs/install#windows-stable" target="_blank" rel="noopener">yarn</a> if desired.
+> `$ npm install --global yarn`
 
 ### Installation
+
+`ConfigService` is a <a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js</a> module available through the <a href="https://www.npmjs.com" target="_blank" rel="noopener">npm</a> and <a href="https://yarnpkg.com/" target="_blank" rel="noopener">yarn</a> package registries.
+
+
+If you have not already done so, create a `package.json` for your project with the <a href="https://docs.npmjs.com/cli/v6/commands/npm-init" target="_blank" rel="noopener">`npm init`</a> or the <a href="https://classic.yarnpkg.com/en/docs/cli/init" target="_blank" rel="noopener">`yarn init`</a> command.
+
+Including this module using the <a href="https://docs.npmjs.com/getting-started/installing-npm-packages-locally" target="_blank" rel="noopener">`npm install`</a> or the <a href="https://classic.yarnpkg.com/en/docs/cli/install" target="_blank" rel="noopener">`yarn install`</a> command:
 
 In a terminal, type :
 
@@ -62,6 +68,11 @@ $ npm install node-config-service --save-dev
 # or
 $ yarn add node-config-service --dev
 ```
+
+## Features
+
+  * Define config params in a json file.
+  * Load config variables with node env params, pass them programmatically, or load them from asynchronous sources.
 
 ## Usage
 
@@ -194,32 +205,46 @@ To help us quickly find and solve your problem, pease try to create bug reports 
 
 ## Scripts
 
-Using either `npm` or `yarn`
+To view an <a href="https://github.com/ruyadorno/ntl" target="_blank" rel="noopener">interactive menu</a> of project commands, first install the dependencies, then use execute the `start` command using either `npm` or `yarn`
 
 View the interactive cli tool that lists and run package.json scripts by using:
 
 ```bash
-$ yarn run info
-yarn run v1.22.4
-warning ..\..\..\package.json: No license field
-$ ntl --info
+$ npm install
+$ npm start
+# or
+$ yarn install
+$ yarn start
+$ ntl
 √  Node Task List
 ? Select a task to run: (Use arrow keys)
->      start › ntl
-        info › ntl --info
-         run › node ./scripts/dev-server.js
-       serve › nodemon ./scripts/dev-server.js
-        test › echo 'Error: no test specified'
-       build › npm run docs-build
-         dev › npm run test && npm run build && npm run serve
+> start
+  menu
+  info
+  test
+  format
+  build
+  build-docs
+(Move up and down to reveal more choices)
+```
 
+## Running Tests
+
+To run the test suite, first install the dependencies, then run the `test` command:
+
+```bash
+$ npm install
+$ npm test
+# or
+$ yarn install
+$ yarn test
 ```
 
 ## Contributing
 
 First off, thanks for taking the time to contribute! Pull requests are welcome. For major changes, please [open an issue](#issues) first to discuss what you would like to change.
 
-[![GitHub last commit](https://img.shields.io/github/last-commit/racheldotey/node-config-service?style=for-the-badge)](https://github.com/racheldotey/node-config-service/commits/main)
+[![GitHub forks](https://img.shields.io/github/forks/racheldotey/node-config-service?style=for-the-badge)](https://github.com/racheldotey/node-config-service/fork) [![GitHub last commit](https://img.shields.io/github/last-commit/racheldotey/node-config-service?style=for-the-badge)](https://github.com/racheldotey/node-config-service/commits/main) [![GitHub watchers](https://img.shields.io/github/watchers/racheldotey/node-config-service?style=for-the-badge)](https://github.com/racheldotey/node-config-service/watchers/) 
 
 ## Contact
 
