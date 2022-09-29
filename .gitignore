@@ -1,6 +1,6 @@
 # Docs
 !docs/images/
-docs/*/
+static/*/
 
 # Logs
 logs
