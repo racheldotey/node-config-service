@@ -20,7 +20,6 @@
 - [Issues](#issues)
 - [Development](#development)
     - [Dev requirements](#dev-requirements)
-    - [Dev tools](#dev-tools)
 - [Scripts](#scripts)
 - [Contributing](#contributing)
 - [Contact](#contact)
@@ -191,14 +190,6 @@ To help us quickly find and solve your problem, pease try to create bug reports 
 <li><a href="https://github.com/remy/nodemon" target="_blank" rel="noopener">Nodemon</a> - Auto restart the app when file changes are detected.</li>
 <li><a href="https://github.com/ruyadorno/ntl" target="_blank" rel="noopener">Node Task List</a> - Interactive cli tool that lists and run `package.json` scripts.</li>
 <li><a href="https://github.com/sindresorhus/open-cli" target="_blank" rel="noopener">Open-cli</a> - Cross-platform command line, open urls, files, etc.</li>
-</ul>
-
-#### Dev tools
-
-<ul>
-<li><a href="https://git-scm.com/" target="_blank" rel="noopener">Git</a> or <a href="https://desktop.github.com/" target="_blank" rel="noopener">GitHub Desktop</a> - Code management.</li>
-<li><a href="https://prettier.io/docs/en/index.html" target="_blank" rel="noopener">Yarn</a> - Dependency management.</li>
-<li><a href="https://prettier.io/docs/en/index.html" target="_blank" rel="noopener">Prettier</a> - Code formatter.</li>
 </ul>
 
 ## Scripts
