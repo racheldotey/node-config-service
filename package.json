@@ -1,18 +1,44 @@
 {
 	"name": "node-config-service",
 	"version": "1.0.0",
-	"description": "A config management service for your next node app.",
+	"private": false,
 	"keywords": [
 		"config",
+		"node",
 		"env",
-		"nodeenv",
-		"dotenv"
+		"environment",
+		"system",
+		"process",
+		"settings",
+		"dotenv",
+		"backend",
+		"front-end"
 	],
-	"main": "./src/index.js",
-	"author": "Rachel Dotey <hello@racheldotey.com>",
-	"homepage": "https://github.com/racheldotey/node-config-service",
-	"bugs": "https://github.com/racheldotey/node-config-service/issues",
+	"description": "A config management service for your next node app.",
+	"author": {
+		"name": "Rachel Dotey",
+		"email": "hello@racheldotey.com",
+		"url": "https://racheldotey.ninja"
+	},
 	"license": "MIT",
+	"homepage": "https://github.com/racheldotey/node-config-service",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/racheldotey/node-config-service"
+	},
+	"bugs": {
+		"url": "https://github.com/racheldotey/node-config-service/issues"
+	},
+	"main": "./src/index.js",
+	"browserslist": [
+		"> 1%",
+		"last 2 versions",
+		"not ie <= 8"
+	],
+	"engines": {
+		"node": ">= 6.0.0",
+		"npm": ">= 3.0.0"
+	},
 	"dependencies": {
 		"dotenv": "^16.0.2",
 		"dotenv-expand": "^9.0.0",
@@ -28,17 +54,22 @@
 		"livereload": "^0.9.3",
 		"nodemon": "^2.0.20",
 		"ntl": "^5.1.0",
-		"open-cli": "^7.0.1"
+		"open-cli": "^7.0.1",
+		"prettier": "^2.7.1"
+	},
+	"config": {
+		"urlLocalDocs": "http://localhost:5555/"
 	},
 	"scripts": {
 		"start": "ntl",
-		"info": "ntl --info",
-		"run": "node ./scripts/dev-server.js",
+		"menu": "ntl",
+		"info": "npm run",
+		"test": "bash ./scripts/run-tests.sh",
+		"format": "prettier --write src/**/*.{js,jsx",
+		"build": "bash ./scripts/build-dist.sh && npm run docs-build",
+		"build-docs": "bash ./scripts/build-docs.sh",
 		"serve": "nodemon ./scripts/dev-server.js",
-		"test": "echo 'Error: no test specified'",
-		"build": "npm run docs-build",
-		"dev": "npm run test && npm run build && npm run serve",
-		"docs-build": "jsdoc --configure jsdoc.json",
-		"docs-view": "open-cli http://localhost:5555/"
+		"develop": "npm run test && npm run build && npm run serve",
+		"view-docs-in-browser": "open-cli http://localhost:5555/"
 	}
 }
