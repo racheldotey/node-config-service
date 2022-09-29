@@ -25,23 +25,23 @@
 			"default_theme": "light",
 			"favicon": "/images/favicon.ico",
 			"menu": [
-			  {
-				"title": "GitHub",
-				"link": "https://github.com/racheldotey/node-config-service",
-				"target": "_blank",
-				"class": "link",
-				"id": "link-github"
-			  }
+				{
+					"title": "GitHub",
+					"link": "https://github.com/racheldotey/node-config-service",
+					"target": "_blank",
+					"class": "link",
+					"id": "link-github"
+				}
 			],
 			"meta": [
-			  {
-				"name": "author",
-				"content": "Rachel Dotey <hello@racheldotey.com>"
-			  },
-			  {
-				"name": "description",
-				"content": "Manage a set of config variables that are dependent upon node environmental variables set on the server."
-			  }
+				{
+					"name": "author",
+					"content": "Rachel Dotey <hello@racheldotey.com>"
+				},
+				{
+					"name": "description",
+					"content": "Manage a set of config variables that are dependent upon node environmental variables set on the server."
+				}
 			],
 			"footer": "Thanks for coming!"
 		}
