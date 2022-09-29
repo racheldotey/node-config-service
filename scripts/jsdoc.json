@@ -1,0 +1,50 @@
+{
+	"name": "docs",
+	"version": "v1",
+	"sourceType": "module",
+	"source": {
+		"include": ["../*.*"],
+		"ignore": ["../static", "**/.git", "**/*.gitignore", "**/*.lock", "**/*.log", "**/logs/**", "**/node_modules/**"]
+	},
+	"plugins": ["plugins/markdown"],
+	"markdown": {
+		"hardwrap": false,
+		"idInHeadings": true
+	},
+	"opts": {
+		"encoding": "utf8",
+		"readme": "README.md",
+		"package": "jsdoc.json",
+		"destination": "../static",
+		"recurse": true,
+		"verbose": true,
+		"template": "node_modules/clean-jsdoc-theme",
+		"theme_opts": {
+			"base_url": "http://localhost:5555/",
+			"homepageTitle": "ConfigService",
+			"title": "ConfigService",
+			"default_theme": "light",
+			"favicon": "/images/favicon.ico",
+			"menu": [
+				{
+					"title": "GitHub",
+					"link": "https://github.com/racheldotey/node-config-service",
+					"target": "_blank",
+					"class": "link",
+					"id": "link-github"
+				}
+			],
+			"meta": [
+				{
+					"name": "author",
+					"content": "Rachel Dotey <hello@racheldotey.com>"
+				},
+				{
+					"name": "description",
+					"content": "Manage a set of config variables that are dependent upon node environmental variables set on the server."
+				}
+			],
+			"footer": "Thanks for coming!"
+		}
+	}
+}
