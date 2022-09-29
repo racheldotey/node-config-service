@@ -1,7 +1,3 @@
-# Docs
-!docs/images/
-static/*/
-
 # Logs
 logs
 *.log
