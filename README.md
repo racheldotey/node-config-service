@@ -24,6 +24,7 @@ console.log(process.env);
 - [Features](#features)
 - [Usage](#usage)
   - [Example Env Variables](#example-env-variables)
+- [API Reference](#api-reference)
 - [Issues](#issues)
 - [Development](#development)
     - [Dev requirements](#dev-requirements)
@@ -172,6 +173,10 @@ WITHOUT_CURLY_BRACES_UNDEFINED_EXPAND_WITH_DEFAULT_WITH_SPECIAL_CHARACTERS=$UNDE
 
 </blockquote>
 </details>
+
+## API Reference
+
+ERROR, Cannot find module.
 
 ## Issues
 
