@@ -22,5 +22,8 @@ Object.defineProperty(ConfigError.prototype, 'desc', {
     value: 'An error occurred within the node config service module.'
 });
 
+const foo = function(params) {
+    
+};
 
 module.exports = ConfigError;

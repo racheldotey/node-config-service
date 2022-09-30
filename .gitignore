@@ -1,18 +1,6 @@
-# Docs
-static/docs/*
-
-# Logs
 logs
 *.log
-
-# Dependency directories
+.DS_Store
+static/
 node_modules/
-
-# dotenv environment variables file
-.env
-
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
+haters/
