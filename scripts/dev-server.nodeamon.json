@@ -1,0 +1,16 @@
+{
+	"env": {
+		"NODE_ENV": "development"
+	},
+	"ignore": [
+		"**/.git",
+		"**/*.md",
+		"**/*.log",
+		"**/logs/**",
+		"**/static/**",
+		"**/node_modules/**"
+	],
+	"restartable": "rs",
+	"verbose": true,
+	"watch": ["../*.*"]
+}
