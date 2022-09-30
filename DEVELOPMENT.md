@@ -1,5 +1,13 @@
 # Developer Notes:
 
+## ESLint
+
+
+
+## JSDocs 
+
+## Inline comments
+
 This was programmed using Visual Studio Code and the [Comment Anchors](https://marketplace.visualstudio.com/items?itemName=ExodiusStudios.comment-anchors) extension to add developer notes to the codebase.
 
 The default settings come with anchors for the following tags:
