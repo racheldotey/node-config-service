@@ -7,12 +7,10 @@
 		"node",
 		"env",
 		"environment",
-		"system",
 		"process",
 		"settings",
 		"dotenv",
-		"backend",
-		"front-end"
+		"backend"
 	],
 	"description": "A config management service for your next node app.",
 	"author": {
