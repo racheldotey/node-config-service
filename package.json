@@ -61,14 +61,23 @@
 		"menu": "ntl",
 		"info": "npm run",
 		"help": "npm run info",
+		"hello": "echo 'rachel'",
 		"test": "bash ./scripts/run-tests.sh",
+		
+		"build": "npm run build:dist",
 		"build:dist": "bash ./scripts/build-dist.sh",
 		"build:dev": "concurrently \"npm:docs:build:md\" \"npm:docs:build:html\"",
+
 		"dev:format": "prettier --write src/**/*.{js,jsx",
-		"dev:serve": "nodemon ./scripts/dev-server.js",
+		"dev:watch": "nodemon --config ./scripts/dev-server.nodeamon.json --exec \"npm run build:dev\"",
+		"dev:serve": "nodemon --config ./scripts/dev-server.nodeamon.json --exec \"node ./scripts/dev-server.js\"",
+
 		"docs:build:html": "jsdoc --configure ./scripts/jsdoc.json",
-		"docs:build:md": "jsdoc2md -t README.hbs src/*.js index.js > README.md",
+		"docs:build:md": "jsdoc2md -t README.hbs src/*.js > README.md",
 		"docs:open": "open-cli http://localhost:5555/",
-		"develop": "npm run build:dev && npm run test && npm run dev:serve"
+
+		"predevelop": "\nnode -e \"console.log('[node-config-service] Development server started at: %s', Date())\"",
+		"develop": "concurrently \"npm:docs:open\" \"npm:dev:watch\" \"npm:dev:serve\"",
+		"postdevelop": "\n\nnode -e \"console.log('[node-config-service] Development server has shutdown at: %s', Date())\""
 	}
 }
