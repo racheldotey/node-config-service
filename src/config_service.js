@@ -1,5 +1,3 @@
-const { merge, forEach } = require('lodash');
-
 const configErrors = require('./errors');
 const ConfigProperty = require('./config_property');
 
@@ -43,7 +41,6 @@ Object.defineProperty(ConfigService.prototype, 'properties', {
                 var prop = new ConfigProperty(envVarKey, appVarOptions);
                 this._properties.push(prop);
             });
-            return this._properties;
         } catch (error) {
             throw new configErrors.Error('Could not define app config properties. Invalid variable options.', error);
         }
@@ -82,7 +79,7 @@ ConfigService.prototype.init = function (systemVariables) {
     }
 };
 
-ConfigService.prototype.findOne = function (name = '', silenceError = false) {
+ConfigService.prototype.findOne = function (name = '') { //, silenceError = false) {
     const config = this.properties;
     var found = config.find(prop => prop.isMatch(name));
     console.debug(`\n\nIN findOne(${name}) = `);
@@ -90,19 +87,16 @@ ConfigService.prototype.findOne = function (name = '', silenceError = false) {
     return found;
 };
 
-ConfigService.prototype.findSeveral = function (names = '', silenceError = false) {
-    //return names.map(name => this.findOne(name)).flat();
-    var found = names.map(name => this.findOne(name)).flat();
-    var found = Object.fromEntries(names.map(name => {
+ConfigService.prototype.findSeveral = function (names = '') { //, silenceError = false) {
+    return Object.fromEntries(names.map(name => {
         const prop = this.findOne(name);
         return [prop.name, prop.value];
     }));
-    return found;
 };
 
-ConfigService.prototype.getVariable = function (name = '', silenceError = false) {
+ConfigService.prototype.get = function (name = '') { //, silenceError = false) {
     console.debug(`\n\nIN getVariable(${name})`);
-    var found;
+
     switch (true) {
         case (!name):
             console.debug(`\n\nIN getVariable(${name}) = (!name)`);
@@ -121,46 +115,12 @@ ConfigService.prototype.getVariable = function (name = '', silenceError = false)
             console.debug(`\n\nIN getVariable(${name}) = (Array.isArray(name))`);
             var foundProps = this.findSeveral(name);
             return foundProps;
-            var varsObject = this.toString(foundProps);
+            /* var varsObject = this.toString(foundProps);
 
             if (name.length === foundProps.length) return varsObject;
 
             var difference = name.filter(x => Object.keys(varsObject).indexOf(x) === -1);
-            throw new configErrors.Error(`Could not find required config properties named ${difference}`);
-
-        default:
-            console.debug(`\n\nIN getVariable(${name}) default Error`);
-            throw new configErrors.Error('Unable to get config variable', new TypeError(`app config#getVariable was called with invalid param ${typeof name}`));
-    }
-};
-
-ConfigService.prototype.get = function (name = '', silenceError = false) {
-    console.debug(`\n\nIN getVariable(${name})`);
-    var found;
-    switch (true) {
-        case (!name):
-            console.debug(`\n\nIN getVariable(${name}) = (!name)`);
-            return this.toString();
-
-        case (typeof name === 'string'):
-            console.debug(`\n\nIN getVariable(${name}) = (typeof name === 'string')`);
-            var prop = this.findOne(name);
-            var value = prop.value;
-
-            if (prop) return value; // Could be undefined
-
-            throw new configErrors.Error(`Could not find required config variable named ${name}`);
-
-        case (Array.isArray(name)):
-            console.debug(`\n\nIN getVariable(${name}) = (Array.isArray(name))`);
-            var foundProps = this.findSeveral(name);
-            return foundProps;
-            var varsObject = this.toString(foundProps);
-
-            if (name.length === foundProps.length) return varsObject;
-
-            var difference = name.filter(x => Object.keys(varsObject).indexOf(x) === -1);
-            throw new configErrors.Error(`Could not find required config properties named ${difference}`);
+            throw new configErrors.Error(`Could not find required config properties named ${difference}`); */
 
         default:
             console.debug(`\n\nIN getVariable(${name}) default Error`);

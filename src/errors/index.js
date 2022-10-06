@@ -27,8 +27,8 @@ const ConfigError = require('./config_error');
  * @param {String} options.cause optional - A property indicating the specific cause of the error.
  */
 class ConfigAggregateError extends AggregateError {
-	constructor(message, options) {
-		super(arguments);
+	constructor(...args) {
+		super(...args);
 
 		this.desc =
 			'Creates an instance representing several errors wrapped in a single error when multiple errors need to be reported by an operation, for example by Promise.any().';
@@ -53,8 +53,8 @@ class ConfigAggregateError extends AggregateError {
  * @param {String} options.cause optional - A property indicating the specific cause of the error.
  */
 class ConfigRangeError extends RangeError {
-	constructor(message, options) {
-		super(arguments);
+	constructor(...args) {
+		super(...args);
 
 		this.desc =
 			'Creates an instance representing an error that occurs when a numeric variable or parameter is outside its valid range.';
@@ -78,8 +78,8 @@ class ConfigRangeError extends RangeError {
  * @param {String} options.cause optional - A property indicating the specific cause of the error.
  */
 class ConfigReferenceError extends ReferenceError {
-	constructor(message, options) {
-		super(arguments);
+	constructor(...args) {
+		super(...args);
 
 		this.desc =
 			'Creates an instance representing an error that occurs when de-referencing an invalid reference.';
@@ -103,8 +103,8 @@ class ConfigReferenceError extends ReferenceError {
  * @param {String} options.cause optional - A property indicating the specific cause of the error.
  */
 class ConfigSyntaxError extends SyntaxError {
-	constructor(message, options) {
-		super(arguments);
+	constructor(...args) {
+		super(...args);
 
 		this.desc = 'Creates an instance representing a syntax error.';
 	}
@@ -128,8 +128,8 @@ class ConfigSyntaxError extends SyntaxError {
  * @param {String} options.cause optional - A property indicating the specific cause of the error.
  */
 class ConfigTypeError extends TypeError {
-	constructor(message, options) {
-		super(arguments);
+	constructor(...args) {
+		super(...args);
 
 		this.desc =
 			'Creates an instance representing an error that occurs when a variable or parameter is not of a valid type.';
@@ -154,8 +154,8 @@ class ConfigTypeError extends TypeError {
  * @param {String} options.cause optional - A property indicating the specific cause of the error.
  */
 class ConfigURIError extends URIError {
-	constructor(message, options) {
-		super(arguments);
+	constructor(...args) {
+		super(...args);
 
 		this.desc =
 			'Creates an instance representing an error that occurs when encodeURI() or decodeURI() are passed invalid parameters.';

@@ -1,11 +1,11 @@
 /**
  * @memberOf ConfigErrors
  * @class ConfigError
- * @extends {Error} 
+ * @extends {Error}
  * @classdesc ConfigError is the base class for all config specific errors.
  * @desc
  * The Error() constructor creates an error object.
- * 
+ *
  * See [Error](https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Error) for more details.
  *
  * @param {String} message optional - A human-readable description of the error.
@@ -22,8 +22,6 @@ Object.defineProperty(ConfigError.prototype, 'desc', {
     value: 'An error occurred within the node config service module.'
 });
 
-const foo = function(params) {
-    
-};
+
 
 module.exports = ConfigError;

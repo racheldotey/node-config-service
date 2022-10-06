@@ -1,9 +1,9 @@
 
 /**
  * NodeJS Config Service.
- * 
- * Simplified config management for node applications. 
- * ConfigService accepts a configuration object of properties 
+ *
+ * Simplified config management for node applications.
+ * ConfigService accepts a configuration object of properties
  * to be defined using the node process env and run time overrides.
  *
  * @module ConfigService
@@ -11,11 +11,11 @@
 
 /**
  * Load environment variables into process.env using [dotenv](https://www.npmjs.com/package/dotenv).
- * 
+ *
  * NOTE: Should be placed as early as possible on startup.
- * 
+ *
  * @event loadEnv
- * @type {Object} process.env 
+ * @type {Object} process.env
  * @memberOf module:ConfigService
  */
 require('./load-env');
@@ -72,7 +72,7 @@ ConfigService.prototype.errors = errors;
  * @memberOf module:ConfigService
  * @type ConfigService
  */
-const configService = module.exports = exports = new ConfigService({
+exports = new ConfigService({
     debugging: true,
     silenceErrors: false,
     logErrors: true,

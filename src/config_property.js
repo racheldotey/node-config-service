@@ -1,6 +1,6 @@
 const configErrors = require('./errors');
 
-const VALID_OPTIONS = Object.freeze([
+/* const VALID_OPTIONS = Object.freeze([
     'key',
     'name',
     'desc',
@@ -9,7 +9,7 @@ const VALID_OPTIONS = Object.freeze([
     'parse',
     'debug',
     'sanitizeFilter',
-]);
+]); */
 
 class ConfigProperty {
     /** @private */
@@ -45,36 +45,36 @@ class ConfigProperty {
     }
 }
 
-/** Setters / Getters 
- * @public 
+/** Setters / Getters
+ * @public
  **/
 
 Object.defineProperty(ConfigProperty.prototype, 'key', {
-    set: function (value) { return this._key = value; },
+    set: function (value) { this._key = value; },
     get: function () { return this._key; }
 });
 
 Object.defineProperty(ConfigProperty.prototype, 'name', {
-    set: function (value) { return this._name = value; },
+    set: function (value) { this._name = value; },
     get: function () { return this._name; }
 });
 
 Object.defineProperty(ConfigProperty.prototype, 'desc', {
-    set: function (value) { return this._desc = value; },
+    set: function (value) { this._desc = value; },
     get: function () { return this._desc; }
 });
 
 // This leans towards required=true whenever possible.
 Object.defineProperty(ConfigProperty.prototype, 'required', {
     set: function (value) {
-        return this._required = (value.toString().toLowerCase() === 'false') ? false : true;
+        this._required = (value.toString().toLowerCase() === 'false') ? false : true;
     },
     get: function () { return (this._required); }
 });
 
 Object.defineProperty(ConfigProperty.prototype, 'parse', {
     set: function (method) {
-        if (typeof method === 'function') return this._parse = method;
+        if (typeof method === 'function') this._parse = method;
         else if (method)
             throw new configErrors.TypeError(`Invalid config property parse method defined. A function was expected but a ${(typeof method)} was received.`);
     },
@@ -83,24 +83,20 @@ Object.defineProperty(ConfigProperty.prototype, 'parse', {
 
 Object.defineProperty(ConfigProperty.prototype, 'value', {
     set: function (envVars) {
-        try {
-            let value;
-            if (envVars && envVars.hasOwnProperty(this._name)) {
-                value = this._parse(envVars[this._name]);
-            } else if (envVars && envVars.hasOwnProperty(this._key)) {
-                value = this._parse(envVars[this._key]);
-            } else if (!this._required) {
-                value = this._parse(this._default);
-            }
+        if (!envVars)
+            throw new configErrors.ReferenceError(`Invalid process environment variables sent to the config.`);
 
-            if (!value)
-                throw new configErrors.ReferenceError(`Config property ${this._key}/${this._name} is required but not defined in the environment.`)
-
-            this._value = value;
+        if (envVars[this._name]) {
+            this._value = envVars[this._name];
             this._isDefined = true;
-
-        } catch (error) {
-            throw error;
+        } else if (envVars[this._key]) {
+            this._value = envVars[this._key];
+            this._isDefined = true;
+        } else if (!this._required) {
+            this._value = this._parse(this._default);
+            this._isDefined = true;
+        } else {
+            throw new configErrors.ReferenceError(`Config property ${this._key}/${this._name} is required but not defined in the environment.`)
         }
     },
     get: function () {
