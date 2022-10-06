@@ -31,8 +31,8 @@ class ConfigService {
         this._processEnv = process.env;
 
         this.properties = (this._options.properties) ? this._options.properties : CONFIG_PROPERTIES;
-    };
-};
+    }
+}
 
 
 Object.defineProperty(ConfigService.prototype, 'properties', {

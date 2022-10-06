@@ -160,7 +160,7 @@ class ConfigURIError extends URIError {
 		this.desc =
 			'Creates an instance representing an error that occurs when encodeURI() or decodeURI() are passed invalid parameters.';
 	}
-};
+}
 
 
 

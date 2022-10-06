@@ -43,7 +43,7 @@ class ConfigProperty {
         this._required = required;
         this.parse = parse;
     }
-};
+}
 
 /** Setters / Getters 
  * @public 
