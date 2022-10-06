@@ -4,7 +4,7 @@
 
 
 
-## JSDocs 
+## JSDocs
 
 ## Inline comments
 
