@@ -1,6 +1,8 @@
-logs
-*.log
+haters/
+
 .DS_Store
+.vscode
+*.log
+logs/
 static/
 node_modules/
-haters/
