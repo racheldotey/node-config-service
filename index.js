@@ -3,7 +3,4 @@
  * Copyright(c) 2021-present Rachel Dotey
  * MIT Licensed
  */
-
-'use strict';
-
-module.exports = require('src');
+module.exports = require('./src');
