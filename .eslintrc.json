@@ -4,11 +4,19 @@
 		"commonjs": true,
 		"es2021": true
 	},
-	"extends": [ "eslint:recommended",  "airbnb:recommend", "plugin:promise/recommended", "prettier"],//"plugin:node/recommended", "airbnb"],
+    "ignorePatterns": [],
+	"extends": [
+		"eslint:recommended",
+		"airbnb",
+		"plugin:promise/recommended",
+		"prettier"
+	], //"plugin:node/recommended", "airbnb"],
 	"overrides": [],
 	"parserOptions": {
 		"ecmaVersion": "latest"
 	},
-	"plugins": [ "promise"],
+	"plugins": [
+		"promise"
+	],
 	"rules": {}
 }
