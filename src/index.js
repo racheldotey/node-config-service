@@ -72,7 +72,7 @@ ConfigService.prototype.errors = errors;
  * @memberOf module:ConfigService
  * @type ConfigService
  */
-exports = new ConfigService({
+module.exports = new ConfigService({
     debugging: true,
     silenceErrors: false,
     logErrors: true,
