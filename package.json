@@ -101,17 +101,17 @@
 		"webpack": "^5.74.0"
 	},
 	"scripts": {
-		"start": "mpm run menu",
+		"start": "npm run menu",
 		"menu": "ntl",
 		"info": "npm run",
 		"help": "npm run info",
 		"hello": "echo 'rachel'",
 		"test": "bash ./scripts/run-tests.sh",
-		
+
 		"build": "npm run build:dist",
 		"build:dist": "bash ./scripts/build-dist.sh",
 		"build:dev": "concurrently \"npm:docs:build:md\" \"npm:docs:build:html\"",
-		
+
 		"dev:lint": "eslint ./",
 		"dev:format": "prettier --write src/**/*.{js,jsx",
 		"dev:watch": "nodemon --config ./scripts/dev-server.nodeamon.json --exec \"npm run build:dev\"",
