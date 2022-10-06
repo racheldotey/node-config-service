@@ -104,8 +104,9 @@
 		"start": "ntl",
 		"info": "npm run",
 
-		"dev:lint": "eslint --ignore-path .gitignore ./",
-		"dev:lint:log": "eslint --ignore-path .gitignore --output-file eslint.txt --format compact ./",
+		"dev:lint": "eslint ./ --ignore-path .gitignore",
+		"dev:lint:fix": "eslint ./ --ignore-path .gitignore --fix",
+		"dev:lint:log": "eslint ./ --ignore-path .gitignore --output-file eslint.html --format compact",
 		"dev:lint:watch": "nodemon --ext js,jsx,md,ts --watch \"*.*\" --exec \"npm run dev:lint\"",
 		"dev:format": "prettier --write src/**/*.{js,jsx",
 		"dev:format:watch": "nodemon --ext js,jsx,md,ts --watch \"*.*\" --exec \"npm run dev:lint\"",
