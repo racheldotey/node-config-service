@@ -22,6 +22,20 @@
 	},
 	"overrides": [
 		{
+			// Enable typescript processor for all .ts files
+			// https://github.com/typescript-eslint/typescript-eslint/tree/main/packages/parser
+			"files": ["*.{ts,tsx}"],
+			"parser": "@typescript-eslint/parser",
+			"parserOptions": {
+				"project": "./tsconfig.json",
+				"sourceType": "module"
+			},
+			"extends": ["plugin:@typescript-eslint/recommended"],
+			"rules": {
+				"@typescript-eslint/switch-exhaustiveness-check": "error"
+			}
+		},
+		{
 			// Enable JSON processor for all .json, .json5, and .jsonc files
 			// https://github.com/ota-meshi/eslint-plugin-jsonc#parser-configuration
 			"files": ["*.json", "*.json5", "*.jsonc"],
@@ -36,10 +50,10 @@
 	],
 	"extends": [
 		"eslint:recommended",
-		//"airbnb",
+		//"standard-with-typescript",
+		"airbnb",
 		//"plugin:unicorn/recommended",	// Verbose - https://github.com/sindresorhus/eslint-plugin-unicorn
 		//"plugin:prettier/recommended",	// Verbose
-		"plugin:@typescript-eslint/recommended",
 		"plugin:import/recommended",
 		"plugin:jest-formatting/recommended",
 		"plugin:jsonc/base",
@@ -62,7 +76,10 @@
 		"plugin:regexp/recommended",
 		"plugin:security/recommended",
 		"plugin:vuejs-accessibility/recommended",
-		"plugin:you-dont-need-lodash-underscore/compatible"
+		"plugin:you-dont-need-lodash-underscore/compatible",
+
+
+		"prettier" // Last on purpose
 	],
 	"plugins": [
 		"@babel", // https://github.com/babel/babel/tree/main/eslint/babel-eslint-plugin
@@ -82,8 +99,8 @@
 		"regexp",
 		"sort-class-members",
 		// Typescript
-		"@typescript-eslint/eslint-plugin",
-		"@typescript-eslint",
+		"@typescript-eslint/eslint-plugin", // https://github.com/typescript-eslint/typescript-eslint/tree/main/packages/eslint-plugin
+		"@typescript-eslint", // https://github.com/typescript-eslint/typescript-eslint/tree/main/packages/parser
 		"deprecation", // https://github.com/gund/eslint-plugin-deprecation
 		// React / Front end
 		"jsx-a11y",
