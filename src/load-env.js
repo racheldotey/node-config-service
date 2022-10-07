@@ -1,4 +1,4 @@
-var envVars;
+let envVars;
 
 if(!envVars) envVars = require('dotenv').config();
 
