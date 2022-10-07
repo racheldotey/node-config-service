@@ -3,7 +3,7 @@
 
 **Simple config config management for `node` apps.**
 
-[![npm](https://img.shields.io/npm/v/node-config-service.svg?style=flat-square)](https://www.npmjs.com/package/node-config-service) [![GitHub all releases](https://img.shields.io/github/downloads/racheldotey/node-config-service/total?style=flat-square)](https://github.com/racheldotey/node-config-service/releases) [![GitHub issues](https://img.shields.io/github/issues/racheldotey/node-config-service?style=flat-square)](https://github.com/racheldotey/node-config-service/issues) [![GitHub last commit](https://img.shields.io/github/last-commit/racheldotey/node-config-service?style=flat-square)](https://github.com/racheldotey/node-config-service/commits/main) 
+[![npm](https://img.shields.io/npm/v/node-config-service.svg?style=flat-square)](https://www.npmjs.com/package/node-config-service) [![GitHub all releases](https://img.shields.io/github/downloads/racheldotey/node-config-service/total?style=flat-square)](https://github.com/racheldotey/node-config-service/releases) [![GitHub issues](https://img.shields.io/github/issues/racheldotey/node-config-service?style=flat-square)](https://github.com/racheldotey/node-config-service/issues) [![GitHub last commit](https://img.shields.io/github/last-commit/racheldotey/node-config-service?style=flat-square)](https://github.com/racheldotey/node-config-service/commits/main)
 
 [![NPM](https://nodei.co/npm/node-config-service.png)](https://nodei.co/npm/node-config-service/)
 
@@ -14,7 +14,7 @@ const configService = require('node-config-service');
 console.log(process.env);
 ```
 
-<details>
+<details open="open">
 <summary>Table of Contents</summary>
 
 - [About](#about)
@@ -25,6 +25,14 @@ console.log(process.env);
 - [Usage](#usage)
   - [Example Env Variables](#example-env-variables)
 - [API Reference](#api-reference)
+- [ConfigService](#configservice)
+  - [ConfigService.ConfigService#version](#configserviceconfigserviceversion)
+    - [Example:](#example)
+  - [ConfigService.ConfigService#ConfigService](#configserviceconfigserviceconfigservice)
+    - [Example:](#example-1)
+  - [ConfigService.ConfigService#errors](#configserviceconfigserviceerrors)
+  - [ConfigService.module.exports : <code>ConfigService</code>](#configservicemoduleexports--configservice)
+  - ["loadEnv"](#loadenv)
 - [Issues](#issues)
 - [Development](#development)
     - [Dev requirements](#dev-requirements)
@@ -49,7 +57,7 @@ Merge several configuration sources into a portable `get` method used throughout
 ### Prerequisites
 
 > Before starting, <a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">download and install Node.js</a>. Node.js 14.0 or higher is required. <a href="https://git-scm.com/" target="_blank" rel="noopener">Git</a> is required to [contribute](#contributing) to the project.
-> 
+>
 > Optional tools include install <a href="https://classic.yarnpkg.com/en/docs/install#windows-stable" target="_blank" rel="noopener">yarn</a> if desired.
 > `$ npm install --global yarn`
 
@@ -176,7 +184,89 @@ WITHOUT_CURLY_BRACES_UNDEFINED_EXPAND_WITH_DEFAULT_WITH_SPECIAL_CHARACTERS=$UNDE
 
 ## API Reference
 
-ERROR, Cannot find module.
+<a name="module_ConfigService"></a>
+
+## ConfigService
+NodeJS Config Service.
+
+Simplified config management for node applications.
+ConfigService accepts a configuration object of properties
+to be defined using the node process env and run time overrides.
+
+
+* [ConfigService](#module_ConfigService)
+    * [.ConfigService#version](#module_ConfigService.ConfigService+version)
+    * [.ConfigService#ConfigService](#module_ConfigService.ConfigService+ConfigService)
+    * [.ConfigService#errors](#module_ConfigService.ConfigService+errors)
+    * [.module.exports](#module_ConfigService.module.exports) : <code>ConfigService</code>
+    * ["loadEnv"](#module_ConfigService.event_loadEnv)
+
+<a name="module_ConfigService.ConfigService+version"></a>
+
+### ConfigService.ConfigService#version
+The ConfigService version
+
+#### Example:
+
+    console.log(configService.version); // '1.x.x'
+
+**Kind**: static property of [<code>ConfigService</code>](#module_ConfigService)
+**Api**: public
+**Properties**
+
+| Name |
+| --- |
+| version |
+
+<a name="module_ConfigService.ConfigService+ConfigService"></a>
+
+### ConfigService.ConfigService#ConfigService
+The ConfigService constructor
+
+The exports of the configService module is an instance of this class.
+
+#### Example:
+
+    const appConfig = require('configService');
+    const moduleConfig = new configService.ConfigService();
+
+**Kind**: static property of [<code>ConfigService</code>](#module_ConfigService)
+**Access**: public
+**Properties**
+
+| Name |
+| --- |
+| ConfigService |
+
+<a name="module_ConfigService.ConfigService+errors"></a>
+
+### ConfigService.ConfigService#errors
+Key and class object map of custom error methods.
+
+**Kind**: static property of [<code>ConfigService</code>](#module_ConfigService)
+**Access**: public
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| errors | <code>Object</code> | Key and class object map of custom error methods. |
+
+<a name="module_ConfigService.module.exports"></a>
+
+### ConfigService.module.exports : <code>ConfigService</code>
+The exports object is an instance of ConfigService.
+
+**Kind**: static property of [<code>ConfigService</code>](#module_ConfigService)
+**Access**: public
+<a name="module_ConfigService.event_loadEnv"></a>
+
+### "loadEnv"
+Load environment variables into process.env using [dotenv](https://www.npmjs.com/package/dotenv).
+
+NOTE: Should be placed as early as possible on startup.
+
+**Kind**: event emitted by [<code>ConfigService</code>](#module_ConfigService)
+
 
 ## Issues
 
@@ -249,7 +339,7 @@ $ yarn test
 
 First off, thanks for taking the time to contribute! Pull requests are welcome. For major changes, please [open an issue](#issues) first to discuss what you would like to change.
 
-[![GitHub forks](https://img.shields.io/github/forks/racheldotey/node-config-service?style=for-the-badge)](https://github.com/racheldotey/node-config-service/fork) [![GitHub last commit](https://img.shields.io/github/last-commit/racheldotey/node-config-service?style=for-the-badge)](https://github.com/racheldotey/node-config-service/commits/main) [![GitHub watchers](https://img.shields.io/github/watchers/racheldotey/node-config-service?style=for-the-badge)](https://github.com/racheldotey/node-config-service/watchers/) 
+[![GitHub forks](https://img.shields.io/github/forks/racheldotey/node-config-service?style=for-the-badge)](https://github.com/racheldotey/node-config-service/fork) [![GitHub last commit](https://img.shields.io/github/last-commit/racheldotey/node-config-service?style=for-the-badge)](https://github.com/racheldotey/node-config-service/commits/main) [![GitHub watchers](https://img.shields.io/github/watchers/racheldotey/node-config-service?style=for-the-badge)](https://github.com/racheldotey/node-config-service/watchers/)
 
 ## Contact
 
