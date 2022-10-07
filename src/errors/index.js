@@ -13,10 +13,10 @@ const ConfigError = require('./config_error');
 /**
  * @memberOf ConfigErrors
  * @class ConfigAggregateErrors
- * @extends {AggregateError} 
- * @classdesc 
+ * @extends {AggregateError}
+ * @classdesc
  * Several errors wrapped in a single error when multiple  errors need to be reported.
- * 
+ *
  * See [AggregateError](https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/AggregateError) for more details.
  * @desc
  * Creates an instance representing several errors wrapped in a single error when multiple
@@ -39,7 +39,7 @@ class ConfigAggregateError extends AggregateError {
  * @memberOf ConfigErrors
  * @class ConfigRangeError
  * @extends {RangeError} https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/RangeError
- * @classdesc Several 
+ * @classdesc Several
  * @desc
  * ConfigRangeError constructor.
  *
@@ -65,7 +65,7 @@ class ConfigRangeError extends RangeError {
  * @memberOf ConfigErrors
  * @class ConfigReferenceError
  * @extends {ReferenceError} https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/ReferenceError
- * @classdesc Several 
+ * @classdesc Several
  * @desc
  * ConfigReferenceError constructor.
  *
@@ -90,7 +90,7 @@ class ConfigReferenceError extends ReferenceError {
  * @memberOf ConfigErrors
  * @class ConfigSyntaxError
  * @extends {SyntaxError} https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/SyntaxError
- * @classdesc Several 
+ * @classdesc Several
  * @desc
  * ConfigSyntaxError constructor.
  *
@@ -114,7 +114,7 @@ class ConfigSyntaxError extends SyntaxError {
  * @memberOf ConfigErrors
  * @class ConfigTypeError
  * @extends {TypeError} https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/TypeError
- * @classdesc Several 
+ * @classdesc Several
  * @desc
  * ConfigTypeError constructor.
  *
@@ -140,7 +140,7 @@ class ConfigTypeError extends TypeError {
  * @memberOf ConfigErrors
  * @class ConfigURIError
  * @extends {URIError} https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/URIError
- * @classdesc Several 
+ * @classdesc Several
  * @desc
  * ConfigURIError constructor.
  *
@@ -161,8 +161,6 @@ class ConfigURIError extends URIError {
 			'Creates an instance representing an error that occurs when encodeURI() or decodeURI() are passed invalid parameters.';
 	}
 }
-
-
 
 module.exports.Error = ConfigError;
 module.exports.ConfigError = ConfigError;
