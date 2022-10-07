@@ -13,9 +13,7 @@ module.exports = {
 			files: ['test/**'],
 			plugins: ['jest', 'jest-formatting'],
 			extends: ['plugin:jest/recommended', 'plugin:jest-formatting/recommended'],
-			rules: {
-				indent: ['error', 2],
-			},
+			rules: {},
 		},
 	],
 };
