@@ -12,16 +12,14 @@
  * @param {Object} options optional - An object that has the following properties:
  * @param {String} options.cause optional - A property indicating the specific cause of the error.
  */
-class ConfigError extends Error { }
+class ConfigError extends Error {}
 
 Object.defineProperty(ConfigError.prototype, 'name', {
-    value: this.constructor.name
+	value: this.constructor.name,
 });
 
 Object.defineProperty(ConfigError.prototype, 'desc', {
-    value: 'An error occurred within the node config service module.'
+	value: 'An error occurred within the node config service module.',
 });
-
-
 
 module.exports = ConfigError;
