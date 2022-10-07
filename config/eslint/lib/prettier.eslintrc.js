@@ -15,11 +15,11 @@
  *
  */
 module.exports = {
-	"extends": ["prettier", "plugin:prettier/recommended"],
-	"plugins": ["prettier"],
-	"rules": {
-	  "prettier/prettier": 1,
-	  "arrow-body-style": "off", // NOTE https://github.com/prettier/eslint-plugin-prettier#arrow-body-style-and-prefer-arrow-callback-issue
-	  "prefer-arrow-callback": "off" // NOTE https://github.com/prettier/eslint-plugin-prettier#arrow-body-style-and-prefer-arrow-callback-issue
-	}
+	extends: ['prettier', 'plugin:prettier/recommended'],
+	plugins: ['prettier'],
+	rules: {
+		'prettier/prettier': 1,
+		'arrow-body-style': 'off', // NOTE https://github.com/prettier/eslint-plugin-prettier#arrow-body-style-and-prefer-arrow-callback-issue
+		'prefer-arrow-callback': 'off', // NOTE https://github.com/prettier/eslint-plugin-prettier#arrow-body-style-and-prefer-arrow-callback-issue
+	},
 };
