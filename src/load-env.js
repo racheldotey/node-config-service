@@ -1,5 +1,5 @@
 let envVars;
 
-if(!envVars) envVars = require('dotenv').config();
+if (!envVars) envVars = require('dotenv').config();
 
 module.exports = envVars;
