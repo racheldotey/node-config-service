@@ -17,38 +17,38 @@
  * @link https://github.com/jsx-eslint/eslint-plugin-jsx-a11y
  */
 module.exports = {
-	"env": {
-		"browser": true,
-		"commonjs": true,
-		"worker": true
+	env: {
+		browser: true,
+		commonjs: true,
+		worker: true,
 	},
-	"parserOptions": {
-		"sourceType": "module",
-		"ecmaVersion": "latest",
-		"ecmaFeatures": {
-			"jsx": true
+	parserOptions: {
+		sourceType: 'module',
+		ecmaVersion: 'latest',
+		ecmaFeatures: {
+			jsx: true,
 		},
-		"settings": {
-			"react": {
-				"version": "detect"
-			}
-		}
+		settings: {
+			react: {
+				version: 'detect',
+			},
+		},
 	},
-	"extends": [
-		"plugin:jsx-a11y/recommended",
-		"plugin:react/jsx-runtime",
-		"plugin:react/recommended",
-		"plugin:react-hooks/recommended",
-		"plugin:react-redux/recommended"
+	extends: [
+		'plugin:jsx-a11y/recommended',
+		'plugin:react/jsx-runtime',
+		'plugin:react/recommended',
+		'plugin:react-hooks/recommended',
+		'plugin:react-redux/recommended',
 	],
-	"plugins": [
-		"jsx-a11y", // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y
-		"react", // https://github.com/jsx-eslint/eslint-plugin-react
-		"react-hooks", // https://www.npmjs.com/package/eslint-plugin-react-hooks
-		"react-redux" // https://github.com/DianaSuvorova/eslint-plugin-react-redux
+	plugins: [
+		'jsx-a11y', // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y
+		'react', // https://github.com/jsx-eslint/eslint-plugin-react
+		'react-hooks', // https://www.npmjs.com/package/eslint-plugin-react-hooks
+		'react-redux', // https://github.com/DianaSuvorova/eslint-plugin-react-redux
 	],
-	"rules": {
-		"react/jsx-uses-react": "error",
-		"react/jsx-uses-vars": "error"
-	}
-}
+	rules: {
+		'react/jsx-uses-react': 'error',
+		'react/jsx-uses-vars': 'error',
+	},
+};
