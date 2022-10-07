@@ -1,4 +1,3 @@
-
 /**
  * NodeJS Config Service.
  *
@@ -73,9 +72,9 @@ ConfigService.prototype.errors = errors;
  * @type ConfigService
  */
 module.exports = new ConfigService({
-    debugging: true,
-    silenceErrors: false,
-    logErrors: true,
-    logFunction: console.debug,
-    properties: defaultProperties
+	debugging: true,
+	silenceErrors: false,
+	logErrors: true,
+	logFunction: console.debug,
+	properties: defaultProperties,
 });
