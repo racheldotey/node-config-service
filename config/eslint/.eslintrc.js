@@ -58,7 +58,7 @@ module.exports = {
 		'./lib/react.eslintrc.js',
 		'./lib/typescript.eslintrc.js',
 		// Last on purpose
-		"./lib/prettier.eslintrc.js"
+		'./lib/prettier.eslintrc.js',
 	],
 	plugins: [
 		'import',
