@@ -1,35 +1,45 @@
 {
-	"ignorePatterns": [
-		"static"
-	],
-	"overrides": [
-		{
-            // Enable JSON processor for all .json, .json5, and .jsonc files
-			// https://github.com/ota-meshi/eslint-plugin-jsonc#parser-configuration
-			"files": ["*.json", "*.json5", "*.jsonc"],
-			"parser": "jsonc-eslint-parser"
-		  },
-        {
-            // Enable Markdown processor for all .md files
-			// https://github.com/eslint/eslint-plugin-markdown#advanced-configuration
-            "files": ["**/*.md"],
-            "processor": "markdown/markdown"
-        }
-	],
+	"ignorePatterns": ["static"],
 	"env": {
+		"node": true,
 		"browser": true,
 		"commonjs": true,
 		"es2021": true
 	},
+	"parser": "@typescript-eslint/parser", // https://github.com/typescript-eslint/typescript-eslint/tree/main/packages/parser
 	"parserOptions": {
+		"project": "./tsconfig.json",
+		"sourceType": "module",
 		"ecmaVersion": "latest",
 		"ecmaFeatures": {
-		  "jsx": true
+			"jsx": true
+		},
+		"settings": {
+			"react": {
+				"version": "detect"
+			}
 		}
 	},
+	"overrides": [
+		{
+			// Enable JSON processor for all .json, .json5, and .jsonc files
+			// https://github.com/ota-meshi/eslint-plugin-jsonc#parser-configuration
+			"files": ["*.json", "*.json5", "*.jsonc"],
+			"parser": "jsonc-eslint-parser"
+		},
+		{
+			// Enable Markdown processor for all .md files
+			// https://github.com/eslint/eslint-plugin-markdown#advanced-configuration
+			"files": ["**/*.md"],
+			"processor": "markdown/markdown"
+		}
+	],
 	"extends": [
 		"eslint:recommended",
 		//"airbnb",
+		//"plugin:unicorn/recommended",	// Verbose - https://github.com/sindresorhus/eslint-plugin-unicorn
+		//"plugin:prettier/recommended",	// Verbose
+		"plugin:@typescript-eslint/recommended",
 		"plugin:import/recommended",
 		"plugin:jest-formatting/recommended",
 		"plugin:jsonc/base",
@@ -49,52 +59,48 @@
 		"plugin:react/recommended",
 		"plugin:react-hooks/recommended",
 		"plugin:react-redux/recommended",
-        "plugin:regexp/recommended",
+		"plugin:regexp/recommended",
 		"plugin:security/recommended",
-		//"plugin:unicorn/recommended",	// Verbose - https://github.com/sindresorhus/eslint-plugin-unicorn
 		"plugin:vuejs-accessibility/recommended",
-			// "eslint-config-airbnb": "^19.0.4",
-			// "eslint-config-airbnb-base": "15.0.0",
-			// "eslint-config-prettier": "^8.5.0",
-			// "eslint-plugin-babel": "^5.3.1",
-		// "eslint-plugin-deprecation": "^1.3.2",
-		// "eslint-plugin-es": "^4.1.0",
-		// "eslint-plugin-sort-class-members": "^1.15.2",
-
-
 		"plugin:you-dont-need-lodash-underscore/compatible"
-		//"plugin:prettier/recommended"	// Verbose
 	],
 	"plugins": [
-		"@babel",							// https://github.com/babel/babel/tree/main/eslint/babel-eslint-plugin
-		"filenames", 						// https://github.com/selaux/eslint-plugin-filenames
-		"html",								// https://github.com/BenoitZugmeyer/eslint-plugin-html
-		"inclusive-language",				// https://github.com/muenzpraeger/eslint-plugin-inclusive-language
-		"import",							// https://github.com/import-js/eslint-plugin-import
+		"@babel", // https://github.com/babel/babel/tree/main/eslint/babel-eslint-plugin
+		"filenames", // https://github.com/selaux/eslint-plugin-filenames
+		"inclusive-language", // https://github.com/muenzpraeger/eslint-plugin-inclusive-language
+		"import", // https://github.com/import-js/eslint-plugin-import
 		"jest-formatting",
 		"jsonc",
-		"jsx-a11y",
 		"lodash",
 		"markdown",
 		"no-unsanitized",
 		"n",
 		"package-json",
 		"prefer-arrow",
-		"prettier",							// https://github.com/prettier/eslint-plugin-prettier
+		"prettier", // https://github.com/prettier/eslint-plugin-prettier
 		"promise",
-		"react",							// https://github.com/jsx-eslint/eslint-plugin-react
-		"react-hooks",						// https://www.npmjs.com/package/eslint-plugin-react-hooks
-		"react-redux",						// https://github.com/DianaSuvorova/eslint-plugin-react-redux
 		"regexp",
+		"sort-class-members",
+		// Typescript
 		"@typescript-eslint/eslint-plugin",
-		"vuejs-accessibility"
+		"@typescript-eslint",
+		"deprecation", // https://github.com/gund/eslint-plugin-deprecation
+		// React / Front end
+		"jsx-a11y",
+		"html", // https://github.com/BenoitZugmeyer/eslint-plugin-html
+		"vuejs-accessibility",
+		"react", // https://github.com/jsx-eslint/eslint-plugin-react
+		"react-hooks", // https://www.npmjs.com/package/eslint-plugin-react-hooks
+		"react-redux" // https://github.com/DianaSuvorova/eslint-plugin-react-redux
 	],
 	"rules": {
+		"deprecation/deprecation": "warn",
+
 		"filenames/match-regex": 2,
 		"filenames/match-exported": 2,
 		"filenames/no-index": 2,
 
-        "inclusive-language/use-inclusive-words": "error",
+		"inclusive-language/use-inclusive-words": "error",
 
 		"lodash/prefer-constant": "off",
 		"lodash/prefer-get": "off",
@@ -110,29 +116,48 @@
 		"lodash/prefer-startswith": "off",
 		"lodash/prefer-times": "off",
 
-        "n/exports-style": ["error", "module.exports"],
-        "n/file-extension-in-import": ["error", "always"],
-        "n/no-missing-require": ["error", {
-            "allowModules": ["node-config-service"]
-        }],
-        "n/prefer-global/buffer": ["error", "always"],
-        "n/prefer-global/console": ["error", "always"],
-        "n/prefer-global/process": ["error", "always"],
-        "n/prefer-global/url-search-params": ["error", "always"],
-        "n/prefer-global/url": ["error", "always"],
-        "n/prefer-promises/dns": "error",
-        "n/prefer-promises/fs": "error",
+		"n/exports-style": ["error", "module.exports"],
+		"n/file-extension-in-import": ["error", "always"],
+		"n/no-missing-require": [
+			"error",
+			{
+				"allowModules": ["node-config-service"]
+			}
+		],
+		"n/prefer-global/buffer": ["error", "always"],
+		"n/prefer-global/console": ["error", "always"],
+		"n/prefer-global/process": ["error", "always"],
+		"n/prefer-global/url-search-params": ["error", "always"],
+		"n/prefer-global/url": ["error", "always"],
+		"n/prefer-promises/dns": "error",
+		"n/prefer-promises/fs": "error",
 
 		"prefer-arrow/prefer-arrow-functions": [
-		  "warn",
-		  {
-			"disallowPrototype": true,
-			"singleReturnOnly": false,
-			"classPropertiesAllowed": false
-		  }
+			"warn",
+			{
+				"disallowPrototype": true,
+				"singleReturnOnly": false,
+				"classPropertiesAllowed": false
+			}
 		],
 
 		"react/jsx-uses-react": "error",
-		"react/jsx-uses-vars": "error"
+		"react/jsx-uses-vars": "error",
+
+		"sort-class-members/sort-class-members": [
+			"error",
+			{
+				"order": [
+					"[static-properties]",
+					"[static-methods]",
+					"[properties]",
+					"[conventional-private-properties]",
+					"constructor",
+					"[methods]",
+					"[conventional-private-methods]"
+				],
+				"accessorPairPositioning": "getThenSet"
+			}
+		]
 	}
 }
