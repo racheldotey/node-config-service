@@ -16,28 +16,26 @@
  * @link https://github.com/gund/eslint-plugin-deprecation
  */
 module.exports = {
-	"overrides": [
+	overrides: [
 		{
 			// Enable typescript processor for all .ts files
 			// https://github.com/typescript-eslint/typescript-eslint/tree/main/packages/parser
-			"files": ["*.{ts,tsx}"],
-			"parser": "@typescript-eslint/parser",
-			"parserOptions": {
-				"project": "./tsconfig.json",
-				"sourceType": "module"
+			files: ['*.{ts,tsx}'],
+			parser: '@typescript-eslint/parser',
+			parserOptions: {
+				project: './tsconfig.json',
+				sourceType: 'module',
 			},
-			"extends": [
-				"plugin:@typescript-eslint/recommended"
+			extends: ['plugin:@typescript-eslint/recommended'],
+			plugins: [
+				'@typescript-eslint/eslint-plugin', // https://github.com/typescript-eslint/typescript-eslint/tree/main/packages/eslint-plugin
+				'@typescript-eslint', // https://github.com/typescript-eslint/typescript-eslint/tree/main/packages/parser
+				'deprecation', // https://github.com/gund/eslint-plugin-deprecation
 			],
-			"plugins": [
-				"@typescript-eslint/eslint-plugin", // https://github.com/typescript-eslint/typescript-eslint/tree/main/packages/eslint-plugin
-				"@typescript-eslint", // https://github.com/typescript-eslint/typescript-eslint/tree/main/packages/parser
-				"deprecation" // https://github.com/gund/eslint-plugin-deprecation
-			],
-			"rules": {
-				"deprecation/deprecation": "warn",
-				"@typescript-eslint/switch-exhaustiveness-check": "error"
-			}
-		}
-	]
-}
+			rules: {
+				'deprecation/deprecation': 'warn',
+				'@typescript-eslint/switch-exhaustiveness-check': 'error',
+			},
+		},
+	],
+};
