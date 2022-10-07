@@ -8,26 +8,21 @@
  * @link https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore
  */
 module.exports = {
-	extends: [
-		"plugin:lodash/recommended",
-		"plugin:you-dont-need-lodash-underscore/compatible"
-	],
-	plugins: [
-		"lodash"
-	],
+	extends: ['plugin:lodash/recommended', 'plugin:you-dont-need-lodash-underscore/compatible'],
+	plugins: ['lodash'],
 	rules: {
-		"lodash/prefer-constant": "off",
-		"lodash/prefer-get": "off",
-		"lodash/prefer-includes": "off",
-		"lodash/prefer-is-nil": "off",
-		"lodash/prefer-lodash-chain": "off",
-		"lodash/prefer-lodash-method": "off",
-		"lodash/prefer-lodash-typecheck": "off",
-		"lodash/prefer-matches": "off",
-		"lodash/prefer-noop": "off",
-		"lodash/prefer-over-quantifier": "off",
-		"lodash/prefer-some": "off",
-		"lodash/prefer-startswith": "off",
-		"lodash/prefer-times": "off"
-	}
+		'lodash/prefer-constant': 'off',
+		'lodash/prefer-get': 'off',
+		'lodash/prefer-includes': 'off',
+		'lodash/prefer-is-nil': 'off',
+		'lodash/prefer-lodash-chain': 'off',
+		'lodash/prefer-lodash-method': 'off',
+		'lodash/prefer-lodash-typecheck': 'off',
+		'lodash/prefer-matches': 'off',
+		'lodash/prefer-noop': 'off',
+		'lodash/prefer-over-quantifier': 'off',
+		'lodash/prefer-some': 'off',
+		'lodash/prefer-startswith': 'off',
+		'lodash/prefer-times': 'off',
+	},
 };
