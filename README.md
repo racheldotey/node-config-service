@@ -11,6 +11,7 @@
 
 ```js
 const configService = require('node-config-service');
+
 console.log(process.env);
 ```
 
@@ -91,6 +92,7 @@ Under the hood ConfigService uses <a href="https://github.com/motdotla/dotenv" t
 
 ```js
 require('node-config-service');
+
 console.log(process.env);
 ```
 
