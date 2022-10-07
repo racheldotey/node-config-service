@@ -2,10 +2,10 @@
 
 ## ESLint
 
-1. <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/eslint">eslint</a>
-1. <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/eslint-config-airbnb">eslint-config-airbnb</a>
-1. <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/eslint-config-airbnb-base">eslint-config-airbnb-base</a>
-1. <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/eslint-config-prettier">eslint-config-prettier</a>
+1. <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/eslint">eslint</a> - https://github.com/eslint/eslint
+1. <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/eslint-config-airbnb">eslint-config-airbnb</a> - https://github.com/airbnb/javascript
+1. <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/eslint-config-airbnb-base">eslint-config-airbnb-base</a> - https://github.com/airbnb/javascript
+1. <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/eslint-config-prettier">eslint-config-prettier</a> - Turns off all rules that are unnecessary or might conflict with [Prettier].
 1. <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/eslint-plugin-babel">eslint-plugin-babel</a>
 1. <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/eslint-plugin-deprecation">eslint-plugin-deprecation</a>
 1. <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/eslint-plugin-es">eslint-plugin-es</a>
@@ -38,9 +38,12 @@
 1. <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/eslint-plugin-tsdoc">eslint-plugin-tsdoc</a>
 1. <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/eslint-plugin-unicorn">eslint-plugin-unicorn</a>
 1. <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/eslint-plugin-vuejs-accessibility">eslint-plugin-vuejs-accessibility</a>
-1. <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/eslint-plugin-you-dont-need-lodash-underscore">eslint-plugin-you-dont-need-lodash-underscore</a>
-1. <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/eslint-webpack-plugin">eslint-webpack-plugin</a>
+2. <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/eslint-plugin-you-dont-need-lodash-underscore">eslint-plugin-you-dont-need-lodash-underscore</a>
 
+
+## Webpack
+
+<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/eslint-webpack-plugin">eslint-webpack-plugin</a> This plugin uses eslint to find and fix problems in your JavaScript code
 
 ## JSDocs
 
