@@ -1,22 +1,123 @@
 {
+	"ignorePatterns": [
+		"static"
+	],
+	"overrides": [
+		{
+            // Enable JSON processor for all .json, .json5, and .jsonc files
+			// https://github.com/ota-meshi/eslint-plugin-jsonc#parser-configuration
+			"files": ["*.json", "*.json5", "*.jsonc"],
+			"parser": "jsonc-eslint-parser"
+		  },
+        {
+            // Enable Markdown processor for all .md files
+			// https://github.com/eslint/eslint-plugin-markdown#advanced-configuration
+            "files": ["**/*.md"],
+            "processor": "markdown/markdown"
+        }
+	],
 	"env": {
 		"browser": true,
 		"commonjs": true,
 		"es2021": true
 	},
-    "ignorePatterns": ["static"],
-	"extends": [
-		"eslint:recommended",
-		"airbnb",
-		"plugin:promise/recommended",
-		"prettier"
-	], //"plugin:node/recommended", "airbnb"],
-	"overrides": [],
 	"parserOptions": {
 		"ecmaVersion": "latest"
 	},
-	"plugins": [
-		"promise"
+	"extends": [
+		"eslint:recommended",
+		//"airbnb",
+
+		"plugin:jsonc/base",
+		"plugin:jsonc/recommended-with-json",
+		"plugin:jsonc/recommended-with-jsonc",
+		"plugin:jsonc/recommended-with-json5",
+		"plugin:jsonc/prettier",
+
+		"plugin:jsx-a11y/recommended",
+		"plugin:lodash/recommended",
+		"plugin:markdown/recommended",
+		"plugin:no-unsanitized/DOM",
+		"plugin:n/recommended",
+		"plugin:package-json/recommended",
+		"plugin:promise/recommended",
+        "plugin:regexp/recommended",
+		"plugin:security/recommended",
+		//"plugin:unicorn/recommended",	// Verbose - https://github.com/sindresorhus/eslint-plugin-unicorn
+		"plugin:vuejs-accessibility/recommended",
+			// "eslint-config-airbnb": "^19.0.4",
+			// "eslint-config-airbnb-base": "15.0.0",
+			// "eslint-config-prettier": "^8.5.0",
+			// "eslint-plugin-babel": "^5.3.1",
+		// "eslint-plugin-deprecation": "^1.3.2",
+		// "eslint-plugin-es": "^4.1.0",
+		// "eslint-plugin-eslint-comments": "^3.2.0",
+		// "eslint-plugin-file-progress": "^1.3.0",
+		// "eslint-plugin-filenames": "^1.3.2",
+		// "eslint-plugin-import": "^2.25.3",
+		// "eslint-plugin-jest-formatting": "^3.1.0",
+		// "eslint-plugin-prettier": "^4.2.1",
+			// "eslint-plugin-react": "^7.28.0",
+			// "eslint-plugin-react-hooks": "^4.3.0",
+			// "eslint-plugin-react-redux": "^4.0.0",
+		// "eslint-plugin-sort-class-members": "^1.15.2",
+		// "eslint-plugin-spellcheck": "^0.0.19",
+
+
+		"plugin:you-dont-need-lodash-underscore/compatible"
+		//"plugin:prettier/recommended"	// Verbose
 	],
-	"rules": {}
+	"plugins": [
+		"html",
+		"inclusive-language",
+		"jsonc",
+		"jsx-a11y",
+		"lodash",
+		"markdown",
+		"no-unsanitized",
+		"n",
+		"package-json",
+		"prefer-arrow",
+		"prettier",
+		"promise",
+		"regexp",
+		"@typescript-eslint/eslint-plugin",
+		"vuejs-accessibility"
+	],
+	"rules": {
+        "inclusive-language/use-inclusive-words": "error",
+		"lodash/prefer-constant": "off",
+		"lodash/prefer-get": "off",
+		"lodash/prefer-includes": "off",
+		"lodash/prefer-is-nil": "off",
+		"lodash/prefer-lodash-chain": "off",
+		"lodash/prefer-lodash-method": "off",
+		"lodash/prefer-lodash-typecheck": "off",
+		"lodash/prefer-matches": "off",
+		"lodash/prefer-noop": "off",
+		"lodash/prefer-over-quantifier": "off",
+		"lodash/prefer-some": "off",
+		"lodash/prefer-startswith": "off",
+		"lodash/prefer-times": "off",
+        "n/exports-style": ["error", "module.exports"],
+        "n/file-extension-in-import": ["error", "always"],
+        "n/no-missing-require": ["error", {
+            "allowModules": ["node-config-service"]
+        }],
+        "n/prefer-global/buffer": ["error", "always"],
+        "n/prefer-global/console": ["error", "always"],
+        "n/prefer-global/process": ["error", "always"],
+        "n/prefer-global/url-search-params": ["error", "always"],
+        "n/prefer-global/url": ["error", "always"],
+        "n/prefer-promises/dns": "error",
+        "n/prefer-promises/fs": "error",
+		"prefer-arrow/prefer-arrow-functions": [
+		  "warn",
+		  {
+			"disallowPrototype": true,
+			"singleReturnOnly": false,
+			"classPropertiesAllowed": false
+		  }
+		]
+	}
 }
