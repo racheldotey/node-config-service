@@ -1,0 +1,89 @@
+{
+	"name": "@racheldotey/eslint-config",
+	"version": "0.9.0",
+	"private": false,
+	"keywords": [
+		"eslint"
+	],
+	"description": "My personal eslint config for development.",
+	"author": {
+		"name": "Rachel Dotey",
+		"email": "hello@racheldotey.com",
+		"url": "https://racheldotey.ninja"
+	},
+	"license": "MIT",
+	"main": "./.eslintrc.js",
+	"engines": {
+		"node": "^14.17.0 || >=16.0.0"
+	},
+	"peerDependencies": {
+	  "eslint": "^3 || ^4 || ^5 || ^6 || ^7 || ^8"
+	},
+	"dependencies": {
+												"eslint-config-standard-with-typescript": "^23.0.0",
+												"eslint-plugin-react": "^7.31.8",
+		"@babel/core": "^7.19.3",
+		"@babel/eslint-parser": "^7.19.1",
+		"@babel/eslint-plugin": "^7.19.1",
+												"@html-eslint/eslint-plugin": "^0.15.0",
+												"@html-eslint/parser": "^0.15.0",
+												"@typescript-eslint/eslint-plugin": "^5.39.0",
+												"@typescript-eslint/parser": "^5.39.0",
+												"ajv": "^8.11.0",
+		"eslint-config-airbnb": "^19.0.4",
+		"eslint-config-airbnb-base": "15.0.0",
+		"eslint-config-prettier": "^8.5.0",
+												"eslint-plugin-deprecation": "^1.3.2",
+												"eslint-plugin-html": "^7.1.0",
+												"eslint-plugin-import": "^2.25.3",
+												"eslint-plugin-inclusive-language": "^2.2.0",
+												"eslint-plugin-jest-formatting": "^3.1.0",
+		"eslint-plugin-jsdoc": "^39.3.6",
+												"eslint-plugin-jsonc": "^2.4.0",
+												"eslint-plugin-jsx-a11y": "^6.6.1",
+												"eslint-plugin-lodash": "^7.4.0",
+												"eslint-plugin-markdown": "^3.0.0",
+												"eslint-plugin-n": "^15.3.0",
+												"eslint-plugin-no-unsanitized": "^4.0.1",
+												"eslint-plugin-package-json": "^0.1.4",
+												"eslint-plugin-prefer-arrow": "^1.2.3",
+												"eslint-plugin-prettier": "^4.2.1",
+												"eslint-plugin-promise": "^6.0.1",
+												"eslint-plugin-react-hooks": "^4.3.0",
+												"eslint-plugin-react-redux": "^4.0.0",
+												"eslint-plugin-regexp": "^1.9.0",
+												"eslint-plugin-security": "^1.5.0",
+												"eslint-plugin-sort-class-members": "^1.15.2",
+		"eslint-plugin-tsdoc": "^0.2.17",
+		"eslint-plugin-unicorn": "^43.0.2",
+												"eslint-plugin-you-dont-need-lodash-underscore": "^6.12.0",
+		"eslint-webpack-plugin": "^3.2.0",
+												"nodemon": "^2.0.20",
+												"ntl": "^5.1.0",
+												"prettier": "^2.7.1",
+		"prettier-config-standard": "^5.0.0",
+												"typescript": "^4.8.4",
+												"webpack": "^5.74.0"
+	},
+	"scripts": {
+		"lint": "eslint ./ --ignore-path .eslintignore",
+		"lint:watch": "nodemon --ext js,jsx,md,ts --watch \"*.*\" --exec \"npm run lint\"",
+		"lint:fix": "eslint ./ --ignore-path .gitignore --fix",
+		"lint:log": "eslint ./ --ignore-path .gitignore --output-file eslint.html --format compact"
+	},
+	"publishConfig": {
+	  "ignore": [
+		".github/",
+		"!lib",
+		"docs/",
+		"test/",
+		"tests/",
+		"*.md",
+		"*.config.js",
+		".eslintrc",
+		".editorconfig",
+		"tsconfig.json",
+		".markdownlint*"
+	  ]
+	}
+}
