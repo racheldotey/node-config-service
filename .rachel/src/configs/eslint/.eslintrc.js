@@ -98,5 +98,17 @@ module.exports = {
 				accessorPairPositioning: 'getThenSet',
 			},
 		],
+
+		'no-underscore-dangle': [
+			2,
+			{
+				allowAfterThis: true,
+				allowAfterSuper: true,
+				allowAfterThisConstructor: true,
+				enforceInMethodNames: true,
+				allowFunctionParams: true,
+				enforceInClassFields: true,
+			},
+		],
 	},
 };

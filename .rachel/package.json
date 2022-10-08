@@ -1,0 +1,39 @@
+{
+	"name": "dev-configs",
+	"version": "0.9.0",
+	"private": false,
+	"description": "A config management service for your next node app.",
+	"author": {
+		"name": "Rachel Dotey",
+		"email": "hello@racheldotey.com",
+		"url": "https://racheldotey.ninja"
+	},
+	"license": "MIT",
+	"homepage": "https://github.com/racheldotey/node-config-service",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/racheldotey/node-config-service"
+	},
+	"bugs": {
+		"url": "https://github.com/racheldotey/node-config-service/issues"
+	},
+	"main": "./scripts/update-configs.js",
+	"browserslist": [
+		"> 1%",
+		"last 2 versions",
+		"not ie <= 8"
+	],
+	"engines": {
+		"node": "^14.17.0 || >=16.0.0"
+	},
+	"dependencies": {
+		"fs-extra": "^10.1.0",
+		"ntl": "^5.1.0",
+		"path": "^0.12.7"
+	},
+	"scripts": {
+		"start": "ntl",
+		"info": "npm run",
+		"update": "eslint ./ --ignore-path .gitignore"
+	}
+}

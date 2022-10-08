@@ -1,6 +1,6 @@
 {
 	"ignorePatterns": ["static"],
 	"extends": [
-		"./config/eslint/.eslintrc"
+		"./.rachel/configs/eslint/.eslintrc"
 	]
 }
