@@ -39,7 +39,7 @@ process.on('uncaughtException', handleError);
 
 
 
-module.exports.cleanup = cleanup;
-module.exports.handleStart = handleStart;
-module.exports.handleExit = handleExit;
-module.exports.handleError = handleError;
+exports.cleanup = cleanup;
+exports.handleStart = handleStart;
+exports.handleExit = handleExit;
+exports.handleError = handleError;
