@@ -32,6 +32,7 @@
 		"ntl": "^5.1.0",
 		"path": "^0.12.7"
 	},
+	"bin": "./cli-scripts",
 	"scripts": {
 		"start": "ntl",
 		"info": "npm run",
