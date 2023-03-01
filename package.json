@@ -100,8 +100,25 @@
 		"webpack": "^5.75.0",
 		"webpack-cli": "^5.0.1"
 	},
+	"ntl": {
+		"descriptions": {
+			"start": "View menu",
+			"menu:close": "Close this menu -> Do nothing",
+			"info": "This list --verbose",
+			"dev:lint": "eslint ./ --ignore-path .gitignore",
+			"dev:lint:fix": "eslint ./ --ignore-path .gitignore --fix",
+			"dev:lint:log": "eslint ./ --ignore-path .gitignore --output-file eslint.html --format compact",
+			"dev:lint:watch": "nodemon --ext js,jsx,md,ts --watch \"*.*\" --exec \"npm run dev:lint\"",
+			"dev:format": "prettier --write src/**/*.{js,jsx",
+			"dev:format:watch": "nodemon --ext js,jsx,md,ts --watch \"*.*\" --exec \"npm run dev:lint\"",
+			"docs:build": "jsdoc2md -t README.hbs src/*.js > README.md",
+			"docs:build:watch": "nodemon --config ./scripts/dev-server.nodeamon.json --exec \"npm run docs:build\"",
+			"menu": "Open interactive script menu"
+		}
+	},
 	"scripts": {
 		"start": "ntl",
+		"menu:close": "",
 		"info": "npm run",
 		"dev:lint": "eslint ./ --ignore-path .gitignore",
 		"dev:lint:fix": "eslint ./ --ignore-path .gitignore --fix",
@@ -110,6 +127,7 @@
 		"dev:format": "prettier --write src/**/*.{js,jsx",
 		"dev:format:watch": "nodemon --ext js,jsx,md,ts --watch \"*.*\" --exec \"npm run dev:lint\"",
 		"docs:build": "jsdoc2md -t README.hbs src/*.js > README.md",
-		"docs:build:watch": "nodemon --config ./scripts/dev-server.nodeamon.json --exec \"npm run docs:build\""
+		"docs:build:watch": "nodemon --config ./scripts/dev-server.nodeamon.json --exec \"npm run docs:build\"",
+		"menu": "ntl"
 	}
 }
