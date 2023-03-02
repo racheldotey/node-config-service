@@ -1,3 +1,5 @@
+import { Strong } from "mdast";
+
 require('dotenv').config({ path: './test.basic.env' });
 const ConfigProperty = require('../src/ConfigProperty');
 
@@ -16,6 +18,9 @@ describe('> Test suite for class `ConfigProperty`:', () => {
         layers: [1, 2, 3],
         sing: () => console.log('HAPPY BIRTHDAY!')
     };
+    const parse = (prop: string) => JSON.parse(prop);
+
+
 
     test('(1) - Init with empty options.', () => {
         const prop = new ConfigProperty('empty_options');
@@ -85,7 +90,7 @@ describe('> Test suite for class `ConfigProperty`:', () => {
 
     test('(7) - Set value using default value and parse method.', () => {
         const defaultValue = JSON.stringify(data);
-        const prop = new ConfigProperty(key, { ...options, default: defaultValue, parse: prop => JSON.parse(prop) });
+        const prop = new ConfigProperty(key, { ...options, default: defaultValue, parse });
 
         expect(prop.isDefined).toBeFalsy();
 
@@ -113,7 +118,7 @@ describe('> Test suite for class `ConfigProperty`:', () => {
 
     test('(9) - Set value from env object with parsing.', () => {
         const value = JSON.stringify(data);
-        const prop = new ConfigProperty(key, { envKey: options.envKey, parse: prop => JSON.parse(prop) });
+        const prop = new ConfigProperty(key, { envKey: options.envKey, parse });
 
         expect(prop.isDefined).toBeFalsy();
         expect(prop.isRequired).toBeTruthy();
@@ -133,3 +138,7 @@ describe('> Test suite for class `ConfigProperty`:', () => {
         expect(() => prop.setValue({})).toThrow();
     });
 });
+
+
+
+export {};
