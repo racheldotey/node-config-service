@@ -129,7 +129,7 @@
 		"start": "ntl",
 		"menu:close": "",
 		"info": "npm run",
-		"test": "jest",
+		"test": "jest --verbose true",
 		"test:dev": "nodemon --ext js,jsx,env,ts --watch \"*.*\" --exec \"npm run test\"",
 		"build": "webpack",
 		"dev:lint": "eslint ./ --ignore-path .gitignore",
