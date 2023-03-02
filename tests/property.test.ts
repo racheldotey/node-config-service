@@ -1,5 +1,3 @@
-import { Strong } from "mdast";
-
 require('dotenv').config({ path: './test.basic.env' });
 const ConfigProperty = require('../src/ConfigProperty');
 
