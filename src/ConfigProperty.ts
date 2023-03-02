@@ -1,4 +1,9 @@
+
 type ConfigPropertyParseFunction = (value: string) => any;
+/**
+ * @description
+ * @interface ConfigPropertyOptions
+ */
 interface ConfigPropertyOptions {
     envKey?: string;
     desc?: string;
@@ -16,7 +21,7 @@ interface ConfigPropertyOptions {
  * @property {string | null} default - Default value for this property
  * @property {boolean} isDefined - Has this property been set/initialized.
  * @property {boolean} isRequired - This must be set or it is invalid.
- * @property {any} errors - Array of errors that have occurred with this property.
+ * @property {Error[] | undefined} errors - Array of errors that have occurred with this property.
  * @property {any} parse -  Parse the property (all process .env vars are strings by default)
  * @property {any} #value - Property value
  */
@@ -31,13 +36,19 @@ class ConfigProperty {
     parse: ConfigPropertyParseFunction;
     #value: any;
 
+    /**
+     * Creates an instance of ConfigProperty.
+     * @param {string} name - Key used to look up this property in calling app.
+     * @param {ConfigPropertyOptions} [options={}]
+     * @memberof ConfigProperty
+     */
     constructor(name: string, options: ConfigPropertyOptions = {}) {
         this.name = name;
         this.envKey = options.envKey || false;
         this.desc = options.desc || '';
         this.default = options.default || undefined;
         this.isDefined = false;
-        this.isRequired = options.required || false;
+        this.isRequired = options.required ?? true;
         this.parse = options.parse || (value => value);
 
         if (this.default) {
