@@ -130,6 +130,7 @@
 		"menu:close": "",
 		"info": "npm run",
 		"test": "jest",
+		"test:dev": "nodemon --ext js,jsx,env,ts --watch \"*.*\" --exec \"npm run test\"",
 		"build": "webpack",
 		"dev:lint": "eslint ./ --ignore-path .gitignore",
 		"dev:lint:fix": "eslint ./ --ignore-path .gitignore --fix",
