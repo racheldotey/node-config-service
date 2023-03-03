@@ -37,7 +37,7 @@ export type ConfigServiceLogFunction = (...data: any[]) => void;
 
 export interface DefinePropertyOptions {
 	[key: string]: ConfigPropertyOptions;
-};
+}
 
 export interface ConfigServiceOptions {
 	silenceErrors?: boolean;
@@ -48,7 +48,7 @@ export interface ConfigServiceOptions {
 
 // @see https://blog.logrocket.com/writing-constructor-typescript/
 export interface ConfigServiceConstructor {
-	new(options?: ConfigServiceOptions): IConfigService;
+	new (options?: ConfigServiceOptions): IConfigService;
 }
 
 export interface IConfigService {
