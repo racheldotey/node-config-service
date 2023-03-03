@@ -1,4 +1,4 @@
-const ConfigProperty = require('../src/ConfigService');
+import ConfigService from '../src/ConfigService';
 
 
 describe('> Test suite for class `ConfigService`:', () => {
