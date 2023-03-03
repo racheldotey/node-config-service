@@ -1,5 +1,5 @@
 import { expect, jest, test } from '@jest/globals';
-import ConfigService from '../src/ConfigService';
+import { ConfigService } from '../src/ConfigService';
 import { IConfigService, ConfigServiceLogFunction } from '../src/main';
 
 const NODE_ENV = {

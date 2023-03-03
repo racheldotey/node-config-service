@@ -1,4 +1,4 @@
-import ConfigProperty from '../src/ConfigProperty';
+import { ConfigProperty } from '../src/ConfigProperty';
 
 
 describe('> Test suite for class `ConfigProperty`:', () => {
