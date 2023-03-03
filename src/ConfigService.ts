@@ -1,12 +1,7 @@
-type ConfigServiceLogFunction = (value: any) => void;
+import { ConfigServiceOptions, IConfigProperty } from './types';
+import ConfigProperty from './ConfigProperty';
 
-interface ConfigServiceOptions {
-	silenceErrors?: boolean;
-	logErrors?: boolean;
-	logFunction?: ConfigServiceLogFunction;
-}
-
-class ConfigService {
+export class ConfigService {
 	options: ConfigServiceOptions;
 	properties: Array<ConfigProperty>;
 
@@ -22,4 +17,4 @@ class ConfigService {
 	}
 }
 
-module.exports = exports = ConfigService;
+export default ConfigService;
