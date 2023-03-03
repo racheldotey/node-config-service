@@ -1,4 +1,4 @@
-import { IConfigPropertyParseFunction, IConfigPropertyOptions } from './types';
+import { ConfigPropertyParseFunction, ConfigPropertyOptions, IConfigProperty } from './types';
 
 /**
  * A single property value for the config.
@@ -12,7 +12,7 @@ import { IConfigPropertyParseFunction, IConfigPropertyOptions } from './types';
  * @property {any} parse -  Parse the property (all process .env vars are strings by default)
  * @property {any} #value - Property value
  */
-class ConfigProperty {
+export class ConfigProperty implements IConfigProperty {
 	name: string;
 	envKey: string | false;
 	desc: string;
@@ -20,16 +20,16 @@ class ConfigProperty {
 	isDefined: boolean;
 	isRequired: boolean;
 	errors?: Error[];
-	parse: IConfigPropertyParseFunction;
+	parse: ConfigPropertyParseFunction;
 	#value: any;
 
 	/**
 	 * Creates an instance of ConfigProperty.
 	 * @param {string} name - Key used to look up this property in calling app.
-	 * @param {IConfigPropertyOptions} [options={}]
+	 * @param {ConfigPropertyOptions} [options={}]
 	 * @memberof ConfigProperty
 	 */
-	constructor(name: string, options: IConfigPropertyOptions = {}) {
+	constructor(name: string, options: ConfigPropertyOptions = {}) {
 		this.name = name;
 		this.envKey = options.envKey || false;
 		this.desc = options.desc || '';
@@ -90,4 +90,5 @@ class ConfigProperty {
 	}
 }
 
-module.exports = exports = ConfigProperty;
+
+export default ConfigProperty;
