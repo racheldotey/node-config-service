@@ -1,8 +1,9 @@
 import type { Config } from '@jest/types';
 
-// Sync object
+// @see https://jestjs.io/docs/configuration
 const config: Config.InitialOptions = {
     verbose: true,
+    coverageDirectory: 'coverage',
     transform: {
         '^.+\\.tsx?$': 'ts-jest',
     },

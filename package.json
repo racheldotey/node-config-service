@@ -130,8 +130,11 @@
 		"start": "ntl",
 		"menu:close": "",
 		"info": "npm run",
-		"test": "jest --verbose true",
-		"test:dev": "nodemon --ext js,jsx,env,ts --watch \"*.*\" --exec \"npm run test\"",
+
+		"test": "jest --config=./tests/jest.config.ts",
+		"test:coverage": "jest --config=./tests/jest.config.ts --collectCoverage",
+		"test:watch": "jest --config=./tests/jest.config.ts --watchAll",
+
 		"build:ts": "npx tsc",
 		"build:ts:dev": "nodemon --ext js,jsx,env,ts --watch \"*.*\" --exec \"npm run build:ts\"",
 		"build": "webpack",
@@ -141,8 +144,10 @@
 		"dev:lint:watch": "nodemon --ext js,jsx,md,ts --watch \"*.*\" --exec \"npm run dev:lint\"",
 		"dev:format": "prettier --write src/**/*.{js,jsx",
 		"dev:format:watch": "nodemon --ext js,jsx,md,ts --watch \"*.*\" --exec \"npm run dev:lint\"",
+
 		"docs:build": "jsdoc2md -t README.hbs src/*.js > README.md",
 		"docs:build:watch": "nodemon --config ./scripts/dev-server.nodeamon.json --exec \"npm run docs:build\"",
+
 		"menu": "ntl"
 	}
 }
