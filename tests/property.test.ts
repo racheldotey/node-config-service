@@ -1,4 +1,4 @@
-const ConfigProperty = require('../src/ConfigProperty');
+import ConfigProperty from '../src/ConfigProperty';
 
 
 describe('> Test suite for class `ConfigProperty`:', () => {
@@ -64,7 +64,7 @@ describe('> Test suite for class `ConfigProperty`:', () => {
         const prop = new ConfigProperty(key);
 
         expect(prop.isDefined).toBeFalsy();
-        expect(() => prop.isMatch()).toThrow();
+        expect(() => prop.isMatch(key)).toThrow();
     });
 
     test('(5) - Test isMatch() method when value is set in the constructor.', () => {
@@ -72,7 +72,7 @@ describe('> Test suite for class `ConfigProperty`:', () => {
         const prop = new ConfigProperty(key, { ...options, value });
 
         expect(prop.isDefined).toBeTruthy();
-        expect(prop.isMatch()).toBeFalsy();
+        expect(prop.isMatch('')).toBeFalsy();
         expect(prop.isMatch(options.envKey)).toBeTruthy();
         expect(prop.isMatch(key)).toBeTruthy();
         expect(prop.isMatch('dog')).toBeFalsy();
