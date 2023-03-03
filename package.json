@@ -105,7 +105,7 @@
 		"prettier-eslint": "^15.0.1",
 		"ts-jest": "^29.0.5",
 		"ts-node": "^10.9.1",
-		"typescript": "^4.8.4",
+		"typescript": "^4.9.5",
 		"webpack": "^5.75.0",
 		"webpack-cli": "^5.0.1"
 	},
@@ -132,6 +132,8 @@
 		"info": "npm run",
 		"test": "jest --verbose true",
 		"test:dev": "nodemon --ext js,jsx,env,ts --watch \"*.*\" --exec \"npm run test\"",
+		"build:ts": "npx tsc",
+		"build:ts:dev": "nodemon --ext js,jsx,env,ts --watch \"*.*\" --exec \"npm run build:ts\"",
 		"build": "webpack",
 		"dev:lint": "eslint ./ --ignore-path .gitignore",
 		"dev:lint:fix": "eslint ./ --ignore-path .gitignore --fix",
