@@ -1,7 +1,7 @@
 import { ConfigProperty, IConfigProperty, ConfigPropertyOptions } from './ConfigProperty';
 
 
-export type ConfigServiceLogFunction = (value: any) => void;
+export type ConfigServiceLogFunction = (...data: any[]) => void;
 
 export interface DefinePropertyOptions {
 	[key: string]: ConfigPropertyOptions;
@@ -11,7 +11,7 @@ export interface ConfigServiceOptions {
 	silenceErrors?: boolean;
 	logErrors?: boolean;
 	logFunction?: ConfigServiceLogFunction;
-	properties: DefinePropertyOptions;
+	properties?: DefinePropertyOptions;
 }
 
 // @see https://blog.logrocket.com/writing-constructor-typescript/
@@ -48,10 +48,12 @@ export const ConfigService: ConfigServiceConstructor = class ConfigService imple
 		this.logFunction = (options.logFunction) ? options.logFunction : undefined;
 
 		this.#properties = {};
-		Object.entries(options.properties).forEach(([name, options]) => {
-			const prop = new ConfigProperty(name, options);
-			this.#properties[prop.name] = prop;
-		});
+		if(options.properties) {
+			Object.entries(options.properties).forEach(([name, options]) => {
+				const prop = new ConfigProperty(name, options);
+				this.#properties[prop.name] = prop;
+			});
+		}
 	}
 
 	init(processEnv: NodeJS.ProcessEnv = process.env) {
