@@ -1,9 +1,10 @@
-import type { Config } from '@jest/types';
+import type { Config } from 'jest';
 
 // @see https://jestjs.io/docs/configuration
-const config: Config.InitialOptions = {
+const config: Config = {
     verbose: true,
     coverageDirectory: 'coverage',
+    errorOnDeprecated: true,
     transform: {
         '^.+\\.tsx?$': 'ts-jest',
     },
