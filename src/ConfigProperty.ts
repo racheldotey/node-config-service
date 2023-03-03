@@ -88,5 +88,3 @@ export const ConfigProperty: ConfigPropertyConstructor = class ConfigProperty
 		return find === this.name || find === this.envKey ? true : false;
 	}
 };
-
-export default ConfigProperty;
