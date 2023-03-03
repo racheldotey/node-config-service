@@ -1,4 +1,3 @@
-require('dotenv').config({ path: './test.basic.env' });
 const ConfigProperty = require('../src/ConfigProperty');
 
 
@@ -29,6 +28,8 @@ describe('> Test suite for class `ConfigProperty`:', () => {
         expect(prop.default).toBeUndefined();
         expect(prop.isRequired).toBeTruthy();
         expect(prop.isDefined).toBeFalsy();
+
+        expect(typeof prop.isMatch).toBe('function');
     });
 
     test('(2) - Init with simple options.', () => {
@@ -92,7 +93,7 @@ describe('> Test suite for class `ConfigProperty`:', () => {
 
         expect(prop.isDefined).toBeFalsy();
 
-        prop.setValue({});
+        expect(prop.setValue({})).toBeUndefined();
 
         expect(prop.isDefined).toBeTruthy();
         expect(prop.isRequired).toBeTruthy();
@@ -105,7 +106,7 @@ describe('> Test suite for class `ConfigProperty`:', () => {
 
         expect(prop.isDefined).toBeFalsy();
 
-        prop.setValue({ [options.envKey]: 'Parrots can talk.' });
+        expect( prop.setValue({ [options.envKey]: 'Parrots can talk.' })).toBeUndefined();
 
         expect(prop.isDefined).toBeTruthy();
         expect(prop.isRequired).toBeTruthy();
@@ -121,7 +122,7 @@ describe('> Test suite for class `ConfigProperty`:', () => {
         expect(prop.isDefined).toBeFalsy();
         expect(prop.isRequired).toBeTruthy();
 
-        prop.setValue({ [options.envKey]: value });
+        expect(prop.setValue({ [options.envKey]: value })).toBeUndefined();
 
         expect(prop.isDefined).toBeTruthy();
         expect(JSON.stringify(prop.value)).toBe(value);
