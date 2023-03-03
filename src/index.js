@@ -7,7 +7,7 @@
  *
  * @module NodeConfigService
  */
-import getDefaultService from './getDefaultService';
+import { getDefaultService } from './getDefaultService';
 import dotenv from 'dotenv';
 
 // Load environment variables into process.env
