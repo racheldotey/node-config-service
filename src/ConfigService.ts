@@ -1,4 +1,4 @@
-import ConfigProperty from './ConfigProperty';
+import { ConfigProperty } from './ConfigProperty';
 import { IConfigProperty, ConfigServiceOptions, IConfigService, ConfigServiceConstructor, ConfigServiceLogFunction } from './main';
 
 
@@ -16,7 +16,7 @@ export const ConfigService: ConfigServiceConstructor = class ConfigService imple
 		this.logFunction = (options.logFunction) ? options.logFunction : undefined;
 
 		this.#properties = {};
-		if(options.properties) {
+		if (options.properties) {
 			Object.entries(options.properties).forEach(([name, options]) => {
 				const prop = new ConfigProperty(name, options);
 				this.#properties[prop.name] = prop;
@@ -40,9 +40,9 @@ export const ConfigService: ConfigServiceConstructor = class ConfigService imple
 	}
 
 	get(...args: string[]) {
-		if(!args.length) return this.findSeveral(Object.keys(this.#properties));
+		if (!args.length) return this.findSeveral(Object.keys(this.#properties));
 
-		if(args.length === 1) {
+		if (args.length === 1) {
 			return (Array.isArray(args[0])) ? this.findSeveral(args[0]) : this.findOne(args[0]);
 		}
 
@@ -62,7 +62,3 @@ export const ConfigService: ConfigServiceConstructor = class ConfigService imple
 		);
 	}
 };
-
-
-
-export default ConfigService;
