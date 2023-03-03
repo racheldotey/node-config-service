@@ -1,4 +1,6 @@
-import { ConfigService, IConfigService } from './ConfigService';
+import { ConfigService } from './ConfigService';
+import { IConfigService } from './main';
+
 
 var defaultService: undefined | IConfigService;
 
@@ -24,5 +26,3 @@ export const getDefaultService = (options = {}) => {
         throw new Error('Unable to initialize default config service.');
     }
 };
-
-export default getDefaultService;
