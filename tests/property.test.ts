@@ -19,7 +19,7 @@ describe('> Test suite for class `ConfigProperty`:', () => {
 
 
 
-    test('(1) - Init with empty options.', () => {
+    test('(1) - Verify the interface.', () => {
         const prop = new ConfigProperty('empty_options');
 
         expect(prop.name).toMatch('empty_options');
