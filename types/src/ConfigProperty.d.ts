@@ -12,5 +12,4 @@ import { ConfigPropertyConstructor } from './main';
  * @property {any} #value - Property value
  */
 export declare const ConfigProperty: ConfigPropertyConstructor;
-export default ConfigProperty;
 //# sourceMappingURL=ConfigProperty.d.ts.map
