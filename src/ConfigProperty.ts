@@ -1,35 +1,4 @@
-export type ConfigPropertyParseFunction = (value: string) => any;
-
-export interface ConfigPropertyOptions {
-	envKey?: string;
-	desc?: string;
-	default?: string;
-	required?: boolean;
-	parse?: ConfigPropertyParseFunction;
-	value?: any;
-}
-
-// @see https://blog.logrocket.com/writing-constructor-typescript/
-export interface ConfigPropertyConstructor {
-	new (name: string, options?: ConfigPropertyOptions): IConfigProperty;
-}
-
-export interface IConfigProperty {
-	name: string;
-	envKey: string | false;
-	desc: string;
-	default?: string;
-	isDefined: boolean;
-	isRequired: boolean;
-	errors?: Error[];
-	parse: ConfigPropertyParseFunction;
-	get value(): {
-		[key: string]: string;
-	};
-	set value(envVars: NodeJS.ProcessEnv);
-	setValue(envVars: NodeJS.ProcessEnv): void;
-	isMatch(find: string): boolean;
-}
+import { IConfigProperty, ConfigPropertyConstructor, ConfigPropertyParseFunction, ConfigPropertyOptions } from './main';
 
 /**
  * A single property value for the config.
