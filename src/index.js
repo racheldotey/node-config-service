@@ -5,76 +5,15 @@
  * ConfigService accepts a configuration object of properties
  * to be defined using the node process env and run time overrides.
  *
- * @module ConfigService
+ * @module NodeConfigService
  */
+import getDefaultService from './getDefaultService';
+import dotenv from 'dotenv';
 
-/**
- * Load environment variables into process.env using [dotenv](https://www.npmjs.com/package/dotenv).
- *
- * NOTE: Should be placed as early as possible on startup.
- *
- * @event loadEnv
- * @type {Object} process.env
- * @memberOf module:ConfigService
- */
-require('./load-env');
+// Load environment variables into process.env
+// @see https://www.npmjs.com/package/dotenv
+dotenv.config();
 
-const pkg = require('../package.json');
+export const defaultService = getDefaultService();
 
-const errors = require('./errors');
-
-const ConfigService = require('./config_service');
-const defaultProperties = require('./default-properties');
-
-/**
- * The ConfigService version
- *
- * #### Example:
- *
- *     console.log(configService.version); // '1.x.x'
- *
- * @api public
- * @property version
- * @memberOf module:ConfigService
- */
-ConfigService.prototype.version = pkg.version;
-
-/**
- * The ConfigService constructor
- *
- * The exports of the configService module is an instance of this class.
- *
- * #### Example:
- *
- *     const appConfig = require('configService');
- *     const moduleConfig = new configService.ConfigService();
- *
- * @public
- * @memberOf module:ConfigService
- * @property ConfigService
- */
-ConfigService.prototype.ConfigService = ConfigService;
-
-/**
- * Key and class object map of custom error methods.
- *
- * @public
- * @memberOf module:ConfigService
- * @property {Object} errors Key and class object map of custom error methods.
- */
-ConfigService.prototype.errors = errors;
-
-/**
- * The exports object is an instance of ConfigService.
- *
- * @public
- * @memberOf module:ConfigService
- * @type ConfigService
- */
-module.exports = new ConfigService({
-	debugging: true,
-	silenceErrors: false,
-	logErrors: true,
-	logFunction: console.debug,
-	properties: defaultProperties,
-});
+export default defaultService;
