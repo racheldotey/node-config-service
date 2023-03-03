@@ -1,5 +1,3 @@
-
-
 export const DEFAULT_PROPERTY_DEFINITIONS = {
     NODE_ENV: {
         envKey: 'environment',
@@ -11,5 +9,5 @@ export const DEFAULT_PROPERTY_DEFINITIONS = {
 };
 
 export const DEFAULT_SERVICE_PROPERTIES = {
-    properties: { ...DEFAULT_SERVICE_PROPERTIES }
+    properties: { ...DEFAULT_PROPERTY_DEFINITIONS }
 };
