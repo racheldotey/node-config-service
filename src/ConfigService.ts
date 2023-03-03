@@ -1,38 +1,6 @@
-import { ConfigProperty, IConfigProperty, ConfigPropertyOptions } from './ConfigProperty';
+import ConfigProperty from './ConfigProperty';
+import { IConfigProperty, ConfigServiceOptions, IConfigService, ConfigServiceConstructor, ConfigServiceLogFunction } from './main';
 
-
-export type ConfigServiceLogFunction = (...data: any[]) => void;
-
-export interface DefinePropertyOptions {
-	[key: string]: ConfigPropertyOptions;
-};
-
-export interface ConfigServiceOptions {
-	silenceErrors?: boolean;
-	logErrors?: boolean;
-	logFunction?: ConfigServiceLogFunction;
-	properties?: DefinePropertyOptions;
-}
-
-// @see https://blog.logrocket.com/writing-constructor-typescript/
-export interface ConfigServiceConstructor {
-	new(options?: ConfigServiceOptions): IConfigService;
-}
-
-export interface IConfigService {
-	silenceErrors?: boolean;
-	logErrors?: boolean;
-	logFunction?: ConfigServiceLogFunction;
-	init(processEnv?: NodeJS.ProcessEnv): IConfigService;
-	get properties(): {
-		[key: string]: IConfigProperty;
-	};
-	get(...args: string[]): any;
-	findOne(find: string): any;
-	findSeveral(names: string[]): {
-		[k: string]: any;
-	};
-}
 
 export const ConfigService: ConfigServiceConstructor = class ConfigService implements IConfigService {
 	silenceErrors?: boolean;
