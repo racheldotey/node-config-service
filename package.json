@@ -28,7 +28,7 @@
 		"url": "https://github.com/racheldotey/node-config-service/issues"
 	},
 	"main": "./src/index.js",
-	"typings": "./src/types.d.ts",
+	"typings": "./src/main.d.ts",
 	"browserslist": [
 		"> 1%",
 		"last 2 versions",
