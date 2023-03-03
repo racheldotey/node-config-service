@@ -1,5 +1,6 @@
 import { expect, jest, test } from '@jest/globals';
-import { ConfigService, IConfigService, ConfigServiceLogFunction } from '../src/ConfigService';
+import ConfigService from '../src/ConfigService';
+import { IConfigService, ConfigServiceLogFunction } from '../src/main';
 
 const NODE_ENV = {
     key: 'NODE_ENV',
@@ -98,9 +99,11 @@ describe('> Test suite for class `ConfigService`:', () => {
         config = config.init();
 
         var env = config.get(prop.name);
+        expect(env).toBeDefined();
         expect(env).toMatch(value);
 
-        var env = config.get(prop.key);
+        env = config.get(prop.key);
+        expect(env).toBeDefined();
         expect(env).toMatch(value);
     });
 
@@ -116,9 +119,11 @@ describe('> Test suite for class `ConfigService`:', () => {
         const value = prop.parse(`${prop.default}_OVERRIDDEN`);
 
         var env = config.get(prop.name);
+        expect(env).toBeDefined();
         expect(env).toMatch(value);
 
-        var env = config.get(prop.key);
+        env = config.get(prop.key);
+        expect(env).toBeDefined();
         expect(env).toMatch(value);
     });
 
