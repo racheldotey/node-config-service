@@ -1,23 +1,19 @@
-export type IConfigPropertyParseFunction = (value: string) => any;
+export type ConfigPropertyParseFunction = (value: string) => any;
 
-/**
- * @description
- * @interface IConfigPropertyOptions
- */
-export interface IConfigPropertyOptions {
+export interface ConfigPropertyOptions {
     envKey?: string;
     desc?: string;
     default?: string;
     required?: boolean;
-    parse?: IConfigPropertyParseFunction;
+    parse?: ConfigPropertyParseFunction;
     value?: any;
 }
 
 /**
  * @description
- * @interface IConfigProperty
+ * @interface ConfigProperty
  */
-export class ConfigProperty {
+export interface IConfigProperty {
     name: string;
     envKey: string | false;
     desc: string;
@@ -25,5 +21,13 @@ export class ConfigProperty {
     isDefined: boolean;
     isRequired: boolean;
     errors?: Error[];
-    parse: IConfigPropertyParseFunction;
+    parse: ConfigPropertyParseFunction;
+}
+
+export type ConfigServiceLogFunction = (value: any) => void;
+
+export interface ConfigServiceOptions {
+	silenceErrors?: boolean;
+	logErrors?: boolean;
+	logFunction?: ConfigServiceLogFunction;
 }
