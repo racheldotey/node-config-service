@@ -1,13 +1,15 @@
-export const DEFAULT_PROPERTY_DEFINITIONS = {
-    NODE_ENV: {
-        envKey: 'environment',
-        desc: `{String} Current environment likely 'production' or 'development'.`,
-        default: 'development',
-        required: false,
-        parse: (value: string) => value.toString().toLowerCase(),
-    },
+import { ConfigServiceOptions, DefinePropertyOptions } from './main';
+
+export const DEFAULT_PROPERTY_DEFINITIONS: DefinePropertyOptions = {
+	environment: {
+		name: 'environment',
+		envKey: 'NODE_ENV',
+		desc: '{string? = "development"} Server environment such as "production" or "development".',
+		default: 'development',
+		required: false,
+	},
 };
 
-export const DEFAULT_SERVICE_PROPERTIES = {
-    properties: { ...DEFAULT_PROPERTY_DEFINITIONS }
+export const DEFAULT_SERVICE_PROPERTIES: ConfigServiceOptions = {
+	properties: { ...DEFAULT_PROPERTY_DEFINITIONS },
 };
