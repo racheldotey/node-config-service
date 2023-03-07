@@ -1,6 +1,7 @@
 import { ConfigService } from './ConfigService';
 import { IConfigService } from './main';
 
+import { DEFAULT_SERVICE_PROPERTIES } from './constants';
 
 var defaultService: undefined | IConfigService;
 
@@ -9,15 +10,7 @@ export const getDefaultService = (options = {}) => {
 
     try {
         defaultService = new ConfigService({
-            properties: {
-                NODE_ENV: {
-                    envKey: 'environment',
-                    desc: `{String} Current environment likely 'production' or 'development'.`,
-                    default: 'development',
-                    required: false,
-                    parse: (value: string) => value.toString().toLowerCase(),
-                },
-            },
+            ...DEFAULT_SERVICE_PROPERTIES,
             ...options,
         });
 
