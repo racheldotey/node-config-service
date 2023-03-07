@@ -1,4 +1,38 @@
-// Property Types
+/** Service Types */
+export type ConfigServiceLogFunction = (...data: any[]) => void;
+
+export interface DefinePropertyOptions {
+	[key: string]: ConfigPropertyOptions;
+}
+
+export interface ConfigServiceOptions {
+	silenceErrors?: boolean;
+	logErrors?: boolean;
+	logFunction?: ConfigServiceLogFunction;
+	properties?: DefinePropertyOptions;
+}
+
+// @see https://blog.logrocket.com/writing-constructor-typescript/
+export interface ConfigServiceConstructor {
+	new (options?: ConfigServiceOptions): IConfigService;
+}
+
+export interface IConfigService {
+	silenceErrors?: boolean;
+	logErrors?: boolean;
+	logFunction?: ConfigServiceLogFunction;
+	init(processEnv?: NodeJS.ProcessEnv): IConfigService;
+	get properties(): {
+		[key: string]: IConfigProperty;
+	};
+	get(...args: string[]): any;
+	findOne(find: string): any;
+	findSeveral(names: string[]): {
+		[k: string]: any;
+	};
+}
+
+/** Property Types */
 export type ConfigPropertyParseFunction = (value: string) => any;
 
 export interface ConfigPropertyOptions {
@@ -33,38 +67,4 @@ export interface IConfigProperty {
 	setValue(envVars: NodeJS.ProcessEnv): void;
 	isMatch(find: string): boolean;
 	getVerbose(): object;
-}
-
-// Service Types
-export type ConfigServiceLogFunction = (...data: any[]) => void;
-
-export interface DefinePropertyOptions {
-	[key: string]: ConfigPropertyOptions;
-}
-
-export interface ConfigServiceOptions {
-	silenceErrors?: boolean;
-	logErrors?: boolean;
-	logFunction?: ConfigServiceLogFunction;
-	properties?: DefinePropertyOptions;
-}
-
-// @see https://blog.logrocket.com/writing-constructor-typescript/
-export interface ConfigServiceConstructor {
-	new (options?: ConfigServiceOptions): IConfigService;
-}
-
-export interface IConfigService {
-	silenceErrors?: boolean;
-	logErrors?: boolean;
-	logFunction?: ConfigServiceLogFunction;
-	init(processEnv?: NodeJS.ProcessEnv): IConfigService;
-	get properties(): {
-		[key: string]: IConfigProperty;
-	};
-	get(...args: string[]): any;
-	findOne(find: string): any;
-	findSeveral(names: string[]): {
-		[k: string]: any;
-	};
 }
