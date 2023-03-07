@@ -46,7 +46,7 @@ module.exports = (env, argv) => {
         },
         mode: mode,
         output: {
-            filename: isProduction ? `[name].min.js` : `[name].js`,
+            filename: isProduction ? `node-config-service.min.js` : `node-config-service.js`,
             path: OUTPUT_DIR,
             globalObject: 'this',
             umdNamedDefine: true,
