@@ -1,20 +1,29 @@
 import { expect, test } from '@jest/globals';
 import { ConfigService } from '../src/ConfigService';
+import { DEFAULT_PROPERTY_DEFINITIONS } from '../src/constants';
 import { expectConfigServiceInterface } from './lib/expectConfigServiceInterface';
 import { expectConfigServiceSettings } from './lib/expectConfigServiceSettings';
 
-const NODE_ENV = {
-    envKey: 'NODE_ENV',
-    key: 'NODE_ENV',
-    name: 'environment',
-    desc: `{String} Current environment, such as 'production' or 'development'.`,
-    default: 'JEST_TESTING_ENV',
-    required: false,
-    parse: (value: string) => value.toString().toLowerCase(),
-};
+
+const properties = { ...DEFAULT_PROPERTY_DEFINITIONS };
+const prop = DEFAULT_PROPERTY_DEFINITIONS.environment;
+prop.parse = (value: string) => value.toString().toLowerCase();
+
 
 describe('> Test suite for class `ConfigService`:', () => {
     var config = new ConfigService();
+
+    var name: string = prop.name || 'environment' || '';
+    var envKey: string = prop.envKey || prop.name || '';
+    var defaultValue: string = prop.default || '';
+
+    test('(Setup) - Verify default config used', () => {
+        expect(name).not.toBe('');
+        expect(envKey).not.toBe('');
+        expect(name).not.toBe(envKey);
+        expect(defaultValue).not.toBe('');
+        expect(typeof prop.parse).toBe('function');
+    });
 
     test('(1) - Verify interface', () => {
         expectConfigServiceInterface(config);
@@ -51,42 +60,37 @@ describe('> Test suite for class `ConfigService`:', () => {
     });
 
     test('(5) - Init with a property definition using default values', () => {
-        const properties = { NODE_ENV };
-        const prop = properties.NODE_ENV;
-        const value = prop.parse(prop.default);
-
         config = new ConfigService({ properties });
         expectConfigServiceInterface(config);
         expectConfigServiceSettings(config);
         // Send a blank {} or it will default to process.env
         config = config.init({});
 
-        var env = config.get(prop.name);
-        console.debug(env)
+        var env = config.get(name);
         expect(env).toBeDefined();
-        expect(env).toMatch(value);
+        expect(env).toMatch(defaultValue);
 
-        env = config.get(prop.key);
+        env = config.get(envKey);
         expect(env).toBeDefined();
-        expect(env).toMatch(value);
+        expect(env).toMatch(defaultValue);
     });
 
     test('(6) - Init with a property definition, override default value', () => {
-        const properties = { NODE_ENV };
-        const prop = properties.NODE_ENV;
-
         config = new ConfigService({ properties });
         expectConfigServiceInterface(config);
         expectConfigServiceSettings(config);
-        config = config.init({ [prop.key]: `${prop.default}_OVERRIDDEN` });
 
-        const value = prop.parse(`${prop.default}_OVERRIDDEN`);
+        var value = `${defaultValue}_OVERRIDDEN`;
+        config = config.init({ [envKey]: value });
 
-        var env = config.get(prop.name);
+        expect(typeof prop.parse).toBe('function');
+        if(prop.parse) value = prop.parse(value);
+
+        var env = config.get(name);
         expect(env).toBeDefined();
         expect(env).toMatch(value);
 
-        env = config.get(prop.key);
+        env = config.get(envKey);
         expect(env).toBeDefined();
         expect(env).toMatch(value);
     });
