@@ -1,4 +1,4 @@
-import { IConfigService } from '../../src/main';
+import { IConfigService } from '../../src/types';
 
 export const expectConfigServiceInterface = (config: IConfigService) => {
 	expect(config).toBeDefined();

@@ -1,4 +1,4 @@
-import { IConfigService, ConfigServiceLogFunction } from '../../src/main';
+import { IConfigService, ConfigServiceLogFunction } from '../../src/types';
 
 export const expectConfigServiceSettings = (
     config: IConfigService,

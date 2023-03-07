@@ -30,6 +30,7 @@ module.exports = (env, argv) => {
         devtool: 'inline-source-map',
         entry: {
             'node-config-service': ['./src/index.ts'],
+            'types': './src/types.ts',
         },
         module: {
             rules: [
@@ -46,7 +47,7 @@ module.exports = (env, argv) => {
         },
         mode: mode,
         output: {
-            filename: isProduction ? `node-config-service.min.js` : `node-config-service.js`,
+            filename: isProduction ? `[name].min.js` : `[name].js`,
             path: OUTPUT_DIR,
             globalObject: 'this',
             umdNamedDefine: true,
