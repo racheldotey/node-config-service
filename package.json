@@ -119,30 +119,59 @@
 			"start": "View menu",
 			"menu:close": "Close this menu -> Do nothing",
 			"info": "NPM info about this package.json scripts",
-			"menu": "Open interactive script menu"
+			"on-changes": "[watch] Execute command when files change. (use ' -- ')",
+			"jest-tests": "Run jest tests with optional command. (use ' -- ')",
+			"test": "Run all tests. Files may be located in any directory.",
+			"test:output-coverage": "Run all tests and output code coverage statistics.",
+			"test:build-dist": "Test the current build dist.",
+			"build": "Build typescript files in `src`.",
+			"dev": "[watch] Recompile files into dist and run tests on file changes."
 		}
 	},
 	"scripts": {
 		"start": "ntl",
 		"menu:close": "",
 		"info": "npm run",
-		"test": "jest --config=./tests/jest.config.ts",
-		"test:watch": "nodemon --ext js,jsx,env,ts --watch \"*.*\" --exec \"npm run test\"",
-		"test:output-coverage": "jest --config=./tests/jest.config.ts --collectCoverage",
-		"test:build": "jest ./tests/build.test.ts --config=./tests/jest.config.ts",
-		"build": "webpack",
-		"build:ts:watch": "nodemon --ext js,jsx,env,ts --watch \"*.*\" --exec \"npm run build\"",
-		"dev": "webpack serve",
+
+		"on-changes": "nodemon --ext env,html,js,json,jsx,md,ts,tsx --watch \"*.*\" --exec",
+		"jest-tests": "jest --config=./tests/jest.config.ts",
+
+		"test": "npm run jest-tests",
+		"test:output-coverage": "npm run jest-tests -- --collectCoverage",
+
+		"pretest:build-dist": "echo '[node-config-service] Testing build dist...'",
+		"test:build-dist": "npm run jest-tests -- ./tests/build.test.ts",
+		"posttest:build-dist": "npm run test",
+
+		"prebuild": "echo '[node-config-service] Starting build process...'",
+		"build": "webpack --mode production",
+		"postbuild": "npm run test:build-dist",
+
+		"dev": "npm run on-changes -- \"npm run build\"",
+		"serve-dev": "webpack serve",
+
+
+		"prepublish:dry-run": "npm publish --dry-run",
+		"publish:dry-run": "npm publish --dry-run",
+		"postpublish:dry-run": "npm publish --dry-run",
+
+		"prepublish": "npm publish",
+		"publish:version-and-publish": "npm publish",
+		"postpublish": "npm publish",
+
+
+
 		"dev:lint": "eslint ./ --ignore-path .gitignore",
 		"dev:lint:fix": "eslint ./ --ignore-path .gitignore --fix",
 		"dev:lint:log": "eslint ./ --ignore-path .gitignore --output-file eslint.html --format compact",
-		"dev:lint:watch": "nodemon --ext js,jsx,md,ts --watch \"*.*\" --exec \"npm run dev:lint\"",
+		"dev:lint:watch": "npm run on-changes -- \"npm run dev:lint\"",
+
 		"dev:format": "prettier --write src/**/*.{js,jsx",
-		"dev:format:watch": "nodemon --ext js,jsx,md,ts --watch \"*.*\" --exec \"npm run dev:lint\"",
-		"docs:build": "jsdoc2md -t README.hbs src/*.js > README.md",
+		"dev:format:watch": "npm run on-changes -- \"npm run dev:lint\"",
+
+		"docs:build": "jsdoc2md -t ./docs/README.hbs src/*.js > README.md",
 		"docs:build:watch": "nodemon --config ./scripts/dev-server.nodeamon.json --exec \"npm run docs:build\"",
-		"publish": "npm publish",
-		"publish:dry-run": "npm publish --dry-run",
+
 		"menu": "ntl"
 	}
 }
