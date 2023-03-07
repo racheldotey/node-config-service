@@ -3,7 +3,7 @@ import {
 	ConfigPropertyConstructor,
 	ConfigPropertyParseFunction,
 	ConfigPropertyOptions,
-} from './main';
+} from './types';
 
 /**
  * A single property value for the config.

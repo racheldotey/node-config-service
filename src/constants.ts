@@ -1,4 +1,4 @@
-import { ConfigServiceOptions, DefinePropertyOptions } from './main';
+import { ConfigServiceOptions, DefinePropertyOptions } from './types';
 
 export const DEFAULT_PROPERTY_DEFINITIONS: DefinePropertyOptions = {
 	environment: {

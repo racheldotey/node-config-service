@@ -5,7 +5,7 @@ import {
 	IConfigService,
 	ConfigServiceConstructor,
 	ConfigServiceLogFunction,
-} from './main';
+} from './types';
 
 export const ConfigService: ConfigServiceConstructor = class ConfigService
 	implements IConfigService {

@@ -1,11 +1,11 @@
 import { ConfigService } from './ConfigService';
-import { IConfigService } from './main';
+import { IConfigService, ConfigPropertyOptions } from './types';
 
 import { DEFAULT_SERVICE_PROPERTIES } from './constants';
 
 var defaultService: undefined | IConfigService;
 
-export const getDefaultService = (options = {}) => {
+export const getDefaultService = (options: ConfigPropertyOptions = {}) => {
 	if (defaultService) return defaultService;
 
     try {
