@@ -75,11 +75,4 @@ export const ConfigService: ConfigServiceConstructor = class ConfigService
 			})
 		);
 	}
-
-	toString() {
-		// Returns key value object representation of config properties
-		return Object.fromEntries(
-			Object.values(this.#properties).map(prop => [prop.name, prop.value])
-		);
-	}
 };
