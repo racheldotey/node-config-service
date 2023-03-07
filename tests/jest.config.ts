@@ -6,7 +6,8 @@ const config: Config = {
     coverageDirectory: 'coverage',
     errorOnDeprecated: true,
     transform: {
-        '^.+\\.tsx?$': 'ts-jest',
+        '^.+\\.(ts|tsx)?$': 'ts-jest',
+        "^.+\\.(js|jsx)$": "babel-jest",
     },
 };
 
