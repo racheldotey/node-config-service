@@ -1,8 +1,7 @@
 import { expect, test } from '@jest/globals';
 import { ConfigService } from '../src/ConfigService';
 import { DEFAULT_PROPERTY_DEFINITIONS } from '../src/constants';
-import { expectConfigServiceInterface } from './lib/expectConfigServiceInterface';
-import { expectConfigServiceSettings } from './lib/expectConfigServiceSettings';
+import { expectConfigServiceInterface, expectConfigServiceSettings } from './lib/utils';
 
 
 const properties = { ...DEFAULT_PROPERTY_DEFINITIONS };
