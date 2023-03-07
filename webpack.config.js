@@ -6,6 +6,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 const TS_CONFIG = path.resolve(__dirname, 'tsconfig.json');
 const OUTPUT_DIR = path.resolve(__dirname, 'dist');
+const YEAR = new Date().getFullYear();
 
 const extractMode = (env, argv, defaultMode = 'development') => {
     var mode = defaultMode;
@@ -47,6 +48,7 @@ module.exports = (env, argv) => {
         },
         mode: mode,
         output: {
+            //clean: true,
             filename: isProduction ? `[name].min.js` : `[name].js`,
             path: OUTPUT_DIR,
             globalObject: 'this',
@@ -57,7 +59,7 @@ module.exports = (env, argv) => {
                 type: 'umd',
                 umdNamedDefine: true,
                 //export: ['default', 'ConfigService'],
-                auxiliaryComment: `[npm:node-config-service] Copyright(c) 2021-present Rachel Dotey <https://github.com/racheldotey/node-config-service> MIT Licensed`,
+                auxiliaryComment: `[npm:node-config-service] Copyright(c) 2021-${YEAR} Rachel Dotey <https://github.com/racheldotey/node-config-service> MIT Licensed`,
             },
         },
         optimization: {
