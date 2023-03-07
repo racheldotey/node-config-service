@@ -5,7 +5,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const production = process.env.NODE_ENV === 'production' || false;
 
 module.exports = {
-	entry: './src/index.ts',
+    entry: './src/index.ts',
     module: {
         rules: [
             {
@@ -14,14 +14,6 @@ module.exports = {
                 exclude: /node_modules/,
             },
         ],
-    },
-    resolve: {
-        extensions: ['.ts', '.js'],
-		fallback: {
-			"fs": false,
-			"os": false,
-			"path": false
-		},
     },
     mode: 'production',
     output: {
@@ -38,7 +30,15 @@ module.exports = {
             new TerserPlugin({})
         ]
     },
-	plugins: [
-	  new Dotenv()
-	],
+    plugins: [
+        new Dotenv()
+    ],
+    resolve: {
+        extensions: ['.ts', '.js'],
+        fallback: {
+            "fs": false,
+            "os": false,
+            "path": false
+        },
+    },
 };
