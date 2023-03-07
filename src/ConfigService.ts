@@ -1,8 +1,14 @@
 import { ConfigProperty } from './ConfigProperty';
-import { IConfigProperty, ConfigServiceOptions, IConfigService, ConfigServiceConstructor, ConfigServiceLogFunction } from './main';
+import {
+	IConfigProperty,
+	ConfigServiceOptions,
+	IConfigService,
+	ConfigServiceConstructor,
+	ConfigServiceLogFunction,
+} from './main';
 
-
-export const ConfigService: ConfigServiceConstructor = class ConfigService implements IConfigService {
+export const ConfigService: ConfigServiceConstructor = class ConfigService
+	implements IConfigService {
 	silenceErrors?: boolean;
 	logErrors?: boolean;
 	logFunction?: ConfigServiceLogFunction;
@@ -11,14 +17,14 @@ export const ConfigService: ConfigServiceConstructor = class ConfigService imple
 	};
 
 	constructor(options: ConfigServiceOptions = { properties: {} }) {
-		this.silenceErrors = (options.silenceErrors) ? true : false;
-		this.logErrors = (options.logErrors) ? true : false;
-		this.logFunction = (options.logFunction) ? options.logFunction : undefined;
+		this.silenceErrors = options.silenceErrors ? true : false;
+		this.logErrors = options.logErrors ? true : false;
+		this.logFunction = options.logFunction ? options.logFunction : undefined;
 
 		this.#properties = {};
 		if (options.properties) {
-			Object.entries(options.properties).forEach(([name, options]) => {
-				const prop = new ConfigProperty(name, options);
+			Object.entries(options.properties).forEach(([key, options]) => {
+				const prop = new ConfigProperty(options.name || key, options);
 				this.#properties[prop.name] = prop;
 			});
 		}
@@ -29,8 +35,10 @@ export const ConfigService: ConfigServiceConstructor = class ConfigService imple
 			Object.values(this.#properties).forEach(prop => prop.setValue(processEnv));
 			return this;
 		} catch (error) {
-			throw new Error('Could not set app config properties. Invalid process env sent ConfigService#init.');
-		};
+			throw new Error(
+				'Could not set app config properties. Invalid process env sent ConfigService#init.'
+			);
+		}
 	}
 
 	get properties() {
@@ -39,26 +47,39 @@ export const ConfigService: ConfigServiceConstructor = class ConfigService imple
 		throw new Error('app config properties requested before initialization.');
 	}
 
-	get(...args: string[]) {
-		if (!args.length) return this.findSeveral(Object.keys(this.#properties));
+	get(find: string | string[] | boolean) {
+		if (find === true) return this.getAll();
+		if (typeof find === 'string') return this.findOne(find);
+		if (Array.isArray(find)) return this.findSeveral(find);
 
-		if (args.length === 1) {
-			return (Array.isArray(args[0])) ? this.findSeveral(args[0]) : this.findOne(args[0]);
-		}
+		throw new Error('Bad config get request. Check your parameters and try again.');
+	}
 
-		return this.findSeveral(args);
+	getAll() {
+		return Object.fromEntries(
+			Object.values(this.#properties).map(prop => [prop.name, prop.value])
+		);
 	}
 
 	findOne(find: string) {
-		return this.#properties?.[find] || Object.values(this.#properties).find(prop => prop.isMatch(find));
+		const found = this.#properties?.[find] ||
+			Object.values(this.#properties).find(prop => prop.isMatch(find));
+		return (found) ? found.value : null;
 	}
 
-	findSeveral(names: string[]) {
+	findSeveral(find: string[] = []) {
 		return Object.fromEntries(
-			names.map((name) => {
-				const prop = this.findOne(name);
-				return [prop.name, prop.value];
+			find.map(name => {
+				const value = this.findOne(name);
+				return [name, value];
 			})
+		);
+	}
+
+	toString() {
+		// Returns key value object representation of config properties
+		return Object.fromEntries(
+			Object.values(this.#properties).map(prop => [prop.name, prop.value])
 		);
 	}
 };
