@@ -5,6 +5,7 @@ import { expectConfigServiceSettings } from './lib/expectConfigServiceSettings';
 
 const NODE_ENV = {
     envKey: 'NODE_ENV',
+    key: 'NODE_ENV',
     name: 'environment',
     desc: `{String} Current environment, such as 'production' or 'development'.`,
     default: 'JEST_TESTING_ENV',
@@ -57,9 +58,11 @@ describe('> Test suite for class `ConfigService`:', () => {
         config = new ConfigService({ properties });
         expectConfigServiceInterface(config);
         expectConfigServiceSettings(config);
-        config = config.init();
+        // Send a blank {} or it will default to process.env
+        config = config.init({});
 
         var env = config.get(prop.name);
+        console.debug(env)
         expect(env).toBeDefined();
         expect(env).toMatch(value);
 
@@ -79,15 +82,13 @@ describe('> Test suite for class `ConfigService`:', () => {
 
         const value = prop.parse(`${prop.default}_OVERRIDDEN`);
 
-        console.debug(value)
         var env = config.get(prop.name);
-        console.debug(env)
         expect(env).toBeDefined();
-        //expect(env).toMatch(value);
+        expect(env).toMatch(value);
 
         env = config.get(prop.key);
         expect(env).toBeDefined();
-        //expect(env).toMatch(value);
+        expect(env).toMatch(value);
     });
 
 });
