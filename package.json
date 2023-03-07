@@ -27,8 +27,11 @@
 	"bugs": {
 		"url": "https://github.com/racheldotey/node-config-service/issues"
 	},
-	"main": "./src/index.js",
-	"typings": "./src/main.d.ts",
+	"type": "commonjs",
+	"main": "./dist/node-config-service.js",
+	"files": [
+		"dist"
+	],
 	"browserslist": [
 		"> 1%",
 		"last 2 versions",
@@ -59,6 +62,7 @@
 		"clean-jsdoc-theme": "^4.2.6",
 		"concurrently": "^7.6.0",
 		"connect-livereload": "^0.6.1",
+		"dotenv-webpack": "^8.0.1",
 		"eslint": "^8.35.0",
 		"eslint-config-airbnb": "^19.0.4",
 		"eslint-config-airbnb-base": "15.0.0",
@@ -68,8 +72,6 @@
 		"eslint-plugin-html": "^7.1.0",
 		"eslint-plugin-import": "^2.27.5",
 		"eslint-plugin-inclusive-language": "^2.2.0",
-		"eslint-plugin-jest": "^27.2.1",
-		"eslint-plugin-jest-formatting": "^3.1.0",
 		"eslint-plugin-jsdoc": "^40.0.1",
 		"eslint-plugin-jsonc": "^2.6.0",
 		"eslint-plugin-jsx-a11y": "^6.7.1",
@@ -103,11 +105,14 @@
 		"open-cli": "^7.1.0",
 		"prettier": "^2.8.4",
 		"prettier-eslint": "^15.0.1",
+		"terser-webpack-plugin": "^5.3.6",
 		"ts-jest": "^29.0.5",
+		"ts-loader": "^9.4.2",
 		"ts-node": "^10.9.1",
 		"typescript": "^4.9.5",
 		"webpack": "^5.75.0",
-		"webpack-cli": "^5.0.1"
+		"webpack-cli": "^5.0.1",
+		"webpack-dev-server": "^4.11.1"
 	},
 	"ntl": {
 		"descriptions": {
@@ -121,24 +126,23 @@
 		"start": "ntl",
 		"menu:close": "",
 		"info": "npm run",
-
 		"test": "jest --config=./tests/jest.config.ts",
 		"test:watch": "nodemon --ext js,jsx,env,ts --watch \"*.*\" --exec \"npm run test\"",
 		"test:output-coverage": "jest --config=./tests/jest.config.ts --collectCoverage",
-
-		"build:ts": "npx tsc",
-		"build:ts:watch": "nodemon --ext js,jsx,env,ts --watch \"*.*\" --exec \"npm run build:ts\"",
+		"test:build": "jest ./tests/build.test.ts --config=./tests/jest.config.ts",
 		"build": "webpack",
+		"build:ts:watch": "nodemon --ext js,jsx,env,ts --watch \"*.*\" --exec \"npm run build\"",
+		"dev": "webpack serve",
 		"dev:lint": "eslint ./ --ignore-path .gitignore",
 		"dev:lint:fix": "eslint ./ --ignore-path .gitignore --fix",
 		"dev:lint:log": "eslint ./ --ignore-path .gitignore --output-file eslint.html --format compact",
 		"dev:lint:watch": "nodemon --ext js,jsx,md,ts --watch \"*.*\" --exec \"npm run dev:lint\"",
 		"dev:format": "prettier --write src/**/*.{js,jsx",
 		"dev:format:watch": "nodemon --ext js,jsx,md,ts --watch \"*.*\" --exec \"npm run dev:lint\"",
-
 		"docs:build": "jsdoc2md -t README.hbs src/*.js > README.md",
 		"docs:build:watch": "nodemon --config ./scripts/dev-server.nodeamon.json --exec \"npm run docs:build\"",
-
+		"publish": "npm publish",
+		"publish:dry-run": "npm publish --dry-run",
 		"menu": "ntl"
 	}
 }
