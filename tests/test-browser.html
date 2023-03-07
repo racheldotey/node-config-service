@@ -5,11 +5,8 @@
     <script src="../dist/node-config-service.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // const definition = { foo: ["bar"] };
-            // const abilities = ["foo", "bam"];
-            // const result = Able.flatten(definition, abilities);
             console.debug((NodeConfigService) ? NodeConfigService : "NO NodeConfigService");
-            // console.debug((ConfigService) ? ConfigService : "NO ConfigService");
+            console.debug(NodeConfigService.ConfigService);
 
             const code = document.createElement("code");
             code.textContent = "works";//result.join(", ");
