@@ -1,4 +1,9 @@
-import { IConfigProperty, ConfigPropertyConstructor, ConfigPropertyParseFunction, ConfigPropertyOptions } from './main';
+import {
+	IConfigProperty,
+	ConfigPropertyConstructor,
+	ConfigPropertyParseFunction,
+	ConfigPropertyOptions,
+} from './main';
 
 /**
  * A single property value for the config.
@@ -13,8 +18,7 @@ import { IConfigProperty, ConfigPropertyConstructor, ConfigPropertyParseFunction
  * @property {any} #value - Property value
  */
 export const ConfigProperty: ConfigPropertyConstructor = class ConfigProperty
-	implements IConfigProperty
-{
+	implements IConfigProperty {
 	name: string;
 	envKey: string | false;
 	desc: string;
@@ -33,7 +37,7 @@ export const ConfigProperty: ConfigPropertyConstructor = class ConfigProperty
 	 */
 	constructor(name: string, options: ConfigPropertyOptions = {}) {
 		this.name = name;
-		this.envKey = options.envKey || false;
+		this.envKey = options.envKey || options.key || false;
 		this.desc = options.desc || '';
 		this.default = options.default || undefined;
 		this.isDefined = false;
@@ -51,7 +55,10 @@ export const ConfigProperty: ConfigPropertyConstructor = class ConfigProperty
 	}
 
 	get value() {
-		if (!this.isDefined) throw new ReferenceError(`Config property "${this.name}" was requested before it was initialized.`);
+		if (!this.isDefined)
+			throw new ReferenceError(
+				`Config property "${this.name}" was requested before it was initialized.`
+			);
 		return this.#value;
 	}
 
@@ -76,7 +83,9 @@ export const ConfigProperty: ConfigPropertyConstructor = class ConfigProperty
 			this.#value = this.parse(value);
 			this.isDefined = true;
 		} else if (this.isRequired) {
-			throw new ReferenceError(`Config property "${this.name}" is required but not defined.`);
+			throw new ReferenceError(
+				`Config property "${this.name}" was required but not defined.`
+			);
 		}
 	}
 
@@ -86,5 +95,19 @@ export const ConfigProperty: ConfigPropertyConstructor = class ConfigProperty
 				`Config property "${this.name}" was requested before it was initialized.`
 			);
 		return find === this.name || find === this.envKey ? true : false;
+	}
+
+	getVerbose() {
+		return {
+			name: this.name,
+			envKey: this.envKey,
+			desc: this.desc,
+			value: this.value,
+			default: this.default,
+			isDefined: this.isDefined,
+			isRequired: this.isRequired,
+			errors: this.errors || null,
+			parse: this.parse
+		}
 	}
 };
