@@ -2,6 +2,8 @@
 export type ConfigPropertyParseFunction = (value: string) => any;
 
 export interface ConfigPropertyOptions {
+	name?: string;
+	key?: string;
 	envKey?: string;
 	desc?: string;
 	default?: string;
@@ -30,6 +32,7 @@ export interface IConfigProperty {
 	set value(envVars: NodeJS.ProcessEnv);
 	setValue(envVars: NodeJS.ProcessEnv): void;
 	isMatch(find: string): boolean;
+	getVerbose(): object;
 }
 
 // Service Types
