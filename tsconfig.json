@@ -33,6 +33,9 @@
 		// @see https://www.typescriptlang.org/tsconfig#moduleResolution
 		"moduleResolution": "node",
 
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+
 		// Types should go into this directory.
 		// Removing this would place the .d.ts files
 		// next to the .js files
@@ -47,7 +50,7 @@
 
 		// By default all visible ”@types” packages are included.
 		// If specified, only packages under typeRoots will be included.
-		// "typeRoots": ["./node_modules/@types"]
+		"typeRoots": ["node_modules/@types"]
 	},
 	"include": ["src/**/*"],
 	"exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts"]
