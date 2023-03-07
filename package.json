@@ -137,15 +137,12 @@
 		"jest-tests": "jest --config=./tests/jest.config.ts",
 
 		"test": "npm run jest-tests",
+		"test:dist": "npm run jest-tests -- ./tests/build.test.js",
 		"test:output-coverage": "npm run jest-tests -- --collectCoverage",
 
-		"pretest:build-dist": "echo '[node-config-service] Testing build dist...'",
-		"test:build-dist": "npm run jest-tests -- ./tests/build.test.ts",
-		"posttest:build-dist": "npm run test",
-
 		"prebuild": "echo '[node-config-service] Starting build process...'",
-		"build": "webpack --mode production",
-		"postbuild": "npm run test:build-dist",
+		"build": "webpack --mode development && webpack --mode production",
+		"postbuild": "npm run test:dist",
 
 		"dev": "npm run on-changes -- \"npm run build\"",
 		"serve-dev": "webpack serve",
