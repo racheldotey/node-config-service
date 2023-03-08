@@ -53,6 +53,10 @@ const config = {
 			// Learn more about loaders from https://webpack.js.org/loaders/
 		],
 	},
+	optimization: {
+		minimize: false,
+		minimizer: [new TerserPlugin({})],
+	},
 	output: {
 		clean: true,
 		filename: `[name].js`,
@@ -69,9 +73,15 @@ const config = {
 	plugins: [
 		// Add your plugins here
 		// Learn more about plugins from https://webpack.js.org/configuration/plugins/
+		new Dotenv(),
 	],
 	resolve: {
 		extensions: ['.tsx', '.ts', '.jsx', '.js', '...'],
+		fallback: {
+			fs: false,
+			os: false,
+			path: false,
+		},
 	},
 };
 
@@ -83,7 +93,8 @@ module.exports = (env, argv) => {
 
 	if (isProduction) {
 		config.mode = 'production';
-		//config.output.filename = '[name].min.js';
+		config.optimization.minimize = true;
+		config.output.filename = '[name].min.js';
 	}
 
 	return config;
