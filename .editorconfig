@@ -1,0 +1,22 @@
+# EditorConfig = consistent coding styles between editors
+# http://editorconfig.org
+
+# Stop looking
+# top-most EditorConfig file
+root = true
+
+# Unix-style newlines with a newline ending every file
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = false
+trim_trailing_whitespace = true
+# 4 space indentation
+indent_size = 4
+indent_style = space
+
+[*.{js,json,jsx,ts,tsx}]
+max_line_length = 120
+
+[*.md]
+trim_trailing_whitespace = false
