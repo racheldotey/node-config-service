@@ -26,17 +26,15 @@ export const ConfigManager: ConfigManagerConstructor = class ConfigManager
 		if (options.properties) this.setProperties(options.properties);
 	}
 
-	init(props: DefinePropertyOptions, envValues?: { [key: string]: string }) {
+	init(props?: DefinePropertyOptions, envValues?: { [key: string]: string }) {
 		try {
 			if (props) this.setProperties(props);
 
-			const processEnv = envValues || process?.env;
+			const processEnv = envValues || {};
 			Object.values(this.#properties).forEach(prop => prop.setValue(processEnv));
 			return this;
 		} catch (error) {
-			throw new Error(
-				'Could not set app config properties. Invalid process env sent ConfigManager#init.'
-			);
+			throw error;
 		}
 	}
 
