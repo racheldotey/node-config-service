@@ -1,5 +1,4 @@
 const path = require('path');
-const webpack = require('webpack');
 const dotenv = require('dotenv');
 const Dotenv = require('dotenv-webpack');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -53,22 +52,24 @@ const config = {
 		minimizer: [new TerserPlugin({})],
 	},
 	output: {
-		clean: true,
+		clean: false,
 		filename: `[name].js`,
-		path: OUTPUT_DIR,
 		globalObject: 'this',
 		library: {
 			name: 'NodeConfigService',
+			auxiliaryComment,
+			//export: ['default','NodeConfigService'],
 			type: 'umd',
 			umdNamedDefine: true,
-			export: 'default',
-			auxiliaryComment,
 		},
+		path: OUTPUT_DIR,
 	},
 	plugins: [
 		// Add your plugins here
 		// Learn more about plugins from https://webpack.js.org/configuration/plugins/
-		new Dotenv(),
+		new Dotenv({
+			silent: false
+		}),
 	],
 	resolve: {
 		// Add `.ts` and `.tsx` as a resolvable extension.
