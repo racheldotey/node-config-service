@@ -13,10 +13,16 @@
  */
 
 /** Exports the Node-Config-Service entry point. */
-//import { NodeConfigService } from './NodeConfigService';
+import { ConfigProperty } from './ConfigProperty';
+import { ConfigService } from './ConfigService';
+import { NodeConfigService } from './NodeConfigService';
 
-const NodeConfigService = { cat: "Luna" };
-console.info("Hello World!", NodeConfigService);
+
+console.debug("ConfigProperty", ConfigProperty);
+console.debug("ConfigService", ConfigService);
+console.debug("NodeConfigService", NodeConfigService);
+
+
 
 export { NodeConfigService };
 export default NodeConfigService;
