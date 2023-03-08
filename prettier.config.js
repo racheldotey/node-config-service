@@ -33,5 +33,5 @@ module.exports = {
 	// Print trailing commas wherever possible when multi-line.
 	trailingComma: 'es5',
 	// Indent with tabs instead of spaces.
-	useTabs: true,
+	useTabs: false,
 };
