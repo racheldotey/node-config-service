@@ -26,13 +26,8 @@ const extractMode = (env, argv, defaultMode = 'development') => {
 
 
 const config = {
-	devServer: {
-		open: true,
-		host: 'localhost',
-	},
 	entry: {
-		'node-config-service': './src/index.ts',
-		//'types': './src/types.ts',
+		'node-config-service': './src/index.ts'
 	},
 	module: {
 		rules: [
@@ -60,13 +55,13 @@ const config = {
 	output: {
 		clean: true,
 		filename: `[name].js`,
-		// path: OUTPUT_DIR,
+		path: OUTPUT_DIR,
 		globalObject: 'this',
 		library: {
 			name: 'NodeConfigService',
 			type: 'umd',
 			umdNamedDefine: true,
-			export: 'default', //['default', 'NodeConfigService'],
+			export: 'default',
 			auxiliaryComment,
 		},
 	},
@@ -76,7 +71,14 @@ const config = {
 		new Dotenv(),
 	],
 	resolve: {
-		extensions: ['.tsx', '.ts', '.jsx', '.js', '...'],
+		// Add `.ts` and `.tsx` as a resolvable extension.
+		extensions: ['.ts', '.tsx', '.js'],
+		// Add support for TypeScripts fully qualified ESM imports.
+		extensionAlias: {
+			'.js': ['.js', '.ts'],
+			'.cjs': ['.cjs', '.cts'],
+			'.mjs': ['.mjs', '.mts'],
+		},
 		fallback: {
 			fs: false,
 			os: false,
@@ -95,6 +97,12 @@ module.exports = (env, argv) => {
 		config.mode = 'production';
 		config.optimization.minimize = true;
 		config.output.filename = '[name].min.js';
+	} else {
+		config.devtool = 'inline-source-map';
+		config.devServer = {
+			open: true,
+			host: 'localhost',
+		};
 	}
 
 	return config;

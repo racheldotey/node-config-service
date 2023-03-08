@@ -10,20 +10,15 @@
 		//// "composite": true,
 
 		// Generate d.ts files
-		// "declaration": true,
+		"declaration": true,
 
 		// go to js file when using IDE functions like
 		// "Go to Definition" in VSCode
-		// "declarationMap": true,
-
-		// This compiler run should
-		// only output d.ts files
-		// "emitDeclarationOnly": true,
+		"declarationMap": true,
 
 		// Allow default imports from modules
-		// "allowSyntheticDefaultImports" : true,
-		// "esModuleInterop": true,
-		"noImplicitAny": true,
+		"allowSyntheticDefaultImports" : true,
+		"esModuleInterop": true,
 
 		// Default set of type definitions for built-in JS APIs
 		"lib": ["es2016"],
@@ -36,17 +31,18 @@
 		// @see https://www.typescriptlang.org/tsconfig#moduleResolution
 		//"moduleResolution": "node",
 
-		//"noUnusedLocals": false,
-		//"noUnusedParameters": false,
+		"noImplicitAny": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
 
 		// Types should go into this directory.
 		// Removing this would place the .d.ts files
 		// next to the .js files
-		//"outDir": "dist",
+		"outDir": "./dist/types",
 
 		// Generate sourcemap files that let debuggers display the
 		// original .ts code when working with the emitted files
-		//"sourceMap": true,
+		"sourceMap": true,
 
 		// Modern browsers support all ES6 features.
 		"target": "es6",

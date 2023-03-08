@@ -24,7 +24,7 @@ export class NodeConfigService extends ConfigService {
 	}
 
 	loadEnv(options?: { [key: string]: IConfigService; }) { // dotenv.DotenvConfigOptions) {
-		// if (!options && this.dotenvLoaded) return;
+		if (!options && this.dotenvLoaded) return;
 
 		// // Load environment variables into process.env
 		// // @see https://www.npmjs.com/package/dotenv
