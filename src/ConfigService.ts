@@ -1,10 +1,12 @@
 import { ConfigProperty } from './ConfigProperty';
 import {
+	ConfigPropertyOptions,
 	IConfigProperty,
 	ConfigServiceOptions,
 	IConfigService,
 	ConfigServiceConstructor,
 	ConfigServiceLogFunction,
+	DefinePropertyOptions
 } from './types';
 
 export const ConfigService: ConfigServiceConstructor = class ConfigService
@@ -21,17 +23,14 @@ export const ConfigService: ConfigServiceConstructor = class ConfigService
 		this.logErrors = options.logErrors ? true : false;
 		this.logFunction = options.logFunction ? options.logFunction : undefined;
 
-		this.#properties = {};
-		if (options.properties) {
-			Object.entries(options.properties).forEach(([key, options]) => {
-				const prop = new ConfigProperty(options.name || key, options);
-				this.#properties[prop.name] = prop;
-			});
-		}
+		if (options.properties) this.setProperties(options.properties);
 	}
 
-	init(processEnv: NodeJS.ProcessEnv = process?.env || {}) {
+	init(props: DefinePropertyOptions, envValues?: { [key: string]: string }) {
 		try {
+			if (props) this.setProperties(props);
+
+			const processEnv = envValues || process?.env;
 			Object.values(this.#properties).forEach(prop => prop.setValue(processEnv));
 			return this;
 		} catch (error) {
@@ -39,6 +38,19 @@ export const ConfigService: ConfigServiceConstructor = class ConfigService
 				'Could not set app config properties. Invalid process env sent ConfigService#init.'
 			);
 		}
+	}
+
+	setProperties(props: { [key: string]: ConfigPropertyOptions; }) {
+		this.#properties = {};
+		Object.entries(props).forEach(([key, options]) => {
+			const prop = new ConfigProperty(options.name || key, options);
+			this.#properties[prop.name] = prop;
+		});
+	}
+
+	addProperty(name: string, options: ConfigPropertyOptions) {
+		const prop = new ConfigProperty(name, options);
+		this.#properties[prop.name] = prop;
 	}
 
 	get properties() {
