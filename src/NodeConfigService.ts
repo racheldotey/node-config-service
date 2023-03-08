@@ -1,4 +1,4 @@
-import * as dotenv from 'dotenv';
+//import * as dotenv from 'dotenv';
 
 import type { IConfigService, ConfigServiceOptions } from './types';
 import { DEFAULT_SERVICE_PROPERTIES } from './constants';
@@ -23,16 +23,16 @@ export class NodeConfigService extends ConfigService {
 		return super.init(processEnv);
 	}
 
-	loadEnv(options?: dotenv.DotenvConfigOptions) {
-		if (!options && this.dotenvLoaded) return;
+	loadEnv(options?: { [key: string]: IConfigService; }) { // dotenv.DotenvConfigOptions) {
+		// if (!options && this.dotenvLoaded) return;
 
-		// Load environment variables into process.env
-		// @see https://www.npmjs.com/package/dotenv
-		dotenv.config(options);
-		this.dotenvLoaded = true;
+		// // Load environment variables into process.env
+		// // @see https://www.npmjs.com/package/dotenv
+		// dotenv.config(options);
+		// this.dotenvLoaded = true;
 	}
 
 	getConfig(key: string) {
 		return this.extraConfigs[key] ? this.extraConfigs[key] : null;
 	}
-}
+};
