@@ -1,7 +1,7 @@
-import { IConfigService, ConfigServiceLogFunction } from '../../src/types';
+import { IConfigManager, ConfigManagerLogFunction } from '../../src/types';
 
 
-const expectConfigServiceProps = (config: IConfigService) => {
+const expectConfigManagerProps = (config: IConfigManager) => {
 	// All props
 	expect(config).toHaveProperty('silenceErrors');
 	expect(config).toHaveProperty('logErrors');
@@ -13,25 +13,25 @@ const expectConfigServiceProps = (config: IConfigService) => {
 	expect(typeof config.findSeveral).toBe('function');
 };
 
-export const expectConfigServiceInterface = (config: IConfigService) => {
+export const expectConfigManagerInterface = (config: IConfigManager) => {
 	expect(config).toBeDefined();
-	expect(config.constructor.name).toMatch('ConfigService');
-	expectConfigServiceProps(config);
+	expect(config.constructor.name).toMatch('ConfigManager');
+	expectConfigManagerProps(config);
 };
 
-export const expectNodeConfigServiceInterface = (config: IConfigService) => {
+export const expectConfigServiceInterface = (config: IConfigManager) => {
 	expect(config).toBeDefined();
-	// expect(config.constructor.name).toMatch('NodeConfigService');
-	expectConfigServiceProps(config);
+	// expect(config.constructor.name).toMatch('ConfigService');
+	expectConfigManagerProps(config);
 };
 
-export const expectConfigServiceSettings = (
-    config: IConfigService,
+export const expectConfigManagerSettings = (
+    config: IConfigManager,
     {
         silenceErrors,
         logErrors,
         logFunction,
-    }: { silenceErrors?: boolean; logErrors?: boolean; logFunction?: ConfigServiceLogFunction } = {}
+    }: { silenceErrors?: boolean; logErrors?: boolean; logFunction?: ConfigManagerLogFunction } = {}
 ) => {
     if (silenceErrors) {
         expect(config.silenceErrors).toBeTruthy();

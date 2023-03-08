@@ -1,4 +1,4 @@
-const { expectNodeConfigServiceInterface } = require('./lib/utils');
+const { expectConfigServiceInterface } = require('./lib/utils');
 const { DEFAULT_PROPERTY_DEFINITIONS } = require('../src/constants');
 
 
@@ -9,9 +9,9 @@ const defaultValue = prop.default || '';
 
 
 
-const expectNodeConfigServiceInstance = (config) => {
+const expectConfigServiceInstance = (config) => {
 	expect(config).toBeDefined();
-	expect(config.constructor.name).toMatch('NodeConfigService');
+	expect(config.constructor.name).toMatch('ConfigService');
 }
 
 const expectConfigPropertyValue = (config, find, value) => {
@@ -20,10 +20,10 @@ const expectConfigPropertyValue = (config, find, value) => {
     expect(prop).toMatch(value);
 }
 
-const expectNodeConfigService = (NodeConfigService) => {
-    const config = new NodeConfigService();
+const expectConfigService = (ConfigService) => {
+    const config = new ConfigService();
 
-    expectNodeConfigServiceInstance(config);
+    expectConfigServiceInstance(config);
 
     expectConfigPropertyValue(config, name, defaultValue);
     expectConfigPropertyValue(config, envKey, defaultValue);
@@ -33,25 +33,25 @@ const expectNodeConfigService = (NodeConfigService) => {
 describe('Test the current `dist` build', () => {
 
     test('(1) - Verify `dist/node-config-service.js` default export.', () => {
-        const NodeConfigService = require('../index.js');
-        console.debug(NodeConfigService);
-        //expectNodeConfigService(NodeConfigService);
+        const ConfigService = require('../index.js');
+        console.debug(ConfigService);
+        //expectConfigService(ConfigService);
     });
 
     /* test('(2) - Verify `dist/node-config-service.js` named exports.', () => {
-        const { NodeConfigService } = require('../dist/node-config-service.js');
-        console.debug(NodeConfigService);
-        //expectNodeConfigService(NodeConfigService);
+        const { ConfigService } = require('../dist/node-config-service.js');
+        console.debug(ConfigService);
+        //expectConfigService(ConfigService);
     }); */
 
     /* test('(3) - Verify `dist/node-config-service.min.js` default export.', () => {
-        const NodeConfigService = require('../dist/node-config-service.min.js');
-        expectNodeConfigService(NodeConfigService);
+        const ConfigService = require('../dist/node-config-service.min.js');
+        expectConfigService(ConfigService);
     });
 
     test('(4) - Verify `dist/node-config-service.min.js` exports.', () => {
-        const { NodeConfigService } = require('../dist/node-config-service.min.js');
-        expectNodeConfigService(NodeConfigService);
+        const { ConfigService } = require('../dist/node-config-service.min.js');
+        expectConfigService(ConfigService);
     }); */
 
 });

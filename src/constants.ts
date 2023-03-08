@@ -1,4 +1,4 @@
-import { ConfigServiceOptions, DefinePropertyOptions } from './types';
+import { ConfigManagerOptions, DefinePropertyOptions } from './types';
 
 export const DEFAULT_PROPERTY_DEFINITIONS: DefinePropertyOptions = {
 	environment: {
@@ -10,6 +10,6 @@ export const DEFAULT_PROPERTY_DEFINITIONS: DefinePropertyOptions = {
 	},
 };
 
-export const DEFAULT_SERVICE_PROPERTIES: ConfigServiceOptions = {
+export const DEFAULT_SERVICE_PROPERTIES: ConfigManagerOptions = {
 	properties: { ...DEFAULT_PROPERTY_DEFINITIONS },
 };

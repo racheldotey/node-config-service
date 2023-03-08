@@ -1,27 +1,27 @@
 /** Service Types */
-export type ConfigServiceLogFunction = (...data: any[]) => void;
+export type ConfigManagerLogFunction = (...data: any[]) => void;
 
 export interface DefinePropertyOptions {
 	[key: string]: ConfigPropertyOptions;
 }
 
-export interface ConfigServiceOptions {
+export interface ConfigManagerOptions {
 	silenceErrors?: boolean;
 	logErrors?: boolean;
-	logFunction?: ConfigServiceLogFunction;
+	logFunction?: ConfigManagerLogFunction;
 	properties?: DefinePropertyOptions;
 }
 
 // @see https://blog.logrocket.com/writing-constructor-typescript/
-export interface ConfigServiceConstructor {
-	new (options?: ConfigServiceOptions): IConfigService;
+export interface ConfigManagerConstructor {
+	new (options?: ConfigManagerOptions): IConfigManager;
 }
 
-export interface IConfigService {
+export interface IConfigManager {
 	silenceErrors?: boolean;
 	logErrors?: boolean;
-	logFunction?: ConfigServiceLogFunction;
-	init(props?: DefinePropertyOptions, envValues?: { [key: string]: string }): IConfigService;
+	logFunction?: ConfigManagerLogFunction;
+	init(props?: DefinePropertyOptions, envValues?: { [key: string]: string }): IConfigManager;
 	get properties(): { [key: string]: IConfigProperty; };
 	get(...args: string[]): any;
 	findOne(find: string): any;
