@@ -61,7 +61,7 @@ const config = {
 		clean: true,
 		filename: `[name].js`,
 		// path: OUTPUT_DIR,
-		// globalObject: 'this',
+		globalObject: 'this',
 		library: {
 			name: 'NodeConfigService',
 			type: 'umd',
