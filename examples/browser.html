@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Test node-config-service dist folder</title>
+    <script src="../dist/node-config-service.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            console.info("Testing `node-config-service` in browser imports.");
+
+            const output = document.createElement('h5');
+
+            try {
+                if(!nodeConfigService) throw new ReferenceError("`node-config-service` was not imported.");
+
+                const { ConfigService } = nodeConfigService;
+                if(!ConfigService) throw new ReferenceError("`ConfigService` was not correctly assigned to the imports.");
+
+                const config = new ConfigService();
+                if(!config) throw new ReferenceError("`ConfigService` failed to be instantiated.");
+
+                config.init();
+
+                const env = config.get('environment');
+                console.info(env);
+                if(!env) throw new ReferenceError(`Could not get environment value from config.`);
+
+                output.textContent = env;
+                document.body.appendChild(output);
+            } catch (error) {
+                console.error(error);
+                output.textContent = (error.message) ? error.message : "Failed to load `node-config-service`";
+                document.body.appendChild(output);
+            }
+
+        });
+    </script>
+</head>
+
+<body></body>
