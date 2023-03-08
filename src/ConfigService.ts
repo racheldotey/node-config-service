@@ -18,7 +18,7 @@ export class ConfigService extends ConfigManager {
 		this.extraConfigs = {};
 	}
 
-	init(props: DefinePropertyOptions, envValues?: { [key: string]: string }) {
+	init(props?: DefinePropertyOptions, envValues?: { [key: string]: string }) {
 		this.loadEnv();
 		return super.init(props, envValues);
 	}
