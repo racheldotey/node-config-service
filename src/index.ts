@@ -17,12 +17,5 @@ import { ConfigProperty } from './ConfigProperty';
 import { ConfigService } from './ConfigService';
 import { NodeConfigService } from './NodeConfigService';
 
-
-console.debug("ConfigProperty", ConfigProperty);
-console.debug("ConfigService", ConfigService);
-console.debug("NodeConfigService", NodeConfigService);
-
-
-
-export { NodeConfigService };
+export { NodeConfigService, ConfigService, ConfigProperty };
 export default NodeConfigService;
