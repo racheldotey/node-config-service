@@ -1,19 +1,22 @@
 /**
- * NodeJS Config Service.
+ * NodeConfigService
+ *
+ * A Node.js app config management service for use in browser and on the server.
  *
  * Simplified config management for node applications.
  * ConfigService accepts a configuration object of properties
  * to be defined using the node process env and run time overrides.
  *
- * @module NodeConfigService
+ * @version 0.9.0
+ * @module node-config-service
+ * @author Rachel Dotey <hello@racheldotey.com>
  */
-import { getDefaultService } from './getDefaultService';
-import * as dotenv from 'dotenv';
 
-// Load environment variables into process.env
-// @see https://www.npmjs.com/package/dotenv
-dotenv.config();
+/** Exports the Node-Config-Service entry point. */
+//import { NodeConfigService } from './NodeConfigService';
 
-export const defaultService = getDefaultService();
+const NodeConfigService = { cat: "Luna" };
+console.info("Hello World!", NodeConfigService);
 
-export default defaultService;
+export { NodeConfigService };
+export default NodeConfigService;
