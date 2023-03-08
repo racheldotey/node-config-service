@@ -80,7 +80,7 @@ describe('> Test suite for class `ConfigService`:', () => {
         expectConfigServiceSettings(config);
 
         var value = `${defaultValue}_OVERRIDDEN`;
-        config = config.init({ [envKey]: value });
+        config = config.init({ properties: { [envKey]: value } });
 
         expect(typeof prop.parse).toBe('function');
         if(prop.parse) value = prop.parse(value);
