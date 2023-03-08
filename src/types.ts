@@ -21,10 +21,8 @@ export interface IConfigService {
 	silenceErrors?: boolean;
 	logErrors?: boolean;
 	logFunction?: ConfigServiceLogFunction;
-	init(processEnv?: NodeJS.ProcessEnv): IConfigService;
-	get properties(): {
-		[key: string]: IConfigProperty;
-	};
+	init(props?: DefinePropertyOptions, envValues?: { [key: string]: string }): IConfigService;
+	get properties(): { [key: string]: IConfigProperty; };
 	get(...args: string[]): any;
 	findOne(find: string): any;
 	findSeveral(names: string[]): {
