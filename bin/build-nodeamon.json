@@ -10,6 +10,7 @@
         "**/.git",
         "**/*.md",
         "**/*.log",
+        "**/dist",
         "**/logs/**",
         "**/static/**",
         "**/node_modules/**"
