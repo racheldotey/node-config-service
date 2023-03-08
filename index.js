@@ -15,7 +15,6 @@
  */
 const { ConfigService, ConfigManager, ConfigProperty } = require('./dist/node-config-service');
 
-/** Exports the Node-Config-Service entry point. */
 module.exports = ConfigService;
 module.exports.default = ConfigService;
 module.exports.ConfigService = ConfigService;
