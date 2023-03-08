@@ -30,7 +30,7 @@ export const ConfigService: ConfigServiceConstructor = class ConfigService
 		}
 	}
 
-	init(processEnv: NodeJS.ProcessEnv = process.env) {
+	init(processEnv: NodeJS.ProcessEnv = process?.env || {}) {
 		try {
 			Object.values(this.#properties).forEach(prop => prop.setValue(processEnv));
 			return this;
