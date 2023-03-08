@@ -142,7 +142,7 @@
 		"test:output-coverage": "npm run jest-tests -- --collectCoverage",
 		"dev:test": "nodemon --ext js --watch \"./dist\" --exec \"npm run test:dist\"",
 		"------------------------------------------ build ------------------------------------------": "",
-		"build": "npm run build:dev && npm run build:prod",
+		"build": "node bin/build-dist.js",
 		"build:dev": "webpack --mode=development",
 		"build:prod": "webpack --mode=production --node-env=production",
 		"watch": "webpack --watch",

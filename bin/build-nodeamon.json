@@ -1,0 +1,23 @@
+{
+    "delay": 1500,
+    "env": {
+        "NODE_ENV": "production"
+    },
+    "execMap": {
+        "ts": "ts-node"
+    },
+    "ignore": [
+        "**/.git",
+        "**/*.md",
+        "**/*.log",
+        "**/logs/**",
+        "**/static/**",
+        "**/node_modules/**"
+    ],
+    "restartable": "rs",
+    "verbose": true,
+    "watch": [
+        "../src",
+        "./build-dist.js"
+    ]
+}
