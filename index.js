@@ -13,9 +13,11 @@
  * @module node-config-service
  * @author Rachel Dotey <hello@racheldotey.com>
  */
-const NodeConfigService = require('./dist/node-config-service');
+const { NodeConfigService, ConfigService, ConfigProperty } = require('./dist/node-config-service');
 
 /** Exports the Node-Config-Service entry point. */
 module.exports = NodeConfigService;
 module.exports.default = NodeConfigService;
 module.exports.NodeConfigService = NodeConfigService;
+module.exports.ConfigService = ConfigService;
+module.exports.ConfigProperty = ConfigProperty;
