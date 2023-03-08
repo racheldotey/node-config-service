@@ -29,6 +29,7 @@
 	},
 	"type": "commonjs",
 	"main": "./dist/node-config-service.js",
+	"types": "./dist/types.d.ts",
 	"files": [
 		"dist"
 	],
@@ -132,32 +133,24 @@
 		"start": "ntl",
 		"menu:close": "",
 		"info": "npm run",
-
-		"on-changes": "nodemon --ext env,html,js,json,jsx,md,ts,tsx --watch \"*.*\" --exec",
-		"jest-tests": "jest --config=./tests/jest.config.ts",
+		"--------------------------------------- development ---------------------------------------": "",
+		"on-changes": "nodemon --ext env,html,js,json,jsx,md,ts,tsx --watch \"*.*\" --exec ",
+		"jest-tests": "jest --config=./tests/jest.config.ts ",
 
 		"test": "npm run jest-tests",
 		"test:dist": "npm run jest-tests -- ./tests/build.test.js",
 		"test:output-coverage": "npm run jest-tests -- --collectCoverage",
-
-		"prebuild": "echo '[node-config-service] Starting build process...'",
-		"build": "webpack --mode development && webpack --mode production",
-		"postbuild": "npm run test:dist",
-
-		"dev": "npm run on-changes -- \"npm run build\"",
-		"serve-dev": "webpack serve",
-
-
-		"prepublish:dry-run": "npm publish --dry-run",
+		"dev:test": "nodemon --ext js --watch \"./dist\" --exec \"npm run test:dist\"",
+		"------------------------------------------ build ------------------------------------------": "",
+		"build": "webpack --mode=production --node-env=production",
+		"build:dev": "webpack --mode=development",
+		"build:prod": "webpack --mode=production --node-env=production",
+		"watch": "webpack --watch",
+		"serve": "webpack serve",
+		"--------------------------------------- NPM publish ---------------------------------------": "",
 		"publish:dry-run": "npm publish --dry-run",
-		"postpublish:dry-run": "npm publish --dry-run",
-
-		"prepublish": "npm publish",
 		"publish:version-and-publish": "npm publish",
-		"postpublish": "npm publish",
-
-
-
+		"----------------------------------------- linting -----------------------------------------": "",
 		"dev:lint": "eslint ./ --ignore-path .gitignore",
 		"dev:lint:fix": "eslint ./ --ignore-path .gitignore --fix",
 		"dev:lint:log": "eslint ./ --ignore-path .gitignore --output-file eslint.html --format compact",
