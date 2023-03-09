@@ -41,7 +41,7 @@ export const ConfigProperty: ConfigPropertyConstructor = class ConfigProperty
 		this.desc = options.desc || '';
 		this.default = options.default || undefined;
 		this.isDefined = false;
-		this.isRequired = options.required ?? true;
+		this.isRequired = options.required ?? false;
 		this.parse = options.parse || (value => value);
 
 		if (this.default) {
@@ -79,6 +79,8 @@ export const ConfigProperty: ConfigPropertyConstructor = class ConfigProperty
 			value = envVars[this.name];
 		}
 
+        console.debug(this)
+
 		if (value) {
 			this.#value = this.parse(value);
 			this.isDefined = true;
@@ -91,7 +93,7 @@ export const ConfigProperty: ConfigPropertyConstructor = class ConfigProperty
 
 	isMatch(find: string) {
 		if (!this.isDefined)
-			throw new ReferenceError(
+			throw new Error(
 				`Config property "${this.name}" was requested before it was initialized.`
 			);
 		return find === this.name || find === this.envKey ? true : false;
