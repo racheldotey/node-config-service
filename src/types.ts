@@ -22,7 +22,7 @@ export interface ConfigManagerInterface {
     logErrors?: boolean;
     logFunction?: ConfigManagerLogFunction;
     init(props?: DefinePropertyOptions, envValues?: { [key: string]: string }): ConfigManagerInterface;
-    get properties(): { [key: string]: IConfigProperty; };
+    get properties(): { [key: string]: ConfigPropertyInterface; };
     get(...args: string[]): any;
     findOne(find: string): any;
     findSeveral(names: string[]): {
@@ -54,10 +54,10 @@ export interface ConfigPropertyOptions {
 
 // @see https://blog.logrocket.com/writing-constructor-typescript/
 export interface ConfigPropertyConstructor {
-    new(name: string, options?: ConfigPropertyOptions): IConfigProperty;
+    new(name: string, options?: ConfigPropertyOptions): ConfigPropertyInterface;
 }
 
-export interface IConfigProperty {
+export interface ConfigPropertyInterface {
     name: string;
     envKey: string;
     description: string;

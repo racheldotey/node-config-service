@@ -2,7 +2,7 @@ import { ConfigProperty } from './ConfigProperty';
 import { DEFAULT_PROPERTIES } from './constants';
 import {
 	ConfigPropertyOptions,
-	IConfigProperty,
+	ConfigPropertyInterface,
 	ConfigManagerOptions,
 	ConfigManagerInterface,
 	ConfigManagerConstructor,
@@ -16,7 +16,7 @@ export const ConfigManager: ConfigManagerConstructor = class ConfigManager
 	logErrors?: boolean;
 	logFunction?: ConfigManagerLogFunction;
 	#properties: {
-		[key: string]: IConfigProperty;
+		[key: string]: ConfigPropertyInterface;
 	};
 
 	constructor(options?: ConfigManagerOptions) {

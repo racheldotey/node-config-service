@@ -12,7 +12,7 @@ export type {
     ConfigPropertyParseFunction,
     ConfigPropertyOptions,
     ConfigPropertyConstructor,
-    IConfigProperty,
+    ConfigPropertyInterface,
 } from './types';
 
 export { ConfigService, ConfigManager, ConfigProperty };

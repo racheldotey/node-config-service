@@ -1,5 +1,5 @@
 import {
-    IConfigProperty,
+    ConfigPropertyInterface,
     ConfigPropertyConstructor,
     ConfigPropertyParseFunction,
     ConfigPropertyOptions,
@@ -19,7 +19,7 @@ import { getSafeBoolean } from './utils/getSafeBoolean';
  * @property {any} #value - Property value
  */
 export const ConfigProperty: ConfigPropertyConstructor = class ConfigProperty
-    implements IConfigProperty {
+    implements ConfigPropertyInterface {
     name: string;
     envKey: string;
     description: string;

@@ -1,7 +1,7 @@
 import { ConfigProperty } from '../src/ConfigProperty';
-import { IConfigProperty } from '../src/types';
+import { ConfigPropertyInterface } from '../src/types';
 
-const expectConfigProperty = (prop: IConfigProperty) => {
+const expectConfigProperty = (prop: ConfigPropertyInterface) => {
     // All props
     expect(prop).toHaveProperty('silenceErrors');
     expect(prop).toHaveProperty('logErrors');
