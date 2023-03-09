@@ -1,6 +1,6 @@
 //import { DEFAULT_PROPERTY_DEFINITIONS } from '../src/constants';
 
-import ConfigService from '../index';
+import ConfigService from '../dist/index';
 
 
 const name = 'environment';
