@@ -5,7 +5,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 
 const packageName = 'node-config-service';
-const packageEntry = './src/index.ts';
+const packageEntry = './src/index';
 const packageVersion = '0.9.1';
 
 const pathRoot = path.resolve(__dirname);
@@ -34,8 +34,7 @@ module.exports = (env, argv) => {
     const config = {
         mode,
         entry: {
-            'node-config-service': './src/index.ts',
-            //[packageName]: packageEntry
+            'node-config-service': packageEntry
         },
         module: {
             rules: [
@@ -83,10 +82,10 @@ module.exports = (env, argv) => {
     };
 
 	if (mode === 'production') {
-		config.output.filename = '[name].min.js';
+		config.output.filename = 'index.min.js';
 		config.optimization.minimize = true;
 	} else {
-		config.output.filename = '[name].js';
+		config.output.filename = 'index.js';
 		config.devtool = 'inline-source-map';
 		config.devServer = {
 			open: true,
