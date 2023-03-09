@@ -63,7 +63,7 @@ describe('> Test suite for class `ConfigManager`:', () => {
         expectConfigManagerInterface(config);
         expectConfigManagerSettings(config);
         // Send a blank {} or it will default to process.env
-        config = config.init({});
+        config = config.init();
 
         var env = config.get(name);
         expect(env).toBeDefined();
@@ -80,7 +80,9 @@ describe('> Test suite for class `ConfigManager`:', () => {
         expectConfigManagerSettings(config);
 
         var value = `${defaultValue}_OVERRIDDEN`;
-        config = config.init({ properties: { [envKey]: value } });
+        config = config.init({}, { [envKey]: value });
+
+        console.log(config.getVerbose())
 
         expect(typeof prop.parse).toBe('function');
         if(prop.parse) value = prop.parse(value);
