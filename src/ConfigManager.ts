@@ -30,7 +30,7 @@ export const ConfigManager: ConfigManagerConstructor = class ConfigManager
 		if (options?.properties) this.setProperties(options.properties);
 	}
 
-	init(props?: ConfigManagerOptions | DefinePropertyOptions, envValues?: { [key: string]: string }) {
+	init(props?: DefinePropertyOptions, envValues?: { [key: string]: string }) {
 		try {
 			if (props) this.setProperties(props);
 
@@ -42,22 +42,31 @@ export const ConfigManager: ConfigManagerConstructor = class ConfigManager
 		}
 	}
 
-	setProperties(props: DefinePropertyOptions) {
-		Object.entries(props).forEach(([key, options]) => {
+	setProperties(propertyOptions: DefinePropertyOptions, resetProperties = false) {
+        // Optionally clear default/loaded properties
+        if(resetProperties === true) this.#properties = {};
+
+		Object.entries(propertyOptions).forEach(([key, options]) => {
+            // If `name` is defined use that as the primary search key
+            // otherwise use the object key for the options
 			const prop = new ConfigProperty(options.name || key, options);
+            // Will override existing properties with the same name
 			this.#properties[prop.name] = prop;
 		});
 	}
 
-	addProperty(name: string, options: ConfigPropertyOptions) {
+	addProperty(name: string, options: ConfigPropertyOptions, safeAdd = true) {
 		const prop = new ConfigProperty(name, options);
+
+        if(safeAdd && this.#properties[prop.name]) throw new Error(`Can't add new property "${prop.name}", it already exists.`);
+
 		this.#properties[prop.name] = prop;
 	}
 
 	get properties() {
-		// Will throw error if properties were never set
 		if (this.#properties) return this.#properties;
-		throw new Error('app config properties requested before initialization.');
+		// Will throw error if properties were never set
+		throw new Error('Config requested before initialization.');
 	}
 
 	get(find: string | string[] | boolean) {
@@ -87,5 +96,13 @@ export const ConfigManager: ConfigManagerConstructor = class ConfigManager
 				return [name, value];
 			})
 		);
+	}
+
+	getVerbose() {
+        const verbose: { [key: string]: any; } = {}
+		Object.entries(this.properties).forEach(([key, prop]) => {
+			verbose[key] = prop.getVerbose();
+		});
+		return verbose;
 	}
 };
