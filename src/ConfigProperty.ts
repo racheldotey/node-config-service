@@ -54,25 +54,24 @@ export const ConfigProperty: ConfigPropertyConstructor = class ConfigProperty
             // `description` takes presentence over `desc`
             this.description = options.description || options.desc || this.description;
 
-            // `isRequired` takes presentence over `required`
-            if (options.required) this.isRequired = getSafeBoolean(options.required);
-
             if (typeof options.parse === "function") this.parse = options.parse;
 
-            // `defaultValue` takes presentence over `defaultValue`
-            if (options.defaultValue || options.default) {
-                this.defaultValue = options.defaultValue || options.default;
-            }
+            // `isRequired` takes presentence over `required`
+            if (options.hasOwnProperty('isRequired')) this.isRequired = getSafeBoolean(options.isRequired);
+            else if (options.hasOwnProperty('required')) this.isRequired = getSafeBoolean(options.required);
+
+            // `defaultValue` takes presentence over `default`
+            if (options.hasOwnProperty('defaultValue')) this.defaultValue = options.defaultValue;
+            else if (options.hasOwnProperty('default')) this.defaultValue = options.default;
 
             // `initValue` takes presentence over `value`
-            if (options.initValue || options.value) {
-                this.value = options.value;
-            }
+            if (options.hasOwnProperty('initValue')) this.value = options.initValue;
+            else if (options.hasOwnProperty('value')) this.value = options.value;
         }
     }
 
     get isDefined() {
-        return !!this.#value;
+        return !!(this.#value !== undefined);
     }
 
     get defaultValue() {
@@ -85,9 +84,8 @@ export const ConfigProperty: ConfigPropertyConstructor = class ConfigProperty
     }
 
     get value() {
-        if (!this.isDefined) {
-            const message = `Config property "${this.name}" requested before it was set.`;
-            throw new Error(message);
+        if (!this.isDefined && this.isRequired) {
+            return this.onError('Value isRequired and was requested before it was set.');
         }
         return this.#value;
     }
@@ -96,7 +94,7 @@ export const ConfigProperty: ConfigPropertyConstructor = class ConfigProperty
         this.#value = this.parse(payload);
     }
 
-    setValue(envVars: { [key: string]: string }) {
+    setValue(envVars: { [key: string]: string }): void {
         var value = this.defaultValue;
 
         // Is the property set in the environment
@@ -109,17 +107,16 @@ export const ConfigProperty: ConfigPropertyConstructor = class ConfigProperty
         if (value) {
             this.value = value;
         } else if (this.isRequired) {
-            const message = `Config property "${this.name}" was required but not defined.`;
-            throw new Error(message);
+            return this.onError('Value isRequired but could not be set.');
         }
     }
 
-    isMatch(find: string) {
-        if (!this.isDefined) {
-            const message = `Config property "${this.name}" was requested before it was initialized.`;
-            throw new Error(message);
-        }
-        return find === this.name || find === this.envKey ? true : false;
+    unsetValue(): void {
+        this.#value = undefined;
+    }
+
+    isMatch(find: string): boolean {
+        return !!(find === this.name || find === this.envKey);
     }
 
     get() {
@@ -142,5 +139,15 @@ export const ConfigProperty: ConfigPropertyConstructor = class ConfigProperty
             errors: this.errors || [],
             parse: this.parse
         };
+    }
+
+    protected onError(cause: string): void {
+        const message = `${this.constructor.name} "${this.name}": ${cause}`;
+        if(!this.errors) this.errors = [];
+
+        const error = new Error(message);
+        this.errors.push(error);
+
+        throw error;
     }
 };

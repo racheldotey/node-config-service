@@ -75,6 +75,7 @@ export interface ConfigPropertyInterface {
     };
     set value(payload: any);
     setValue(envVars: NodeJS.ProcessEnv): void;
+    unsetValue(): void;
     isMatch(find: string): boolean;
     getVerbose(): object;
 }
