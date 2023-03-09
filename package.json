@@ -28,8 +28,8 @@
 		"url": "https://github.com/racheldotey/node-config-service/issues"
 	},
 	"type": "commonjs",
-	"main": "./dist/node-config-service.js",
-	"types": "./dist/types.d.ts",
+	"main": "./dist/index.min.js",
+	"types": "./dist/index.d.ts",
 	"files": [
 		"dist"
 	],
