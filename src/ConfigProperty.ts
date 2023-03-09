@@ -46,10 +46,11 @@ export const ConfigProperty: ConfigPropertyConstructor = class ConfigProperty
 
 		if (this.default) {
 			this.#value = this.parse(this.default);
+			this.isDefined = true;
 		}
 
 		if (options.value) {
-			this.#value = options.value;
+			this.#value = this.parse(options.value);
 			this.isDefined = true;
 		}
 	}
@@ -57,7 +58,7 @@ export const ConfigProperty: ConfigPropertyConstructor = class ConfigProperty
 	get value() {
 		if (!this.isDefined)
 			throw new ReferenceError(
-				`Config property "${this.name}" was requested before it was initialized.`
+				`Config property "${this.name}" requested before it was initialized.`
 			);
 		return this.#value;
 	}
@@ -68,7 +69,7 @@ export const ConfigProperty: ConfigPropertyConstructor = class ConfigProperty
 
 	setValue(envVars: { [key: string]: string }) {
 		// Was the value already set, possibly at init
-		if (this.isDefined) return;
+		// if (this.isDefined) return;
 
 		var value = this.default;
 
