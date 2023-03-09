@@ -5,6 +5,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 
 const packageName = 'node-config-service';
+const packageEntry = './src/index.ts';
 const packageVersion = '0.9.1';
 
 const pathRoot = path.resolve(__dirname);
@@ -33,13 +34,12 @@ module.exports = (env, argv) => {
     const config = {
         mode,
         entry: {
-            'node-config-service': './src/index.ts'
+            'node-config-service': './src/index.ts',
+            //[packageName]: packageEntry
         },
         module: {
             rules: [
                 {
-                    // files with `.ts`, `.cts`, `.mts` or `.tsx` extensions will be handled by `ts-loader`
-                    // @see https://github.com/TypeStrong/ts-loader
                     test: /\.([cm]?ts|tsx)$/,
                     loader: 'ts-loader',
                     exclude: ['/node_modules/'],
@@ -57,21 +57,18 @@ module.exports = (env, argv) => {
             library: {
                 name: 'nodeConfigService',
                 auxiliaryComment,
-                //export: ['default','NodeConfigService'],
                 type: 'umd',
                 umdNamedDefine: true,
             },
             path: pathDist,
         },
         plugins: [
-            // @see https://webpack.js.org/configuration/plugins/
             new Dotenv({
                 silent: false
             }),
         ],
         resolve: {
             extensions: ['.ts', '.tsx', '.js'],
-            // Add support for TypeScripts fully qualified ESM imports.
             extensionAlias: {
                 '.js': ['.js', '.ts'],
                 '.cjs': ['.cjs', '.cts'],
@@ -86,9 +83,10 @@ module.exports = (env, argv) => {
     };
 
 	if (mode === 'production') {
-		config.optimization.minimize = true;
 		config.output.filename = '[name].min.js';
+		config.optimization.minimize = true;
 	} else {
+		config.output.filename = '[name].js';
 		config.devtool = 'inline-source-map';
 		config.devServer = {
 			open: true,
