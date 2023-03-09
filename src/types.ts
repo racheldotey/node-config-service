@@ -14,14 +14,14 @@ export interface ConfigManagerOptions {
 
 // @see https://blog.logrocket.com/writing-constructor-typescript/
 export interface ConfigManagerConstructor {
-    new(options?: ConfigManagerOptions): IConfigManager;
+    new(options?: ConfigManagerOptions): ConfigManagerInterface;
 }
 
-export interface IConfigManager {
+export interface ConfigManagerInterface {
     silenceErrors?: boolean;
     logErrors?: boolean;
     logFunction?: ConfigManagerLogFunction;
-    init(props?: DefinePropertyOptions, envValues?: { [key: string]: string }): IConfigManager;
+    init(props?: DefinePropertyOptions, envValues?: { [key: string]: string }): ConfigManagerInterface;
     get properties(): { [key: string]: IConfigProperty; };
     get(...args: string[]): any;
     findOne(find: string): any;

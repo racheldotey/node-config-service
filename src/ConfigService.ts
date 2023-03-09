@@ -1,12 +1,12 @@
 //import * as dotenv from 'dotenv';
 
-import type { IConfigManager, DefinePropertyOptions, ConfigManagerOptions } from './types';
+import type { ConfigManagerInterface, DefinePropertyOptions, ConfigManagerOptions } from './types';
 import { ConfigManager } from './ConfigManager';
 
 export class ConfigService extends ConfigManager {
 	dotenvLoaded?: boolean | false;
 	extraConfigs: {
-		[key: string]: IConfigManager;
+		[key: string]: ConfigManagerInterface;
 	};
 
 	constructor(options: ConfigManagerOptions = { properties: {} }) {

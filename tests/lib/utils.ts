@@ -1,7 +1,7 @@
-import { IConfigManager, ConfigManagerLogFunction } from '../../src/types';
+import { ConfigManagerInterface, ConfigManagerLogFunction } from '../../src/types';
 
 
-const expectConfigManagerProps = (config: IConfigManager) => {
+const expectConfigManagerProps = (config: ConfigManagerInterface) => {
 	// All props
 	expect(config).toHaveProperty('silenceErrors');
 	expect(config).toHaveProperty('logErrors');
@@ -13,20 +13,20 @@ const expectConfigManagerProps = (config: IConfigManager) => {
 	expect(typeof config.findSeveral).toBe('function');
 };
 
-export const expectConfigManagerInterface = (config: IConfigManager) => {
+export const expectConfigManagerInterface = (config: ConfigManagerInterface) => {
 	expect(config).toBeDefined();
 	expect(config.constructor.name).toMatch('ConfigManager');
 	expectConfigManagerProps(config);
 };
 
-export const expectConfigServiceInterface = (config: IConfigManager) => {
+export const expectConfigServiceInterface = (config: ConfigManagerInterface) => {
 	expect(config).toBeDefined();
 	// expect(config.constructor.name).toMatch('ConfigService');
 	expectConfigManagerProps(config);
 };
 
 export const expectConfigManagerSettings = (
-    config: IConfigManager,
+    config: ConfigManagerInterface,
     {
         silenceErrors,
         logErrors,

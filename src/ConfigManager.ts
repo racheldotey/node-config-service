@@ -4,14 +4,14 @@ import {
 	ConfigPropertyOptions,
 	IConfigProperty,
 	ConfigManagerOptions,
-	IConfigManager,
+	ConfigManagerInterface,
 	ConfigManagerConstructor,
 	ConfigManagerLogFunction,
 	DefinePropertyOptions
 } from './types';
 
 export const ConfigManager: ConfigManagerConstructor = class ConfigManager
-	implements IConfigManager {
+	implements ConfigManagerInterface {
 	silenceErrors?: boolean;
 	logErrors?: boolean;
 	logFunction?: ConfigManagerLogFunction;

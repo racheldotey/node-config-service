@@ -3,7 +3,7 @@ export type {
     DefinePropertyOptions,
     ConfigManagerOptions,
     ConfigManagerConstructor,
-    IConfigManager,
+    ConfigManagerInterface,
     ConfigPropertyParseFunction,
     ConfigPropertyOptions,
     ConfigPropertyConstructor,
