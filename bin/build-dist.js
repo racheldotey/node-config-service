@@ -26,8 +26,7 @@ const runWebpackBuild = async webpackConfig =>
         webpack(webpackConfig, (error, stats) => {
             if (error || stats.hasErrors()) {
                 tl.error(error);
-                exit(1);
-                reject(error);
+                process.exit(1);
             }
             tl.info(`Build ${webpackConfig.mode} complete.`);
             resolve(webpackConfig.mode);
