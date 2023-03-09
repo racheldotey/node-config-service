@@ -1,20 +1,42 @@
+#!/usr/bin/env node
+
+'use strict';
+
+// Crash on unhandled rejections.
+process.on('unhandledRejection', error => {
+    console.error(error);
+    throw error;
+});
+
 const fs = require('fs');
+const path = require('path');
 const webpack = require('webpack');
 
-const tinyLogger = require('./tinyLogger');
+const { getPackageRootDir } = require('./utils/getPackageRootDir');
+const { getTinyLogger } = require('./utils/getTinyLogger');
 const getWebpackConfig = require('../webpack.config');
 
-const packageName = 'node-config-service';
-const packageVersion = '0.9.1';
+const tl = getTinyLogger(`  [build-dist]  `);
+tl.info('// -----------------------------------------------');
+tl.info('---------- Starting module build process ---------');
 
-const tl = tinyLogger(`  [${packageName}:build-dist]  `);
-tl.info(`Starting dist build of ${packageName} v${packageVersion}...`);
+const NAME = 'node-config-service';
+const VERSION = '0.9.1';
+const DIR_ROOT = getPackageRootDir();
+const DIR_SOURCE = path.join(DIR_ROOT, 'src');
+const FILES_TO_COPY = ['index.d.ts'];
 
-const deleteDistFolder = ({ output }) => {
+tl.info(`           > ${NAME} v${VERSION} ...`);
+
+const getConfig = mode => getWebpackConfig({ mode });
+
+const deleteDistFolder = path => {
     // Remove dist directory to start fresh
-    if (fs.existsSync(output.path)) {
-        tl.info(`Path ${output.path} already exists. Deleting old dist.`);
-        return fs.rmSync(output.path, { recursive: true });
+    if (fs.existsSync(path)) {
+        tl.info(` - Deleting old dist.`);
+        fs.rmSync(path, { recursive: true });
+        tl.info(` -- Delete dist complete.`);
+        return true;
     }
 
     return true;
@@ -22,29 +44,44 @@ const deleteDistFolder = ({ output }) => {
 
 const runWebpackBuild = async webpackConfig =>
     new Promise((resolve, reject) => {
-        tl.info(`Building ${webpackConfig.mode} with webpack.`);
+        tl.info(` - Compiling ${webpackConfig.mode} with webpack.`);
         webpack(webpackConfig, (error, stats) => {
             if (error || stats.hasErrors()) {
-                tl.error(error);
+                tl.error(error, stats.hasErrors());
                 process.exit(1);
             }
-            tl.info(`Build ${webpackConfig.mode} complete.`);
-            resolve(webpackConfig.mode);
+            tl.info(` -- Compile ${webpackConfig.mode} complete.`);
+            return resolve(webpackConfig.mode);
         });
     });
 
-const getConfig = mode => getWebpackConfig({ mode });
+const copyOtherFiles = async (files, fromFolder, toFolder) => {
+    await Promise.all(
+        files.map(async file =>
+            fs.copyFileSync(path.join(fromFolder, file), path.join(toFolder, file))
+        )
+    );
+};
 
 const main = async () => {
     // Get webpack configs for each env mode
     const development = getConfig('development');
     const production = getConfig('production');
 
-    deleteDistFolder(development);
-    deleteDistFolder(production);
+    const distDev = development.output.path;
+    const distProd = production.output.path;
+
+    deleteDistFolder(distDev);
+    if (distDev != distProd) deleteDistFolder(distProd);
 
     await runWebpackBuild(development);
     await runWebpackBuild(production);
+
+    copyOtherFiles(FILES_TO_COPY, DIR_SOURCE, distDev);
+    if (distDev != distProd) copyOtherFiles(FILES_TO_COPY, DIR_SOURCE, distProd);
+
+    tl.info('------ The module build process is complete ------');
+    tl.info('----------------------------------------------- //');
 };
 
 main();
