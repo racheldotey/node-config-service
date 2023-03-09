@@ -28,6 +28,7 @@ export interface IConfigManager {
     findSeveral(names: string[]): {
         [k: string]: any;
     };
+    getVerbose(): object;
 }
 
 
