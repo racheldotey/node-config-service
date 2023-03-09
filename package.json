@@ -135,7 +135,7 @@
 		"info": "npm run",
 		"--------------------------------------- development ---------------------------------------": "",
 		"test": "jest --config=tests/jest.config.ts",
-		"test:build": "jest --config=tests/jest.config.ts tests/dist-es6.test.ts",
+		"test:build": "jest --config=tests/jest.config.ts tests/dist-es6.test.ts tests/dist-commonjs.test.js",
 		"test:dist": "npm run test:build",
 		"test:watch": "nodemon -e js,ts,mjs,json --watch dist --watch tests --exec \"npm run \"",
 		"------------------------------------------ build ------------------------------------------": "",
