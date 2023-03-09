@@ -1,4 +1,3 @@
-const { expectConfigServiceInterface } = require('./lib/utils');
 const { DEFAULT_PROPERTY_DEFINITIONS } = require('../src/constants');
 
 
