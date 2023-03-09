@@ -32,7 +32,7 @@ describe('Test the current `dist` build', () => {
 
 
     test('(1) - Verify `dist/node-config-service.js` default export.', () => {
-        console.debug(ConfigService);
+        //console.debug(ConfigService);
         //expectConfigService(ConfigService);
     });
 
