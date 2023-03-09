@@ -8,12 +8,19 @@ const getTinyLogger = (x = '') => {
     const P = x.toString();
     var p = x.toString();
 
-    return {
+    const tinyLogger = {
         prefix: (x = '') => (p = P + x.toString()),
         info: (...n) => console.info(p, ...n),
         debug: (...n) => console.debug(p, ...n),
         error: (...n) => console.error(R, p, ...n, R),
     };
+
+    const makeChainable = (method, chained) => (...args) => {
+        method(...args);
+        return chained;
+    };
+
+    return tinyLogger;
 };
 
 module.exports.getTinyLogger = getTinyLogger;

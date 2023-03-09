@@ -82,7 +82,7 @@ describe('> Test suite for class `ConfigManager`:', () => {
         var value = `${defaultValue}_OVERRIDDEN`;
         config = config.init({}, { [envKey]: value });
 
-        console.log(config.getVerbose())
+        //console.log(config.getVerbose())
 
         expect(typeof prop.parse).toBe('function');
         if(prop.parse) value = prop.parse(value);

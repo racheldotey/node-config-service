@@ -1,9 +1,10 @@
 import {
-	IConfigProperty,
-	ConfigPropertyConstructor,
-	ConfigPropertyParseFunction,
-	ConfigPropertyOptions,
+    IConfigProperty,
+    ConfigPropertyConstructor,
+    ConfigPropertyParseFunction,
+    ConfigPropertyOptions,
 } from './types';
+import { getSafeBoolean } from './utils/getSafeBoolean';
 
 /**
  * A single property value for the config.
@@ -18,99 +19,111 @@ import {
  * @property {any} #value - Property value
  */
 export const ConfigProperty: ConfigPropertyConstructor = class ConfigProperty
-	implements IConfigProperty {
-	name: string;
-	envKey: string | false;
-	desc: string;
-	default?: string;
-	isDefined: boolean;
-	isRequired: boolean;
-	errors?: Error[];
-	parse: ConfigPropertyParseFunction;
-	#value: any;
+    implements IConfigProperty {
+    name: string;
+    envKey: string | false;
+    description: string;
+    defaultValue?: string;
+    isDefined: boolean;
+    isRequired: boolean;
+    errors?: Error[];
+    parse: ConfigPropertyParseFunction;
+    #value: any;
 
-	/**
-	 * Creates an instance of ConfigProperty.
-	 * @param {string} name - Key used to look up this property in calling app.
-	 * @param {ConfigPropertyOptions} [options={}]
-	 * @memberof ConfigProperty
-	 */
-	constructor(name: string, options: ConfigPropertyOptions = {}) {
-		this.name = name;
-		this.envKey = options.envKey || options.key || false;
-		this.desc = options.desc || '';
-		this.default = options.default || undefined;
-		this.isDefined = false;
-		this.isRequired = options.required ?? false;
-		this.parse = options.parse || (value => value);
+    /**
+     * Creates an instance of ConfigProperty.
+     * @param {string} name - Key used to look up this property in calling app.
+     * @param {ConfigPropertyOptions} [options={}]
+     * @memberof ConfigProperty
+     */
+    constructor(name: string, options?: ConfigPropertyOptions) {
+        // Required
+        this.name = `${name}`;
+        this.envKey = `${name}`;
 
-		if (this.default) {
-			this.#value = this.parse(this.default);
-			this.isDefined = true;
-		}
+        // Default properties
+        this.description = '';
+        this.isDefined = false;
+        this.isRequired = false;
+        this.parse = value => value;
 
-		if (options.value) {
-			this.#value = this.parse(options.value);
-			this.isDefined = true;
-		}
-	}
+        // Optional parameters
+        if (options) {
+            this.envKey = options.envKey || options.key || this.envKey;
+            this.description = options.description || options.desc || this.description;
 
-	get value() {
-		if (!this.isDefined)
-			throw new ReferenceError(
-				`Config property "${this.name}" requested before it was initialized.`
-			);
-		return this.#value;
-	}
+            // `isRequired` takes presentence over `required`
+            if (options.required) this.isRequired = getSafeBoolean(options.required);
 
-	set value(envVars: { [key: string]: string }) {
-		this.setValue(envVars);
-	}
+            if (typeof options.parse === "function") this.parse = options.parse;
 
-	setValue(envVars: { [key: string]: string }) {
-		// Was the value already set, possibly at init
-		// if (this.isDefined) return;
+            // `defaultValue` takes presentence over `defaultValue`
+            if (options.defaultValue || options.default) {
+                this.defaultValue = options.defaultValue || options.default;
+                this.value = this.defaultValue;
+            }
 
-		var value = this.default;
+            // `initValue` takes presentence over `value`
+            if (options.initValue || options.value) {
+                this.value = options.value;
+            }
+        }
+    }
 
-		// Is the property set in the environment
-		if (this.envKey && envVars[this.envKey]) {
-			value = envVars[this.envKey];
-		} else if (envVars[this.name]) {
-			value = envVars[this.name];
-		}
+    get value() {
+        if (!this.isDefined)
+            throw new ReferenceError(
+                `Config property "${this.name}" requested before it was set.`
+            );
+        return this.#value;
+    }
 
-        console.debug(this)
+    set value(payload: any) {
+        this.#value = this.parse(payload);
+        this.isDefined = true;
+    }
 
-		if (value) {
-			this.#value = this.parse(value);
-			this.isDefined = true;
-		} else if (this.isRequired) {
-			throw new ReferenceError(
-				`Config property "${this.name}" was required but not defined.`
-			);
-		}
-	}
+    setValue(envVars: { [key: string]: string }) {
+        // Was the value already set, possibly at init
+        // if (this.isDefined) return;
 
-	isMatch(find: string) {
-		if (!this.isDefined)
-			throw new Error(
-				`Config property "${this.name}" was requested before it was initialized.`
-			);
-		return find === this.name || find === this.envKey ? true : false;
-	}
+        var value = this.defaultValue;
 
-	getVerbose() {
-		return {
-			name: this.name,
-			envKey: this.envKey,
-			desc: this.desc,
-			value: this.value,
-			default: this.default,
-			isDefined: this.isDefined,
-			isRequired: this.isRequired,
-			errors: this.errors || null,
-			parse: this.parse
-		}
-	}
+        // Is the property set in the environment
+        if (this.envKey && envVars[this.envKey]) {
+            value = envVars[this.envKey];
+        } else if (envVars[this.name]) {
+            value = envVars[this.name];
+        }
+
+        if (value) {
+            this.value = value;
+        } else if (this.isRequired) {
+            throw new ReferenceError(
+                `Config property "${this.name}" was required but not defined.`
+            );
+        }
+    }
+
+    isMatch(find: string) {
+        if (!this.isDefined)
+            throw new Error(
+                `Config property "${this.name}" was requested before it was initialized.`
+            );
+        return find === this.name || find === this.envKey ? true : false;
+    }
+
+    getVerbose() {
+        return {
+            name: this.name,
+            envKey: this.envKey,
+            desc: this.description,
+            value: this.value,
+            default: this.defaultValue,
+            isDefined: this.isDefined,
+            isRequired: this.isRequired,
+            errors: this.errors || null,
+            parse: this.parse
+        }
+    }
 };

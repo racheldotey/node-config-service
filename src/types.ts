@@ -32,7 +32,9 @@ export interface ConfigManagerInterface {
 }
 
 
-/** Property Types */
+/**
+ * Property Types
+ **/
 export type ConfigPropertyParseFunction = (value: string) => any;
 
 export interface ConfigPropertyOptions {
@@ -40,10 +42,14 @@ export interface ConfigPropertyOptions {
     key?: string;
     envKey?: string;
     desc?: string;
+    description?: string;
     default?: string;
+    defaultValue?: string;
     required?: boolean;
+    isRequired?: boolean;
     parse?: ConfigPropertyParseFunction;
     value?: any;
+    initValue?: any;
 }
 
 // @see https://blog.logrocket.com/writing-constructor-typescript/
@@ -54,8 +60,8 @@ export interface ConfigPropertyConstructor {
 export interface IConfigProperty {
     name: string;
     envKey: string | false;
-    desc: string;
-    default?: string;
+    description: string;
+    defaultValue?: string;
     isDefined: boolean;
     isRequired: boolean;
     errors?: Error[];
