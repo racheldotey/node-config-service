@@ -53,21 +53,21 @@ describe('> Test suite for class `ConfigProperty`:', () => {
         expect(() => prop.value).toThrow();
     });
 
-    test('(3) - Do not throw error when value is requested if value is set in the constructor.', () => {
+    test('(4) - Do not throw error when value is requested if value is set in the constructor.', () => {
         const prop = new ConfigProperty(key, { ...options, value: key });
 
         expect(prop.isDefined).toBeTruthy();
         expect(prop.value).toMatch(key);
     });
 
-    test('(4) - Throw error if isMatch() is called before value was set.', () => {
+    test('(5) - Throw error if isMatch() is called before value was set.', () => {
         const prop = new ConfigProperty(key);
 
         expect(prop.isDefined).toBeFalsy();
         expect(() => prop.isMatch(key)).toThrow();
     });
 
-    test('(5) - Test isMatch() method when value is set in the constructor.', () => {
+    test('(6) - Test isMatch() method when value is set in the constructor.', () => {
         const value = { foo: 'bar' };
         const prop = new ConfigProperty(key, { ...options, value });
 
@@ -78,7 +78,7 @@ describe('> Test suite for class `ConfigProperty`:', () => {
         expect(prop.isMatch('dog')).toBeFalsy();
     });
 
-    test('(6) - Set advanced value in the constructor.', () => {
+    test('(7) - Set advanced value in the constructor.', () => {
         const prop = new ConfigProperty(key, { ...options, value: data });
 
         expect(prop.isDefined).toBeTruthy();
@@ -87,7 +87,7 @@ describe('> Test suite for class `ConfigProperty`:', () => {
         expect(JSON.stringify(prop.value)).toBe(JSON.stringify(data));
     });
 
-    test('(7) - Set value using default value and parse method.', () => {
+    test('(8) - Set value using default value and parse method.', () => {
         const defaultValue = JSON.stringify(data);
         const prop = new ConfigProperty(key, { ...options, default: defaultValue, parse });
 
@@ -101,7 +101,7 @@ describe('> Test suite for class `ConfigProperty`:', () => {
         expect(JSON.stringify(prop.value)).toBe(defaultValue);
     });
 
-    test('(8) - Set value from env object. No parsing.', () => {
+    test('(9) - Set value from env object. No parsing.', () => {
         const prop = new ConfigProperty(key, options);
 
         expect(prop.isDefined).toBeFalsy();
@@ -115,7 +115,7 @@ describe('> Test suite for class `ConfigProperty`:', () => {
 
     });
 
-    test('(9) - Set value from env object with parsing.', () => {
+    test('(10) - Set value from env object with parsing.', () => {
         const value = JSON.stringify(data);
         const prop = new ConfigProperty(key, { envKey: options.envKey, parse });
 
@@ -128,7 +128,7 @@ describe('> Test suite for class `ConfigProperty`:', () => {
         expect(JSON.stringify(prop.value)).toBe(value);
     });
 
-    test('(10) - Throw error if setValue() cannot find its key when the property isRequired', () => {
+    test('(11) - Throw error if setValue() cannot find its key when the property isRequired', () => {
         const prop = new ConfigProperty(key, { envKey: options.envKey });
 
         expect(prop.isDefined).toBeFalsy();
