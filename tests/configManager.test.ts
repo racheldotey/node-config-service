@@ -1,11 +1,11 @@
 import { expect, test } from '@jest/globals';
 import { ConfigManager } from '../src/ConfigManager';
-import { DEFAULT_PROPERTY_DEFINITIONS } from '../src/constants';
+import { DEFAULT_PROPERTIES } from '../src/constants';
 import { expectConfigManagerInterface, expectConfigManagerSettings } from './lib/utils';
 
 
-const properties = { ...DEFAULT_PROPERTY_DEFINITIONS };
-const prop = DEFAULT_PROPERTY_DEFINITIONS.environment;
+const properties = { ...DEFAULT_PROPERTIES };
+const prop = DEFAULT_PROPERTIES.environment;
 prop.parse = (value: string) => value.toString().toLowerCase();
 
 
@@ -16,7 +16,7 @@ describe('> Test suite for class `ConfigManager`:', () => {
     var envKey: string = prop.envKey || prop.name || '';
     var defaultValue: string = prop.default || '';
 
-    test('(Setup) - Verify default config used', () => {
+    test('(1) - Verify default config used', () => {
         expect(name).not.toBe('');
         expect(envKey).not.toBe('');
         expect(name).not.toBe(envKey);
@@ -24,25 +24,25 @@ describe('> Test suite for class `ConfigManager`:', () => {
         expect(typeof prop.parse).toBe('function');
     });
 
-    test('(1) - Verify interface', () => {
+    test('(2) - Verify interface', () => {
         expectConfigManagerInterface(config);
         expectConfigManagerSettings(config);
     });
 
-    test('(2) - Init with empty settings', () => {
+    test('(3) - Init with empty settings', () => {
         config = config.init();
         expectConfigManagerInterface(config);
         expectConfigManagerSettings(config);
     });
 
-    test('(3) - Init with empty but defined properties object', () => {
+    test('(4) - Init with empty but defined properties object', () => {
         config = new ConfigManager({ properties: {} });
         expectConfigManagerSettings(config);
         config = config.init();
         expectConfigManagerSettings(config);
     });
 
-    test('(4) - Init with error logging and silenceErrors, no properties', () => {
+    test('(5) - Init with error logging and silenceErrors, no properties', () => {
         var options = {
             silenceErrors: true,
             logErrors: true,
@@ -58,7 +58,7 @@ describe('> Test suite for class `ConfigManager`:', () => {
         expectConfigManagerSettings(config, options);
     });
 
-    test('(5) - Init with a property definition using default values', () => {
+    test('(6) - Init with a property definition using default values', () => {
         config = new ConfigManager({ properties });
         expectConfigManagerInterface(config);
         expectConfigManagerSettings(config);
@@ -74,7 +74,7 @@ describe('> Test suite for class `ConfigManager`:', () => {
         expect(env).toMatch(defaultValue);
     });
 
-    test('(6) - Init with a property definition, override default value', () => {
+    test('(7) - Init with a property definition, override default value', () => {
         config = new ConfigManager({ properties });
         expectConfigManagerInterface(config);
         expectConfigManagerSettings(config);

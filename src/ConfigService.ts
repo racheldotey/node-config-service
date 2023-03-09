@@ -1,7 +1,6 @@
 //import * as dotenv from 'dotenv';
 
 import type { IConfigManager, DefinePropertyOptions, ConfigManagerOptions } from './types';
-import { DEFAULT_SERVICE_PROPERTIES } from './constants';
 import { ConfigManager } from './ConfigManager';
 
 export class ConfigService extends ConfigManager {
@@ -12,7 +11,6 @@ export class ConfigService extends ConfigManager {
 
 	constructor(options: ConfigManagerOptions = { properties: {} }) {
 		super({
-			...DEFAULT_SERVICE_PROPERTIES,
 			...options,
 		});
 		this.extraConfigs = {};

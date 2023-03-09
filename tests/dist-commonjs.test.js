@@ -1,7 +1,7 @@
-const { DEFAULT_PROPERTY_DEFINITIONS } = require('../src/constants');
+const { DEFAULT_PROPERTIES } = require('../src/constants');
 
 
-const prop = DEFAULT_PROPERTY_DEFINITIONS.environment;
+const prop = DEFAULT_PROPERTIES.environment;
 const name = prop.name || 'environment' || '';
 const envKey = prop.envKey || prop.name || '';
 const defaultValue = prop.default || '';

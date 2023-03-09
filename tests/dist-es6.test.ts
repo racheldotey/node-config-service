@@ -1,4 +1,4 @@
-//import { DEFAULT_PROPERTY_DEFINITIONS } from '../src/constants';
+//import { DEFAULT_PROPERTIES } from '../src/constants';
 
 import ConfigService from '../dist/index';
 
