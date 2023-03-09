@@ -1,4 +1,5 @@
 import { ConfigProperty } from './ConfigProperty';
+import { DEFAULT_PROPERTIES } from './constants';
 import {
 	ConfigPropertyOptions,
 	IConfigProperty,
@@ -18,15 +19,18 @@ export const ConfigManager: ConfigManagerConstructor = class ConfigManager
 		[key: string]: IConfigProperty;
 	};
 
-	constructor(options: ConfigManagerOptions = { properties: {} }) {
-		this.silenceErrors = options.silenceErrors ? true : false;
-		this.logErrors = options.logErrors ? true : false;
-		this.logFunction = options.logFunction ? options.logFunction : undefined;
+	constructor(options?: ConfigManagerOptions) {
+		this.silenceErrors = options?.silenceErrors ? true : false;
+		this.logErrors = options?.logErrors ? true : false;
+		this.logFunction = options?.logFunction ? options.logFunction : undefined;
 
-		if (options.properties) this.setProperties(options.properties);
+		this.#properties = {};
+        this.setProperties({ ...DEFAULT_PROPERTIES });
+
+		if (options?.properties) this.setProperties(options.properties);
 	}
 
-	init(props?: DefinePropertyOptions, envValues?: { [key: string]: string }) {
+	init(props?: ConfigManagerOptions | DefinePropertyOptions, envValues?: { [key: string]: string }) {
 		try {
 			if (props) this.setProperties(props);
 
@@ -38,8 +42,7 @@ export const ConfigManager: ConfigManagerConstructor = class ConfigManager
 		}
 	}
 
-	setProperties(props: { [key: string]: ConfigPropertyOptions; }) {
-		this.#properties = {};
+	setProperties(props: DefinePropertyOptions) {
 		Object.entries(props).forEach(([key, options]) => {
 			const prop = new ConfigProperty(options.name || key, options);
 			this.#properties[prop.name] = prop;
