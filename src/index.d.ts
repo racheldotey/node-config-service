@@ -8,4 +8,4 @@ export type {
     ConfigPropertyOptions,
     ConfigPropertyConstructor,
     IConfigProperty,
-} from '../types/main';
+} from '../types';
