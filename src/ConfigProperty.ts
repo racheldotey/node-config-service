@@ -21,14 +21,15 @@ import { getSafeBoolean } from './utils/getSafeBoolean';
 export const ConfigProperty: ConfigPropertyConstructor = class ConfigProperty
     implements IConfigProperty {
     name: string;
-    envKey: string | false;
+    envKey: string;
     description: string;
-    defaultValue?: string;
-    isDefined: boolean;
-    isRequired: boolean;
-    errors?: Error[];
     parse: ConfigPropertyParseFunction;
-    #value: any;
+    isRequired: boolean;
+
+    errors?: Error[];
+
+    #defaultValue?: any;
+    #value?: any;
 
     /**
      * Creates an instance of ConfigProperty.
@@ -43,13 +44,14 @@ export const ConfigProperty: ConfigPropertyConstructor = class ConfigProperty
 
         // Default properties
         this.description = '';
-        this.isDefined = false;
-        this.isRequired = false;
         this.parse = value => value;
+        this.isRequired = false;
 
         // Optional parameters
         if (options) {
+            // `envKey` takes presentence over `key`
             this.envKey = options.envKey || options.key || this.envKey;
+            // `description` takes presentence over `desc`
             this.description = options.description || options.desc || this.description;
 
             // `isRequired` takes presentence over `required`
@@ -60,7 +62,6 @@ export const ConfigProperty: ConfigPropertyConstructor = class ConfigProperty
             // `defaultValue` takes presentence over `defaultValue`
             if (options.defaultValue || options.default) {
                 this.defaultValue = options.defaultValue || options.default;
-                this.value = this.defaultValue;
             }
 
             // `initValue` takes presentence over `value`
@@ -70,23 +71,32 @@ export const ConfigProperty: ConfigPropertyConstructor = class ConfigProperty
         }
     }
 
+    get isDefined() {
+        return !!this.#value;
+    }
+
+    get defaultValue() {
+        return this.#defaultValue;
+    }
+
+    set defaultValue(payload: any) {
+        this.#defaultValue = payload;
+        if (!this.isDefined) this.value = this.defaultValue;
+    }
+
     get value() {
-        if (!this.isDefined)
-            throw new ReferenceError(
-                `Config property "${this.name}" requested before it was set.`
-            );
+        if (!this.isDefined) {
+            const message = `Config property "${this.name}" requested before it was set.`;
+            throw new Error(message);
+        }
         return this.#value;
     }
 
     set value(payload: any) {
         this.#value = this.parse(payload);
-        this.isDefined = true;
     }
 
     setValue(envVars: { [key: string]: string }) {
-        // Was the value already set, possibly at init
-        // if (this.isDefined) return;
-
         var value = this.defaultValue;
 
         // Is the property set in the environment
@@ -99,18 +109,25 @@ export const ConfigProperty: ConfigPropertyConstructor = class ConfigProperty
         if (value) {
             this.value = value;
         } else if (this.isRequired) {
-            throw new ReferenceError(
-                `Config property "${this.name}" was required but not defined.`
-            );
+            const message = `Config property "${this.name}" was required but not defined.`;
+            throw new Error(message);
         }
     }
 
     isMatch(find: string) {
-        if (!this.isDefined)
-            throw new Error(
-                `Config property "${this.name}" was requested before it was initialized.`
-            );
+        if (!this.isDefined) {
+            const message = `Config property "${this.name}" was requested before it was initialized.`;
+            throw new Error(message);
+        }
         return find === this.name || find === this.envKey ? true : false;
+    }
+
+    get() {
+        return {
+            name: this.name,
+            description: this.description,
+            value: this.value
+        };
     }
 
     getVerbose() {
@@ -122,8 +139,8 @@ export const ConfigProperty: ConfigPropertyConstructor = class ConfigProperty
             default: this.defaultValue,
             isDefined: this.isDefined,
             isRequired: this.isRequired,
-            errors: this.errors || null,
+            errors: this.errors || [],
             parse: this.parse
-        }
+        };
     }
 };

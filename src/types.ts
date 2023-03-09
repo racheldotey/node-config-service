@@ -59,17 +59,21 @@ export interface ConfigPropertyConstructor {
 
 export interface IConfigProperty {
     name: string;
-    envKey: string | false;
+    envKey: string;
     description: string;
-    defaultValue?: string;
-    isDefined: boolean;
+    parse: ConfigPropertyParseFunction;
     isRequired: boolean;
     errors?: Error[];
-    parse: ConfigPropertyParseFunction;
+
+    get isDefined(): boolean;
+    get defaultValue(): {
+        [key: string]: string;
+    };
+    set defaultValue(payload: any);
     get value(): {
         [key: string]: string;
     };
-    set value(envVars: NodeJS.ProcessEnv);
+    set value(payload: any);
     setValue(envVars: NodeJS.ProcessEnv): void;
     isMatch(find: string): boolean;
     getVerbose(): object;
