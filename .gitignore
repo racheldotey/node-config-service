@@ -1,6 +1,12 @@
+### Build files ###
+build/
+dist/
+types/
+
 ### Haters. Ingnore 'em. ###
 negitivity/
 *.hate
+
 
 # Created by https://www.toptal.com/developers/gitignore/api/yarn,node,macos,linux,grunt,windows,serverless,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=yarn,node,macos,linux,grunt,windows,serverless,visualstudiocode
