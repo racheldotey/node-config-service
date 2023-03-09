@@ -1,7 +1,3 @@
-#!/usr/bin/env node
-
-'use strict';
-
 // Crash on unhandled rejections.
 process.on('unhandledRejection', error => {
     console.error(error);
@@ -16,12 +12,15 @@ const { getPackageRootDir } = require('./utils/getPackageRootDir');
 const { getTinyLogger } = require('./utils/getTinyLogger');
 const getWebpackConfig = require('../webpack.config');
 
+const npmPackage = require('../package.json');
+const tsconfig = require('../tsconfig.json');
+
 const tl = getTinyLogger(`  [build-dist]  `);
 tl.info('// -----------------------------------------------');
 tl.info('---------- Starting module build process ---------');
 
-const NAME = 'node-config-service';
-const VERSION = '0.9.1';
+const NAME = 'node-config-service';//npmPackage.name;
+const VERSION = '0.9.0';//npmPackage.version;
 const DIR_ROOT = getPackageRootDir();
 const DIR_SOURCE = path.join(DIR_ROOT, 'src');
 const FILES_TO_COPY = ['index.d.ts'];
@@ -30,12 +29,12 @@ tl.info(`           > ${NAME} v${VERSION} ...`);
 
 const getConfig = mode => getWebpackConfig({ mode });
 
-const deleteDistFolder = path => {
+const deleteDir = path => {
     // Remove dist directory to start fresh
     if (fs.existsSync(path)) {
-        tl.info(` - Deleting old dist.`);
+        tl.info(` - Deleting existing ${path}`);
         fs.rmSync(path, { recursive: true });
-        tl.info(` -- Delete dist complete.`);
+        tl.info(` -- Delete complete.`);
         return true;
     }
 
@@ -64,21 +63,24 @@ const copyOtherFiles = async (files, fromFolder, toFolder) => {
 };
 
 const main = async () => {
+
     // Get webpack configs for each env mode
     const development = getConfig('development');
     const production = getConfig('production');
 
-    const distDev = development.output.path;
-    const distProd = production.output.path;
+    const dirDist = production.output.path;
+    const dirDistDev = development.output.path;
+    const typesDir = 'types';//tsconfig.compilerOptions.outDir;
 
-    deleteDistFolder(distDev);
-    if (distDev != distProd) deleteDistFolder(distProd);
+    deleteDir(typesDir);
+    deleteDir(dirDist);
+    if (dirDist != dirDistDev) deleteDir(dirDistDev);
 
     await runWebpackBuild(development);
     await runWebpackBuild(production);
 
-    copyOtherFiles(FILES_TO_COPY, DIR_SOURCE, distDev);
-    if (distDev != distProd) copyOtherFiles(FILES_TO_COPY, DIR_SOURCE, distProd);
+    copyOtherFiles(FILES_TO_COPY, DIR_SOURCE, dirDist);
+    if (dirDist != dirDistDev) copyOtherFiles(FILES_TO_COPY, DIR_SOURCE, dirDistDev);
 
     tl.info('------ The module build process is complete ------');
     tl.info('----------------------------------------------- //');
