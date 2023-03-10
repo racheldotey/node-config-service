@@ -73,6 +73,8 @@
 		"eslint-plugin-html": "^7.1.0",
 		"eslint-plugin-import": "^2.27.5",
 		"eslint-plugin-inclusive-language": "^2.2.0",
+		"eslint-plugin-jest": "^27.2.1",
+		"eslint-plugin-jest-formatting": "^3.1.0",
 		"eslint-plugin-jsdoc": "^40.0.1",
 		"eslint-plugin-jsonc": "^2.6.0",
 		"eslint-plugin-jsx-a11y": "^6.7.1",
@@ -149,11 +151,8 @@
 		"lint": "eslint ./ --ignore-path .gitignore",
 		"lint:fix": "eslint ./ --ignore-path .gitignore --fix",
 		"lint:log": "eslint ./ --ignore-path .gitignore --output-file eslint.html --format compact",
-
-		"format": "prettier --write src/**/*.{js,jsx",
-
+		"format": "prettier --write src/**/*.{js,jsx,ts",
 		"docs:build": "jsdoc2md -t ./docs/README.hbs src/*.js > README.md",
-
 		"menu": "ntl"
 	}
 }
