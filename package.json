@@ -153,7 +153,6 @@
 		"format": "prettier --write src/**/*.{js,jsx",
 
 		"docs:build": "jsdoc2md -t ./docs/README.hbs src/*.js > README.md",
-		"docs:build:watch": "nodemon --config ./scripts/dev-server.nodeamon.json --exec \"npm run docs:build\"",
 
 		"menu": "ntl"
 	}
