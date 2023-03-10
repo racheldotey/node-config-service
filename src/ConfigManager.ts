@@ -34,15 +34,11 @@ export const ConfigManager: ConfigManagerConstructor = class ConfigManager
     }
 
     init(props?: DefinePropertyOptions, envValues?: { [key: string]: string }) {
-        try {
-            if (props) this.setProperties(props);
+        if (props) this.setProperties(props);
 
-            const processEnv = envValues || {};
-            Object.values(this.#properties).forEach(prop => prop.setValue(processEnv));
-            return this;
-        } catch (error) {
-            throw error;
-        }
+        const processEnv = envValues || {};
+        Object.values(this.#properties).forEach(prop => prop.setValue(processEnv));
+        return this;
     }
 
     setProperties(propertyOptions: DefinePropertyOptions, resetProperties = false) {
@@ -106,10 +102,11 @@ export const ConfigManager: ConfigManagerConstructor = class ConfigManager
     }
 
     getVerbose() {
-        const verbose: { [key: string]: any; } = {}
-        /* Object.entries(this.properties).forEach(([key, prop]) => {
-            verbose[key] = prop.getVerbose();
-        }); */
-        return verbose;
+        // const verbose: { [key: string]: any; } = {}
+        // Object.entries(this.properties).forEach(([key, prop]) => {
+        //     verbose[key] = prop.getVerbose();
+        // });
+        // return verbose;
+        return {};
     }
 };
