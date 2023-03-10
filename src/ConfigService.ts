@@ -4,16 +4,16 @@ import type { ConfigManagerInterface, DefinePropertyOptions, ConfigManagerOption
 import { ConfigManager } from './ConfigManager';
 
 export class ConfigService extends ConfigManager {
-	dotenvLoaded?: boolean | false;
-	extraConfigs: {
+	#dotenvLoaded?: boolean | false;
+	#extraConfigs: {
 		[key: string]: ConfigManagerInterface;
 	};
 
-	constructor(options: ConfigManagerOptions = { properties: {} }) {
+	constructor(options?: ConfigManagerOptions) {
 		super({
 			...options,
 		});
-		this.extraConfigs = {};
+		this.#extraConfigs = {};
 	}
 
 	init(props?: DefinePropertyOptions, envValues?: { [key: string]: string }) {
@@ -22,15 +22,15 @@ export class ConfigService extends ConfigManager {
 	}
 
 	loadEnv() { // dotenv.DotenvConfigOptions) {
-		if (this.dotenvLoaded) return;
+		if (this.#dotenvLoaded) return;
 
 		// Load environment variables into process.env
 		// @see https://www.npmjs.com/package/dotenv
 		//dotenv.config();
-		this.dotenvLoaded = true;
+		this.#dotenvLoaded = true;
 	}
 
 	getConfig(key: string) {
-		return this.extraConfigs[key] ? this.extraConfigs[key] : null;
+		return this.#extraConfigs[key] ? this.#extraConfigs[key] : null;
 	}
 };

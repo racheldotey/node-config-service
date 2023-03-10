@@ -10,6 +10,7 @@ export interface ConfigManagerOptions {
     logErrors?: boolean;
     logFunction?: ConfigManagerLogFunction;
     properties?: DefinePropertyOptions;
+    includeDefaults?: boolean;
 }
 
 // @see https://blog.logrocket.com/writing-constructor-typescript/

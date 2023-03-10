@@ -25,7 +25,8 @@ export const ConfigManager: ConfigManagerConstructor = class ConfigManager
         this.logFunction = options?.logFunction ? options.logFunction : undefined;
 
         this.#properties = {};
-        this.setProperties({ ...DEFAULT_PROPERTIES });
+
+        if(options?.includeDefaults !== false) this.setProperties({ ...DEFAULT_PROPERTIES });
 
         if (options?.properties) {
             this.setProperties(options.properties);
