@@ -95,7 +95,7 @@ export const ConfigProperty: ConfigPropertyConstructor = class ConfigProperty
     }
 
     setValue(envVars: { [key: string]: string }): void {
-        var value = this.defaultValue;
+        let value = this.defaultValue;
 
         // Is the property set in the environment
         if (this.envKey && envVars[this.envKey]) {
@@ -121,7 +121,7 @@ export const ConfigProperty: ConfigPropertyConstructor = class ConfigProperty
 
     protected onError(cause: string): void {
         const message = `${this.constructor.name} "${this.name}": ${cause}`;
-        if(!this.errors) this.errors = [];
+        if (!this.errors) this.errors = [];
 
         const error = new Error(message);
         this.errors.push(error);

@@ -9,7 +9,7 @@ describe('> Test suite for class `ConfigProperty`:', () => {
         expect(ConfigProperty.name).toMatch('ConfigProperty');
     });
 
-    var prop = new ConfigProperty(key);
+    let prop = new ConfigProperty(key);
 
     test('(2) - Create default `new ConfigProperty()` instance', () => {
         // All props
@@ -284,11 +284,11 @@ describe('> Test suite for class `ConfigProperty`:', () => {
         const key = 'dessert';
         const parse = (val: any) => JSON.parse(val);
 
-        var data: { [key:string]: any } = {
+        const data: { [key:string]: any } = {
             type: 'Birthday cake',
             layers: [1, 2, 3]
         };
-        var dataString = JSON.stringify(data);
+        let dataString = JSON.stringify(data);
 
         prop = new ConfigProperty(key, { parse });
         expect(prop.defaultValue).toBeUndefined();
@@ -302,7 +302,7 @@ describe('> Test suite for class `ConfigProperty`:', () => {
         expect(prop.defaultValue).toMatch(dataString);
         expect(JSON.stringify(prop.value)).toMatch(dataString);
 
-        var lastDataString = '' + dataString;
+        const lastDataString = '' + dataString;
         data.flavor = 'Chocolate';
         dataString = JSON.stringify(data);
 

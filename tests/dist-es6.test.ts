@@ -14,7 +14,7 @@ const defaultValue = 'production';
 // }
 
 // const expectConfigPropertyValue = (config, find, value) => {
-//     var prop = config.get(find);
+//     let prop = config.get(find);
 // 	expect(prop).toBeDefined();
 //     expect(prop).toMatch(value);
 // }

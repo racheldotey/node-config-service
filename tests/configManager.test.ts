@@ -51,7 +51,7 @@ describe('> Test suite for class `ConfigManager`:', () => {
     });
 
     test('(4) - Property `properties` (constructor option `properties`)', () => {
-        var config = new ConfigManager({ properties: {} });
+        let config = new ConfigManager({ properties: {} });
         expect(config.length).toBe(Object.keys(DEFAULT_PROPERTIES).length);
         Object.keys(DEFAULT_PROPERTIES).forEach(name => expect(config.get(name)).toBeDefined());
 
@@ -89,7 +89,7 @@ describe('> Test suite for class `ConfigManager`:', () => {
     test('(6) - Method `findSeveral()`', () => {
         const config = new ConfigManager({ properties: propDefs });
 
-        var found = config.findSeveral([]);
+        let found = config.findSeveral([]);
         expect(found).toBeDefined();
         expect(Object.keys(found).length).toBe(0);
 
@@ -120,7 +120,7 @@ describe('> Test suite for class `ConfigManager`:', () => {
         expect(config.get('BAR')).toBeDefined();
         expect(config.get('unknown')).toBeUndefined();
         // Array = findSeveral()
-        var found = config.get([]);
+        let found = config.get([]);
         expect(found).toBeDefined();
         expect(Object.keys(found).length).toBe(0);
 
@@ -139,7 +139,7 @@ describe('> Test suite for class `ConfigManager`:', () => {
 
     test('(8) - Method `getAll()`', () => {
         const config = new ConfigManager({ properties: propDefs, includeDefaults: false });
-        var found = config.getAll();
+        const found = config.getAll();
         expect(Object.keys(found).length).toBe(Object.keys(propDefs).length);
         Object.keys(propDefs).forEach(name => expect(found[name]).toBeDefined());
     });

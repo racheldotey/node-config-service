@@ -33,4 +33,4 @@ export class ConfigService extends ConfigManager {
 	getConfig(key: string) {
 		return this.#extraConfigs[key] ? this.#extraConfigs[key] : null;
 	}
-};
+}

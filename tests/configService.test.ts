@@ -9,7 +9,7 @@ describe('> Test suite for class `ConfigService`:', () => {
     });
 
     test('(2) - Create default `new ConfigService()` instance', () => {
-        var service = new ConfigService();
+        const service = new ConfigService();
         // All methods
         expect(typeof service.init).toBe('function');
         expect(typeof service.loadEnv).toBe('function');
