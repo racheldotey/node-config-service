@@ -23,7 +23,6 @@ describe('> Test suite for class `ConfigProperty`:', () => {
         // All methods
         expect(typeof prop.setValue).toBe('function');
         expect(typeof prop.isMatch).toBe('function');
-        expect(typeof prop.getVerbose).toBe('function');
     });
 
     test('(3) - Expect default properties', () => {
@@ -66,7 +65,7 @@ describe('> Test suite for class `ConfigProperty`:', () => {
         expect(prop.value).toMatch(key);
     });
 
-    test('(7) - Unset value', () => {
+    test('(7) - Method `unsetValue()`', () => {
         expect(prop.isRequired).toBeTruthy();
         expect(prop.isDefined).toBeTruthy();
         // Unset the value

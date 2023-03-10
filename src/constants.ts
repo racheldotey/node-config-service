@@ -2,15 +2,13 @@ import { ConfigManagerOptions, DefinePropertyOptions } from './types';
 
 export const DEFAULT_PROPERTIES: DefinePropertyOptions = {
 	nodeConfigService: {
-		name: 'nodeConfigService',
 		envKey: 'NODE_CONFIG_SERVICE',
-		desc: 'Optional - Demo env variable.',
-		default: 'Hello World!',
-		required: false,
+		description: 'Optional - Demo env variable.',
+		defaultValue: 'Hello World!',
+		isRequired: false,
 	},
 	environment: {
-		name: 'environment',
-		envKey: 'NODE_ENV',
+		key: 'NODE_ENV',
 		desc: '{string = "production"} Optional - Server environment such as "production" or "development".',
 		default: 'production',
 		required: false,

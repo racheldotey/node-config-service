@@ -1,100 +1,154 @@
-import { expect, test } from '@jest/globals';
 import { ConfigManager } from '../src/ConfigManager';
 import { DEFAULT_PROPERTIES } from '../src/constants';
 import { expectConfigManagerInterface, expectConfigManagerSettings } from './lib/utils';
 
 
-const properties = { ...DEFAULT_PROPERTIES };
 const prop = DEFAULT_PROPERTIES.environment;
 prop.parse = (value: string) => value.toString().toLowerCase();
+const propDefs = {
+    foo: {
+        envKey: 'FOO',
+        defaultValue: 'Foo value'
+    },
+    bar: {
+        key: 'BAR',
+        value: 'Bar value'
+    }
+}
 
 
 describe('> Test suite for class `ConfigManager`:', () => {
-    var config = new ConfigManager();
-
-    var name: string = prop.name || 'environment' || '';
-    var envKey: string = prop.envKey || prop.name || '';
-    var defaultValue: string = prop.default || '';
-
-    test('(1) - Verify default config used', () => {
-        expect(name).not.toBe('');
-        expect(envKey).not.toBe('');
-        expect(name).not.toBe(envKey);
-        expect(defaultValue).not.toBe('');
-        expect(typeof prop.parse).toBe('function');
+    test('(1) - Was the class `ConfigManager` imported correctly', () => {
+        expect(ConfigManager).toBeDefined();
+        expect(ConfigManager.name).toMatch('ConfigManager');
     });
 
-    test('(2) - Verify interface', () => {
-        expectConfigManagerInterface(config);
-        expectConfigManagerSettings(config);
+    test('(2) - Create default `new ConfigManager()` instance', () => {
+        // Init with default properties
+        const config = new ConfigManager();
+        // All props
+        expect(config).toHaveProperty('silenceErrors');
+        expect(config).toHaveProperty('logErrors');
+        expect(config).toHaveProperty('logFunction');
+        // All methods
+        expect(typeof config.init).toBe('function');
+        expect(typeof config.get).toBe('function');
+        expect(typeof config.findOne).toBe('function');
+        expect(typeof config.findSeveral).toBe('function');
     });
 
-    test('(3) - Init with empty settings', () => {
-        config = config.init();
-        expectConfigManagerInterface(config);
-        expectConfigManagerSettings(config);
+    test('(3) - Init with default properties', () => {
+        const config = new ConfigManager();
+
+        expect(config.silenceErrors).toBeFalsy();
+        expect(config.logErrors).toBeFalsy();
+        expect(config.logFunction).toBeUndefined();
+
+        expect(config.length).toBe(Object.keys(DEFAULT_PROPERTIES).length);
+
+        Object.keys(DEFAULT_PROPERTIES).forEach(name => {
+            const val = config.get(name);
+            expect(val).toBeDefined()
+        });
     });
 
-    test('(4) - Init with empty but defined properties object', () => {
-        config = new ConfigManager({ properties: {} });
-        expectConfigManagerSettings(config);
-        config = config.init();
-        expectConfigManagerSettings(config);
+    test('(4) - Property `properties` (constructor option `properties`)', () => {
+        // Init with default properties
+        var config = new ConfigManager({ properties: {} });
+        expect(config.length).toBe(Object.keys(DEFAULT_PROPERTIES).length);
+        Object.keys(DEFAULT_PROPERTIES).forEach(name => expect(config.get(name)).toBeDefined());
+
+        // Init with default properties
+        config = new ConfigManager({ properties: DEFAULT_PROPERTIES });
+        expect(config.length).toBe(Object.keys(DEFAULT_PROPERTIES).length);
+        Object.keys(DEFAULT_PROPERTIES).forEach(name => expect(config.get(name)).toBeDefined());
+
+        // Init with default and defined properties
+        config = new ConfigManager({ properties: propDefs });
+        expect(config.length).toBe(Object.keys({ ...DEFAULT_PROPERTIES, ...propDefs }).length);
+        Object.keys({ ...DEFAULT_PROPERTIES, ...propDefs }).forEach(name => expect(config.get(name)).toBeDefined());
+        // Reset and set new properties
+        config.setProperties(propDefs, true);
+        expect(config.length).toBe(Object.keys(propDefs).length);
+        Object.keys(DEFAULT_PROPERTIES).forEach(name => expect(config.get(name)).toBeUndefined());
+        Object.keys(propDefs).forEach(name => expect(config.get(name)).toBeDefined());
+        // Empty properties
+        config.setProperties({}, true);
+        expect(config.length).toBe(0);
+        config.setProperties(propDefs);
+        expect(config.length).toBe(Object.keys(propDefs).length);
     });
 
-    test('(5) - Init with error logging and silenceErrors, no properties', () => {
-        var options = {
-            silenceErrors: true,
-            logErrors: true,
-            logFunction: (...args: any[]) => console.debug(...args)
-        };
-        config = new ConfigManager(options);
-        expectConfigManagerSettings(config, options);
-        config = config.init();
-        expectConfigManagerSettings(config, options);
-        options.silenceErrors = false;
-        options.logErrors = false;
-        config = new ConfigManager(options);
-        expectConfigManagerSettings(config, options);
+    test('(5) - Method `findOne()`', () => {
+        const config = new ConfigManager({ properties: propDefs });
+
+        expect(config.findOne('foo')).toBeDefined();
+        expect(config.findOne('FOO')).toBeDefined();
+        expect(config.findOne('bar')).toBeDefined();
+        expect(config.findOne('BAR')).toBeDefined();
+        expect(config.findOne('unknown')).toBeUndefined();
     });
 
-    test('(6) - Init with a property definition using default values', () => {
-        config = new ConfigManager({ properties });
-        expectConfigManagerInterface(config);
-        expectConfigManagerSettings(config);
-        // Send a blank {} or it will default to process.env
-        config = config.init();
+    test('(6) - Method `findSeveral()`', () => {
+        const config = new ConfigManager({ properties: propDefs });
 
-        var env = config.get(name);
-        expect(env).toBeDefined();
-        expect(env).toMatch(defaultValue);
+        var found = config.findSeveral([]);
+        expect(found).toBeDefined();
+        expect(Object.keys(found).length).toBe(0);
 
-        env = config.get(envKey);
-        expect(env).toBeDefined();
-        expect(env).toMatch(defaultValue);
+        found = config.findSeveral(['foo']);
+        expect(found).toBeDefined();
+        expect(Object.keys(found).length).toBe(1);
+        expect(found.foo).toBeDefined();
+
+        found = config.findSeveral(['foo', 'FOO', 'bar', 'BAR']);
+        expect(Object.keys(found).length).toBe(4);
+        expect(found.foo).toBeDefined();
+        expect(found.FOO).toBeDefined();
+        expect(found.bar).toBeDefined();
+        expect(found.BAR).toBeDefined();
+
+        found = config.findSeveral(['unknown']);
+        expect(found).toBeDefined();
+        expect(Object.keys(found).length).toBe(1);
+        expect(found.unknown).toBeUndefined();
     });
 
-    test('(7) - Init with a property definition, override default value', () => {
-        config = new ConfigManager({ properties });
-        expectConfigManagerInterface(config);
-        expectConfigManagerSettings(config);
+    test('(7) - Method `get()`', () => {
+        const config = new ConfigManager();
+        config.setProperties(propDefs, true);
+        expect(config.length).toBe(Object.keys(propDefs).length);
 
-        var value = `${defaultValue}_OVERRIDDEN`;
-        config = config.init({}, { [envKey]: value });
+        // String = find()
+        expect(config.get('foo')).toBeDefined();
+        expect(config.get('BAR')).toBeDefined();
+        expect(config.get('unknown')).toBeUndefined();
+        // Array = findSeveral()
+        var found = config.get([]);
+        expect(found).toBeDefined();
+        expect(Object.keys(found).length).toBe(0);
 
-        //console.log(config.getVerbose())
-
-        expect(typeof prop.parse).toBe('function');
-        if(prop.parse) value = prop.parse(value);
-
-        var env = config.get(name);
-        expect(env).toBeDefined();
-        expect(env).toMatch(value);
-
-        env = config.get(envKey);
-        expect(env).toBeDefined();
-        expect(env).toMatch(value);
+        found = config.get(['foo', 'FOO', 'bar', 'BAR', 'unknown']);
+        expect(Object.keys(found).length).toBe(5);
+        expect(found.foo).toBeDefined();
+        expect(found.FOO).toBeDefined();
+        expect(found.bar).toBeDefined();
+        expect(found.BAR).toBeDefined();
+        expect(found.unknown).toBeUndefined();
+        // Boolean true = getAll()
+        found = config.get(true);
+        expect(Object.keys(found).length).toBe(Object.keys(propDefs).length);
+        Object.keys(propDefs).forEach(name => expect(found[name]).toBeDefined());
     });
+
+    test('(8) - Method `getAll()`', () => {
+        const config = new ConfigManager();
+        config.setProperties(propDefs, true);
+        var found = config.getAll();
+        expect(Object.keys(found).length).toBe(Object.keys(propDefs).length);
+        Object.keys(propDefs).forEach(name => expect(found[name]).toBeDefined());
+    });
+
 
 });
 

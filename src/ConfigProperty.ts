@@ -119,28 +119,6 @@ export const ConfigProperty: ConfigPropertyConstructor = class ConfigProperty
         return !!(find === this.name || find === this.envKey);
     }
 
-    get() {
-        return {
-            name: this.name,
-            description: this.description,
-            value: this.value
-        };
-    }
-
-    getVerbose() {
-        return {
-            name: this.name,
-            envKey: this.envKey,
-            desc: this.description,
-            value: this.value,
-            default: this.defaultValue,
-            isDefined: this.isDefined,
-            isRequired: this.isRequired,
-            errors: this.errors || [],
-            parse: this.parse
-        };
-    }
-
     protected onError(cause: string): void {
         const message = `${this.constructor.name} "${this.name}": ${cause}`;
         if(!this.errors) this.errors = [];

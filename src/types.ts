@@ -23,12 +23,15 @@ export interface ConfigManagerInterface {
     logFunction?: ConfigManagerLogFunction;
     init(props?: DefinePropertyOptions, envValues?: { [key: string]: string }): ConfigManagerInterface;
     get properties(): { [key: string]: ConfigPropertyInterface; };
-    get(...args: string[]): any;
+    get length(): number;
+    get(find: string | string[] | boolean): any;
+    getAll(): any;
+    getVerbose(): object;
     findOne(find: string): any;
     findSeveral(names: string[]): {
         [k: string]: any;
     };
-    getVerbose(): object;
+    setProperties(propertyOptions: DefinePropertyOptions, resetProperties?: boolean): void;
 }
 
 
@@ -74,8 +77,7 @@ export interface ConfigPropertyInterface {
         [key: string]: string;
     };
     set value(payload: any);
+    isMatch(find: string): boolean;
     setValue(envVars: NodeJS.ProcessEnv): void;
     unsetValue(): void;
-    isMatch(find: string): boolean;
-    getVerbose(): object;
 }

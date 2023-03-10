@@ -2,7 +2,7 @@ import type { Config } from 'jest';
 
 // @see https://jestjs.io/docs/configuration
 const config: Config = {
-    verbose: false,
+    verbose: true,
     coverageDirectory: 'coverage',
     errorOnDeprecated: true,
     transform: {
