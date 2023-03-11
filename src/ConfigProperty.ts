@@ -1,7 +1,7 @@
 import {
     ConfigPropertyInterface,
     ConfigPropertyConstructor,
-    ConfigPropertyParseFunction,
+    ConfigPropertyParseValueMethod,
     ConfigPropertyOptions,
 } from './types';
 import { getSafeBoolean } from './utils/getSafeBoolean';
@@ -23,7 +23,7 @@ export const ConfigProperty: ConfigPropertyConstructor = class ConfigProperty
     name: string;
     envKey: string;
     description: string;
-    parse: ConfigPropertyParseFunction;
+    parse: ConfigPropertyParseValueMethod;
     isRequired: boolean;
 
     errors?: Error[];

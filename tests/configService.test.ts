@@ -1,16 +1,16 @@
-import { ConfigService } from '../src/ConfigService';
+import { NodeConfigService } from '../src/NodeConfigService';
 import { DEFAULT_PROPERTIES } from '../src/constants';
 
 
-describe('> Test suite for class `ConfigService`:', () => {
-    test('(1) - Was the class `ConfigService` imported correctly', () => {
-        expect(ConfigService).toBeDefined();
-        expect(ConfigService.name).toMatch('ConfigService');
+describe('> Test suite for class `NodeConfigService`:', () => {
+    test('(1) - Was the class `NodeConfigService` imported correctly', () => {
+        expect(NodeConfigService).toBeDefined();
+        expect(NodeConfigService.name).toMatch('NodeConfigService');
     });
 
-    test('(2) - Create default `new ConfigService()` instance', () => {
-        const service = new ConfigService();
-        expect(service instanceof ConfigService).toBeTruthy();
+    test('(2) - Create default `new NodeConfigService()` instance', () => {
+        const service = new NodeConfigService();
+        expect(service instanceof NodeConfigService).toBeTruthy();
         // All methods
         expect(typeof service.init).toBe('function');
         expect(typeof service.loadEnv).toBe('function');
@@ -28,7 +28,7 @@ describe('> Test suite for class `ConfigService`:', () => {
     });
 
     test('(3) -Default properties', () => {
-        const config = new ConfigService();
+        const config = new NodeConfigService();
 
         expect(config.silenceErrors).toBeFalsy();
         expect(config.logErrors).toBeFalsy();

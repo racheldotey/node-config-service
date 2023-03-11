@@ -1,7 +1,7 @@
-const { ConfigService, ConfigManager, ConfigProperty } = require('./main');
+const { NodeConfigService, ConfigPropertyManager, ConfigProperty } = require('./main');
 
-module.exports = ConfigService;
-module.exports.default = ConfigService;
-module.exports.ConfigService = ConfigService;
-module.exports.ConfigManager = ConfigManager;
+module.exports = NodeConfigService;
+module.exports.default = NodeConfigService;
+module.exports.NodeConfigService = NodeConfigService;
+module.exports.ConfigPropertyManager = ConfigPropertyManager;
 module.exports.ConfigProperty = ConfigProperty;

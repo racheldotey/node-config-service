@@ -7,17 +7,17 @@ try {
     if (!nodeConfigService) throw new ReferenceError('`node-config-service` was not imported.');
 
 
-    const { ConfigService } = nodeConfigService;
-    console.debug(ConfigService);
+    const { NodeConfigService } = nodeConfigService;
+    console.debug(NodeConfigService);
 
-    if (!ConfigService)
-        throw new ReferenceError('`ConfigService` was not correctly assigned to the imports.');
+    if (!NodeConfigService)
+        throw new ReferenceError('`NodeConfigService` was not correctly assigned to the imports.');
 
 
-    const config = new ConfigService();
+    const config = new NodeConfigService();
     console.debug(config);
 
-    if (!config) throw new ReferenceError('`ConfigService` failed to be instantiated.');
+    if (!config) throw new ReferenceError('`NodeConfigService` failed to be instantiated.');
 
     config.init();
 

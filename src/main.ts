@@ -1,19 +1,19 @@
 /** Exports the Node-Config-Service entry point. */
 import { ConfigProperty } from './ConfigProperty';
-import { ConfigManager } from './ConfigManager';
-import { ConfigService } from './ConfigService';
+import { ConfigPropertyManager } from './ConfigPropertyManager';
+import { NodeConfigService } from './NodeConfigService';
 
 export type {
-    ConfigManagerLogFunction,
-    DefinePropertyOptions,
-    ConfigManagerOptions,
-    ConfigManagerConstructor,
-    ConfigManagerInterface,
-    ConfigPropertyParseFunction,
+    ConfigOnErrorCallback,
+    ConfigPropertyDefinitionsMap,
+    ConfigPropertyManagerOptions,
+    ConfigPropertyManagerConstructor,
+    ConfigPropertyManagerInterface,
+    ConfigPropertyParseValueMethod,
     ConfigPropertyOptions,
     ConfigPropertyConstructor,
     ConfigPropertyInterface,
 } from './types';
 
-export { ConfigService, ConfigManager, ConfigProperty };
-export default ConfigService;
+export { NodeConfigService, ConfigPropertyManager, ConfigProperty };
+export default NodeConfigService;

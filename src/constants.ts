@@ -1,6 +1,6 @@
-import { ConfigManagerOptions, DefinePropertyOptions } from './types';
+import { ConfigPropertyManagerOptions, ConfigPropertyDefinitionsMap } from './types';
 
-export const DEFAULT_PROPERTIES: DefinePropertyOptions = {
+export const DEFAULT_PROPERTIES: ConfigPropertyDefinitionsMap = {
 	nodeConfigService: {
 		envKey: 'NODE_CONFIG_SERVICE',
 		description: 'Optional - Demo env variable.',
@@ -15,6 +15,6 @@ export const DEFAULT_PROPERTIES: DefinePropertyOptions = {
 	},
 };
 
-export const DEFAULT_OPTIONS: ConfigManagerOptions = {
+export const DEFAULT_OPTIONS: ConfigPropertyManagerOptions = {
 	properties: { ...DEFAULT_PROPERTIES },
 };

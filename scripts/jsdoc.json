@@ -20,8 +20,8 @@
 		"template": "node_modules/clean-jsdoc-theme",
 		"theme_opts": {
 			"base_url": "http://localhost:5555/",
-			"homepageTitle": "ConfigService",
-			"title": "ConfigService",
+			"homepageTitle": "NodeConfigService",
+			"title": "NodeConfigService",
 			"default_theme": "light",
 			"favicon": "/images/favicon.ico",
 			"menu": [

@@ -1,4 +1,4 @@
-import { ConfigManager } from '../src/ConfigManager';
+import { ConfigPropertyManager } from '../src/ConfigPropertyManager';
 import { DEFAULT_PROPERTIES } from '../src/constants';
 
 
@@ -16,14 +16,14 @@ const propDefs = {
 }
 
 
-describe('> Test suite for class `ConfigManager`:', () => {
-    test('(1) - Was the class `ConfigManager` imported correctly', () => {
-        expect(ConfigManager).toBeDefined();
-        expect(ConfigManager.name).toMatch('ConfigManager');
+describe('> Test suite for class `ConfigPropertyManager`:', () => {
+    test('(1) - Was the class `ConfigPropertyManager` imported correctly', () => {
+        expect(ConfigPropertyManager).toBeDefined();
+        expect(ConfigPropertyManager.name).toMatch('ConfigPropertyManager');
     });
 
-    test('(2) - Create default `new ConfigManager()` instance', () => {
-        const config = new ConfigManager();
+    test('(2) - Create default `new ConfigPropertyManager()` instance', () => {
+        const config = new ConfigPropertyManager();
         // All props
         expect(config).toHaveProperty('silenceErrors');
         expect(config).toHaveProperty('logErrors');
@@ -36,7 +36,7 @@ describe('> Test suite for class `ConfigManager`:', () => {
     });
 
     test('(3) -Default properties', () => {
-        const config = new ConfigManager();
+        const config = new ConfigPropertyManager();
 
         expect(config.silenceErrors).toBeFalsy();
         expect(config.logErrors).toBeFalsy();
@@ -51,17 +51,17 @@ describe('> Test suite for class `ConfigManager`:', () => {
     });
 
     test('(4) - Property `properties` (constructor option `properties`)', () => {
-        let config = new ConfigManager({ properties: {} });
+        let config = new ConfigPropertyManager({ properties: {} });
         expect(config.length).toBe(Object.keys(DEFAULT_PROPERTIES).length);
         Object.keys(DEFAULT_PROPERTIES).forEach(name => expect(config.get(name)).toBeDefined());
 
         // Init with default properties
-        config = new ConfigManager({ properties: DEFAULT_PROPERTIES });
+        config = new ConfigPropertyManager({ properties: DEFAULT_PROPERTIES });
         expect(config.length).toBe(Object.keys(DEFAULT_PROPERTIES).length);
         Object.keys(DEFAULT_PROPERTIES).forEach(name => expect(config.get(name)).toBeDefined());
 
         // Init with default and defined properties
-        config = new ConfigManager({ properties: propDefs });
+        config = new ConfigPropertyManager({ properties: propDefs });
         expect(config.length).toBe(Object.keys({ ...DEFAULT_PROPERTIES, ...propDefs }).length);
         Object.keys({ ...DEFAULT_PROPERTIES, ...propDefs }).forEach(name => expect(config.get(name)).toBeDefined());
         // Reset and set new properties
@@ -77,7 +77,7 @@ describe('> Test suite for class `ConfigManager`:', () => {
     });
 
     test('(5) - Method `findOne()`', () => {
-        const config = new ConfigManager({ properties: propDefs });
+        const config = new ConfigPropertyManager({ properties: propDefs });
 
         expect(config.findOne('foo')).toBeDefined();
         expect(config.findOne('FOO')).toBeDefined();
@@ -87,7 +87,7 @@ describe('> Test suite for class `ConfigManager`:', () => {
     });
 
     test('(6) - Method `findSeveral()`', () => {
-        const config = new ConfigManager({ properties: propDefs });
+        const config = new ConfigPropertyManager({ properties: propDefs });
 
         let found = config.findSeveral([]);
         expect(found).toBeDefined();
@@ -112,7 +112,7 @@ describe('> Test suite for class `ConfigManager`:', () => {
     });
 
     test('(7) - Method `get()`', () => {
-        const config = new ConfigManager({ properties: propDefs, includeDefaults: false });
+        const config = new ConfigPropertyManager({ properties: propDefs, includeDefaults: false });
         expect(config.length).toBe(Object.keys(propDefs).length);
 
         // String = find()
@@ -138,7 +138,7 @@ describe('> Test suite for class `ConfigManager`:', () => {
     });
 
     test('(8) - Method `getAll()`', () => {
-        const config = new ConfigManager({ properties: propDefs, includeDefaults: false });
+        const config = new ConfigPropertyManager({ properties: propDefs, includeDefaults: false });
         const found = config.getAll();
         expect(Object.keys(found).length).toBe(Object.keys(propDefs).length);
         Object.keys(propDefs).forEach(name => expect(found[name]).toBeDefined());

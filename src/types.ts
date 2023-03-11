@@ -1,28 +1,28 @@
 /** Service Types */
-export type ConfigManagerLogFunction = (...data: any[]) => void;
+export type ConfigOnErrorCallback = (...data: any[]) => void;
 
-export interface DefinePropertyOptions {
+export interface ConfigPropertyDefinitionsMap {
     [key: string]: ConfigPropertyOptions;
 }
 
-export interface ConfigManagerOptions {
+export interface ConfigPropertyManagerOptions {
     silenceErrors?: boolean;
     logErrors?: boolean;
-    logFunction?: ConfigManagerLogFunction;
-    properties?: DefinePropertyOptions;
+    logFunction?: ConfigOnErrorCallback;
+    properties?: ConfigPropertyDefinitionsMap;
     includeDefaults?: boolean;
 }
 
 // @see https://blog.logrocket.com/writing-constructor-typescript/
-export interface ConfigManagerConstructor {
-    new(options?: ConfigManagerOptions): ConfigManagerInterface;
+export interface ConfigPropertyManagerConstructor {
+    new(options?: ConfigPropertyManagerOptions): ConfigPropertyManagerInterface;
 }
 
-export interface ConfigManagerInterface {
+export interface ConfigPropertyManagerInterface {
     silenceErrors?: boolean;
     logErrors?: boolean;
-    logFunction?: ConfigManagerLogFunction;
-    init(props?: DefinePropertyOptions, envValues?: { [key: string]: string }): ConfigManagerInterface;
+    logFunction?: ConfigOnErrorCallback;
+    init(props?: ConfigPropertyDefinitionsMap, envValues?: { [key: string]: string }): ConfigPropertyManagerInterface;
     get properties(): { [key: string]: ConfigPropertyInterface; };
     get length(): number;
     get(find: string | string[] | boolean): any;
@@ -32,14 +32,14 @@ export interface ConfigManagerInterface {
     findSeveral(names: string[]): {
         [k: string]: any;
     };
-    setProperties(propertyOptions: DefinePropertyOptions, resetProperties?: boolean): void;
+    setProperties(propertyOptions: ConfigPropertyDefinitionsMap, resetProperties?: boolean): void;
 }
 
 
 /**
  * Property Types
  **/
-export type ConfigPropertyParseFunction = (value: string) => any;
+export type ConfigPropertyParseValueMethod = (value: string) => any;
 
 export interface ConfigPropertyOptions {
     name?: string;
@@ -51,7 +51,7 @@ export interface ConfigPropertyOptions {
     defaultValue?: string;
     required?: boolean;
     isRequired?: boolean;
-    parse?: ConfigPropertyParseFunction;
+    parse?: ConfigPropertyParseValueMethod;
     value?: any;
     initValue?: any;
 }
@@ -65,7 +65,7 @@ export interface ConfigPropertyInterface {
     name: string;
     envKey: string;
     description: string;
-    parse: ConfigPropertyParseFunction;
+    parse: ConfigPropertyParseValueMethod;
     isRequired: boolean;
     errors?: Error[];
 

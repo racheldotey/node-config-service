@@ -10,7 +10,7 @@
 </div>
 
 ```js
-const configService = require('node-config-service');
+const nodeConfigService = require('node-config-service');
 
 console.log(process.env);
 ```
@@ -26,13 +26,13 @@ console.log(process.env);
 - [Usage](#usage)
   - [Example Env Variables](#example-env-variables)
 - [API Reference](#api-reference)
-- [ConfigService](#configservice)
-  - [ConfigService.ConfigService#version](#configserviceconfigserviceversion)
+- [NodeConfigService](#nodeconfigservice)
+  - [NodeConfigService.NodeConfigService#version](#configserviceconfigserviceversion)
     - [Example:](#example)
-  - [ConfigService.ConfigService#ConfigService](#configserviceconfigserviceconfigservice)
+  - [NodeConfigService.NodeConfigService#NodeConfigService](#configserviceconfigserviceconfigservice)
     - [Example:](#example-1)
-  - [ConfigService.ConfigService#errors](#configserviceconfigserviceerrors)
-  - [ConfigService.module.exports : <code>ConfigService</code>](#configservicemoduleexports--configservice)
+  - [NodeConfigService.NodeConfigService#errors](#configserviceconfigserviceerrors)
+  - [NodeConfigService.module.exports : <code>NodeConfigService</code>](#configservicemoduleexports--nodeconfigservice)
   - ["loadEnv"](#loadenv)
 - [Issues](#issues)
 - [Development](#development)
@@ -49,7 +49,7 @@ console.log(process.env);
 
 ![Keywords](https://img.shields.io/github/package-json/keywords/racheldotey/node-config-service?style=for-the-badge)
 
-`ConfigService` is a `node` module used to manage a set of config variables that are dependent upon node environmental variables set on the server.
+`NodeConfigService` is a `node` module used to manage a set of config variables that are dependent upon node environmental variables set on the server.
 
 Merge several configuration sources into a portable `get` method used throughout the app.
 
@@ -64,7 +64,7 @@ Merge several configuration sources into a portable `get` method used throughout
 
 ### Installation
 
-`ConfigService` is a <a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js</a> module available through the <a href="https://www.npmjs.com" target="_blank" rel="noopener">npm</a> and <a href="https://yarnpkg.com/" target="_blank" rel="noopener">yarn</a> package registries.
+`NodeConfigService` is a <a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js</a> module available through the <a href="https://www.npmjs.com" target="_blank" rel="noopener">npm</a> and <a href="https://yarnpkg.com/" target="_blank" rel="noopener">yarn</a> package registries.
 
 
 If you have not already done so, create a `package.json` for your project with the <a href="https://docs.npmjs.com/cli/v6/commands/npm-init" target="_blank" rel="noopener">`npm init`</a> or the <a href="https://classic.yarnpkg.com/en/docs/cli/init" target="_blank" rel="noopener">`yarn init`</a> command.
@@ -88,7 +88,7 @@ $ yarn add node-config-service --dev
 
 Process environmental variables can be set in a number of ways including the command line interface, in the `package.json` and using `.env` files in the root of your project.
 
-Under the hood ConfigService uses <a href="https://github.com/motdotla/dotenv" target="_blank" rel="noopener">Dotenv</a> to populate the node `process.env` object with the defined variables.
+Under the hood NodeConfigService uses <a href="https://github.com/motdotla/dotenv" target="_blank" rel="noopener">Dotenv</a> to populate the node `process.env` object with the defined variables.
 
 ```js
 require('node-config-service');
@@ -188,31 +188,31 @@ WITHOUT_CURLY_BRACES_UNDEFINED_EXPAND_WITH_DEFAULT_WITH_SPECIAL_CHARACTERS=$UNDE
 
 <a name="module_ConfigService"></a>
 
-## ConfigService
+## NodeConfigService
 NodeJS Config Service.
 
 Simplified config management for node applications.
-ConfigService accepts a configuration object of properties
+NodeConfigService accepts a configuration object of properties
 to be defined using the node process env and run time overrides.
 
 
-* [ConfigService](#module_ConfigService)
-    * [.ConfigService#version](#module_ConfigService.ConfigService+version)
-    * [.ConfigService#ConfigService](#module_ConfigService.ConfigService+ConfigService)
-    * [.ConfigService#errors](#module_ConfigService.ConfigService+errors)
-    * [.module.exports](#module_ConfigService.module.exports) : <code>ConfigService</code>
+* [NodeConfigService](#module_ConfigService)
+    * [.NodeConfigService#version](#module_ConfigService.NodeConfigService+version)
+    * [.NodeConfigService#NodeConfigService](#module_ConfigService.NodeConfigService+NodeConfigService)
+    * [.NodeConfigService#errors](#module_ConfigService.NodeConfigService+errors)
+    * [.module.exports](#module_ConfigService.module.exports) : <code>NodeConfigService</code>
     * ["loadEnv"](#module_ConfigService.event_loadEnv)
 
-<a name="module_ConfigService.ConfigService+version"></a>
+<a name="module_ConfigService.NodeConfigService+version"></a>
 
-### ConfigService.ConfigService#version
-The ConfigService version
+### NodeConfigService.NodeConfigService#version
+The NodeConfigService version
 
 #### Example:
 
-    console.log(configService.version); // '1.x.x'
+    console.log(nodeConfigService.version); // '1.x.x'
 
-**Kind**: static property of [<code>ConfigService</code>](#module_ConfigService)
+**Kind**: static property of [<code>NodeConfigService</code>](#module_ConfigService)
 **Api**: public
 **Properties**
 
@@ -220,32 +220,32 @@ The ConfigService version
 | --- |
 | version |
 
-<a name="module_ConfigService.ConfigService+ConfigService"></a>
+<a name="module_ConfigService.NodeConfigService+NodeConfigService"></a>
 
-### ConfigService.ConfigService#ConfigService
-The ConfigService constructor
+### NodeConfigService.NodeConfigService#NodeConfigService
+The NodeConfigService constructor
 
-The exports of the configService module is an instance of this class.
+The exports of the nodeConfigService module is an instance of this class.
 
 #### Example:
 
-    const appConfig = require('configService');
-    const moduleConfig = new configService.ConfigService();
+    const appConfig = require('nodeConfigService');
+    const moduleConfig = new nodeConfigService.NodeConfigService();
 
-**Kind**: static property of [<code>ConfigService</code>](#module_ConfigService)
+**Kind**: static property of [<code>NodeConfigService</code>](#module_ConfigService)
 **Access**: public
 **Properties**
 
 | Name |
 | --- |
-| ConfigService |
+| NodeConfigService |
 
-<a name="module_ConfigService.ConfigService+errors"></a>
+<a name="module_ConfigService.NodeConfigService+errors"></a>
 
-### ConfigService.ConfigService#errors
+### NodeConfigService.NodeConfigService#errors
 Key and class object map of custom error methods.
 
-**Kind**: static property of [<code>ConfigService</code>](#module_ConfigService)
+**Kind**: static property of [<code>NodeConfigService</code>](#module_ConfigService)
 **Access**: public
 **Properties**
 
@@ -255,10 +255,10 @@ Key and class object map of custom error methods.
 
 <a name="module_ConfigService.module.exports"></a>
 
-### ConfigService.module.exports : <code>ConfigService</code>
-The exports object is an instance of ConfigService.
+### NodeConfigService.module.exports : <code>NodeConfigService</code>
+The exports object is an instance of NodeConfigService.
 
-**Kind**: static property of [<code>ConfigService</code>](#module_ConfigService)
+**Kind**: static property of [<code>NodeConfigService</code>](#module_ConfigService)
 **Access**: public
 <a name="module_ConfigService.event_loadEnv"></a>
 
@@ -267,7 +267,7 @@ Load environment variables into process.env using [dotenv](https://www.npmjs.com
 
 NOTE: Should be placed as early as possible on startup.
 
-**Kind**: event emitted by [<code>ConfigService</code>](#module_ConfigService)
+**Kind**: event emitted by [<code>NodeConfigService</code>](#module_ConfigService)
 
 
 ## Issues
