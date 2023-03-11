@@ -1,5 +1,4 @@
-/** Service Types */
-export type ConfigOnErrorCallback = (...data: any[]) => void;
+/** ConfigPropertyManager  */
 
 export interface ConfigPropertyDefinitionsMap {
     [key: string]: ConfigPropertyOptions;
@@ -12,8 +11,10 @@ export interface ConfigPropertyManagerOptions {
     properties?: ConfigPropertyDefinitionsMap;
     includeDefaults?: boolean;
 }
+export type ConfigPropertyDefinitionsArray = ConfigPropertyOptions[];
 
-// @see https://blog.logrocket.com/writing-constructor-typescript/
+export type ConfigOnErrorCallback = (...data: any[]) => void;
+
 export interface ConfigPropertyManagerConstructor {
     new(options?: ConfigPropertyManagerOptions): ConfigPropertyManagerInterface;
 }
@@ -35,11 +36,15 @@ export interface ConfigPropertyManagerInterface {
     setProperties(propertyOptions: ConfigPropertyDefinitionsMap, resetProperties?: boolean): void;
 }
 
+/** ConfigProperty **/
+export type ConfigPropertyUnparsedValue = string | number | boolean | null;
 
 /**
  * Property Types
  **/
 export type ConfigPropertyParseValueMethod = (value: string) => any;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type ConfigPropertyParsedValue = any;
 
 export interface ConfigPropertyOptions {
     name?: string;
@@ -56,7 +61,6 @@ export interface ConfigPropertyOptions {
     initValue?: any;
 }
 
-// @see https://blog.logrocket.com/writing-constructor-typescript/
 export interface ConfigPropertyConstructor {
     new(name: string, options?: ConfigPropertyOptions): ConfigPropertyInterface;
 }
