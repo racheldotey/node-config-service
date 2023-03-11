@@ -11,9 +11,7 @@ export class NodeConfigService extends ConfigPropertyManager {
 	};
 
 	constructor(options?: ConfigPropertyManagerOptions) {
-		super({
-			...options,
-		});
+		super(options);
 		this.#extraConfigs = { 'default': this };
 	}
 
@@ -23,23 +21,20 @@ export class NodeConfigService extends ConfigPropertyManager {
 	}
 
 	loadEnv(options?: dotenv.DotenvConfigOptions) {
-		if (this.#dotenvLoaded) return;
-
 		// Load environment variables into process.env
 		// @see https://www.npmjs.com/package/dotenv
 		dotenv.config(options);
 		this.#dotenvLoaded = true;
 	}
 
-	getConfig(key: string) {
-		if (key === 'default') return this;
-		return this.#extraConfigs[key] ?? undefined;
-	}
-
 	addConfig(key: string, options?: ConfigPropertyManagerOptions) {
 		if (this.getConfig(key)) throw new Error(`A config named "${key}" is already defined.`);
 		const newConfig = new ConfigPropertyManager(options);
 		return this.#extraConfigs[key] = newConfig;
+	}
+
+	getConfig(key?: string) {
+		return (!key || key === 'default') ? this : this.#extraConfigs[key] ?? undefined;
 	}
 
 	deleteConfig(key: string) {
