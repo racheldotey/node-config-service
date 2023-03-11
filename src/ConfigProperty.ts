@@ -57,21 +57,21 @@ export const ConfigProperty: ConfigPropertyConstructor = class ConfigProperty
             if (typeof options.parse === "function") this.parse = options.parse;
 
             // `isRequired` takes presentence over `required`
-            if (options.hasOwnProperty('isRequired')) this.isRequired = getSafeBoolean(options.isRequired);
-            else if (options.hasOwnProperty('required')) this.isRequired = getSafeBoolean(options.required);
+            if (Object.hasOwn(options, 'isRequired')) this.isRequired = getSafeBoolean(options.isRequired);
+            else if (Object.hasOwn(options, 'required')) this.isRequired = getSafeBoolean(options.required);
 
             // `defaultValue` takes presentence over `default`
-            if (options.hasOwnProperty('defaultValue')) this.defaultValue = options.defaultValue;
-            else if (options.hasOwnProperty('default')) this.defaultValue = options.default;
+            if (Object.hasOwn(options, 'defaultValue')) this.defaultValue = options.defaultValue;
+            else if (Object.hasOwn(options, 'default')) this.defaultValue = options.default;
 
             // `initValue` takes presentence over `value`
-            if (options.hasOwnProperty('initValue')) this.value = options.initValue;
-            else if (options.hasOwnProperty('value')) this.value = options.value;
+            if (Object.hasOwn(options, 'initValue')) this.value = options.initValue;
+            else if (Object.hasOwn(options, 'value')) this.value = options.value;
         }
     }
 
     get isDefined() {
-        return !!(this.#value !== undefined);
+        return Boolean(this.#value !== undefined);
     }
 
     get defaultValue() {
@@ -116,7 +116,7 @@ export const ConfigProperty: ConfigPropertyConstructor = class ConfigProperty
     }
 
     isMatch(find: string): boolean {
-        return !!(find === this.name || find === this.envKey);
+        return Boolean(find === this.name || find === this.envKey);
     }
 
     protected onError(cause: string): void {

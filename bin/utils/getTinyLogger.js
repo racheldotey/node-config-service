@@ -15,10 +15,10 @@ const getTinyLogger = (x = '') => {
         error: (...n) => console.error(R, p, ...n, R),
     };
 
-    const makeChainable = (method, chained) => (...args) => {
+    /* const makeChainable = (method, chained) => (...args) => {
         method(...args);
         return chained;
-    };
+    }; */
 
     return tinyLogger;
 };

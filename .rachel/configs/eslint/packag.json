@@ -79,7 +79,7 @@
 		"tests/",
 		"*.md",
 		"*.config.js",
-		".eslintrc",``
+		".eslintrc",
 		".editorconfig",
 		"tsconfig.json",
 		".markdownlint*"

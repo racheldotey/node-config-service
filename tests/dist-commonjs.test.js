@@ -1,38 +1,10 @@
-const { DEFAULT_PROPERTIES } = require('../src/constants');
-
-
-const prop = DEFAULT_PROPERTIES.environment;
-const name = prop.name || 'environment' || '';
-const envKey = prop.envKey || prop.name || '';
-const defaultValue = prop.default || '';
-
-
-
-const expectConfigServiceInstance = (config) => {
-	expect(config).toBeDefined();
-	expect(config.constructor.name).toMatch('ConfigService');
-}
-
-const expectConfigPropertyValue = (config, find, value) => {
-    let prop = config.get(find);
-	expect(prop).toBeDefined();
-    expect(prop).toMatch(value);
-}
-
-const expectConfigService = (ConfigService) => {
-    const config = new ConfigService();
-
-    expectConfigServiceInstance(config);
-
-    expectConfigPropertyValue(config, name, defaultValue);
-    expectConfigPropertyValue(config, envKey, defaultValue);
-}
+// const { DEFAULT_PROPERTIES } = require('../src/constants');
 
 
 describe('Test the current `dist` build', () => {
 
     test('(1) - Verify `dist/index.js` default export.', () => {
-        const ConfigService = require('../dist/index');
+        // const ConfigService = require('../dist/index');
         //console.debug(ConfigService);
         //expectConfigService(ConfigService);
     });

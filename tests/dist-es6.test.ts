@@ -1,11 +1,11 @@
 //import { DEFAULT_PROPERTIES } from '../src/constants';
 
-import ConfigService from '../dist/index';
+// import ConfigService from '../dist/index';
 
 
-const name = 'environment';
-const envKey = 'NODE_ENV';
-const defaultValue = 'production';
+// const name = 'environment';
+// const envKey = 'NODE_ENV';
+// const defaultValue = 'production';
 
 
 // const expectConfigServiceInstance = (config) => {

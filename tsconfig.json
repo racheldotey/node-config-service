@@ -6,7 +6,7 @@
         "declarationMap": true,
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
-        "lib": ["es2016"],
+        "lib": ["ES2016", "ESNext"],
         "module": "commonjs",
         "noImplicitAny": true,
         "noUnusedLocals": false,

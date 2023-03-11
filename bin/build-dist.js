@@ -12,8 +12,8 @@ const { getPackageRootDir } = require('./utils/getPackageRootDir');
 const { getTinyLogger } = require('./utils/getTinyLogger');
 const getWebpackConfig = require('../webpack.config');
 
-const npmPackage = require('../package.json');
-const tsconfig = require('../tsconfig.json');
+// const npmPackage = require('../package.json');
+// const tsconfig = require('../tsconfig.json');
 
 const tl = getTinyLogger(`  [build-dist]  `);
 tl.info('// -----------------------------------------------');
@@ -42,7 +42,7 @@ const deleteDir = path => {
 };
 
 const runWebpackBuild = async webpackConfig =>
-    new Promise((resolve, reject) => {
+    new Promise((resolve) => {
         tl.info(` - Compiling ${webpackConfig.mode} with webpack.`);
         webpack(webpackConfig, (error, stats) => {
             if (error || stats.hasErrors()) {
