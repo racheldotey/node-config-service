@@ -10,9 +10,10 @@ export class NodeConfigService extends ConfigPropertyManager {
 		[key: string]: ConfigPropertyManagerInterface;
 	};
 
-	constructor(options?: ConfigPropertyManagerOptions) {
+	constructor(options?: ConfigPropertyManagerOptions, envOptions?: dotenv.DotenvConfigOptions) {
 		super(options);
 		this.#extraConfigs = { 'default': this };
+		this.loadEnv(envOptions);
 	}
 
 	init(props?: ConfigPropertyDefinitionsMap, envValues?: { [key: string]: string }) {
