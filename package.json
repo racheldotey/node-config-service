@@ -1,6 +1,6 @@
 {
 	"name": "node-config-service",
-	"version": "1.0.0-0",
+	"version": "1.0.0",
 	"private": false,
 	"keywords": [
 		"config",
@@ -148,8 +148,10 @@
 		"build:watch": "nodemon --watch src -e js,ts,mjs,json --exec \"npm run build\"",
 		"--------------------------------------- NPM publish ---------------------------------------": "",
 		"publish:dry-run": "npm publish --dry-run",
-		"package-prepublish": "npm version minor -m \"Updating node-config-manager version to %s\"",
-		"package-publish": "npm publish --dry-run",
+		"prepublish:safety": "git pull && git status && npm test",
+		"prepublish:build": "npm run build && npm test",
+		"prepublish:version": "npm version minor -m \"Updating node-config-manager version to %s\"",
+		"publish:package": "git push && git push --tags && npm publish",
 		"----------------------------------------- linting -----------------------------------------": "",
 		"lint": "eslint ./ --ignore-path .gitignore",
 		"lint:fix": "eslint ./ --ignore-path .gitignore --fix",
