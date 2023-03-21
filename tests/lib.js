@@ -1,6 +1,6 @@
 
-const keyDefined = `environment`;
-const keyNotDefined = `value-doesnt-exist-as-a-config-property-or-environment-variable`;
+const keyDefined = 'environment';
+const keyNotDefined = 'value-doesnt-exist-as-a-config-property-or-environment-variable';
 
 
 const expectConfigProperty = (property) => {
@@ -49,7 +49,7 @@ const expectConfigService = (service) => {
 };
 
 const testObjectPropertiesToBeDefined = (exported = {}, start = 1) => {
-  var count = 0;
+  let count = 0;
 
   Object.keys(exported).forEach((key, i) => {
     count = i + start;
@@ -62,7 +62,7 @@ const testObjectPropertiesToBeDefined = (exported = {}, start = 1) => {
 };
 
 const testNodeConfigServiceExports = ({ defaultExport, nodeConfigProperty, nodeConfigPropertyManager, nodeConfigService }, start = 1) => {
-  var count = start;
+  let count = start;
 
   test(`(${count++}) - Expect defaultExport to be defined`, () => {
     const service = defaultExport();
@@ -88,7 +88,7 @@ const testNodeConfigServiceExports = ({ defaultExport, nodeConfigProperty, nodeC
 }
 
 const testNodeConfigServiceGetMethod = (nodeConfigService, start = 1) => {
-  var count = start;
+  let count = start;
   let config = nodeConfigService();
 
   test(`(${count++}) - Expect config.get('${keyDefined}') = to be defined`, () => {

@@ -9,7 +9,7 @@ const FORMAT = {
     'timeStamp': 'MMMM Do YYYY, h:mm:ss a'  // October 5th 2022, 12:58:43 pm
 };
 
-var frozen;
+let frozen;
 
 
 const init = (...args) => {

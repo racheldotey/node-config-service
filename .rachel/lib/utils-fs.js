@@ -1,7 +1,7 @@
 const fs = require('fs-extra');
 const path = require('path');
 
-var app_root_dir_path, working_dir;
+let app_root_dir_path, working_dir;
 
 const init = (appRootDir, workingDir) => {
     exports.setAppRootDir(appRootDir);
@@ -45,7 +45,7 @@ const readJson = async (file) => {
 };
 
 const getDirFiles = async (...args) => {
-    var dir = working_dir;
+    let dir = working_dir;
 
     if (args.length) dir = path.join(app_root_dir_path, ...args);
 
@@ -59,7 +59,7 @@ const existsInWorkspace = async (fileName) => {
 
 const readDirSync = (dir, ignore) => {
     const source = 0;
-    var contents = fs.readdirSync(path.join(this.getRootDir(), dir));
+    let contents = fs.readdirSync(path.join(this.getRootDir(), dir));
     if (ignore) contents = contents.filter((file) => file !== ignore);
     return contents.map((file) => {
         return fs.statSync(path + '/' + file).isDirectory();

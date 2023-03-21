@@ -2,7 +2,7 @@ const console = require('./console-extras');
 const fsUtils = require('./utils-fs');
 
 
-var modulePackage = require('../package.json');
+let modulePackage = require('../package.json');
 console.log(modulePackage);
 
 const package = {

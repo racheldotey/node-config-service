@@ -6,7 +6,7 @@
 const getTinyLogger = (x = '') => {
     const R = '\n\r';
     const P = x.toString();
-    var p = x.toString();
+    let p = x.toString();
 
     const tinyLogger = {
         prefix: (x = '') => (p = P + x.toString()),

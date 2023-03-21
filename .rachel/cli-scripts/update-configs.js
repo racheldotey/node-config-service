@@ -23,7 +23,7 @@ const breathe = async (ms = 1500) => await new Promise((resolve) => setTimeout(r
 
     console.info('Creating a backup directory. All versions of your files will be saved there.');
     await breathe();
-	var bin = path.resolve(rootDir, 'rachel', moment().format('YY-MM-DD'));
+	let bin = path.resolve(rootDir, 'rachel', moment().format('YY-MM-DD'));
 
 	// If we've already run once today, be more precise
 	// https://github.com/jprichardson/node-fs-extra/blob/master/docs/pathExists-sync.md

@@ -16,7 +16,7 @@ const auxiliaryComment = `Node-Config-Service v${packageVersion} Copyright(c) 20
 
 
 const extractMode = (env = {}, argv = {}, defaultMode = 'production') => {
-	var mode = defaultMode;
+	let mode = defaultMode;
 	if (argv.mode || argv.nodeEnv || env.mode || env.nodeEnv) {
 		mode = argv.mode ?? argv.nodeEnv ?? env.mode ?? env.nodeEnv;
 	} else {

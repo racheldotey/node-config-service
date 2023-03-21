@@ -90,7 +90,7 @@ const fetchNpmRegistryData = async (opts = {}, allPackages = { packages: [] }) =
 }
 
 const combinePagedData = async (preCombined) => {
-    var combined;
+    let combined;
     const fileName = `${FILE_NAME}_combined.json`;
 
     if (preCombined) {
@@ -107,7 +107,7 @@ const combinePagedData = async (preCombined) => {
 }
 
 const filterRelated = async (combined) => {
-    var filtered;
+    let filtered;
     const fileName = `${FILE_NAME}_filtered.json`;
 
     if (combined) {
@@ -128,7 +128,7 @@ const filterRelated = async (combined) => {
 const update = async ({ throttle, limit, size }) => {
     console.info(`Starting eslint package update process.`);
 
-    var data = await fetchNpmRegistryData({ throttle, limit, size });
+    let data = await fetchNpmRegistryData({ throttle, limit, size });
     data = await combinePagedData(data);
     data = await filterRelated(data);
     return data;

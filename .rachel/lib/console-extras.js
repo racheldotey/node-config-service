@@ -1,4 +1,4 @@
-var logPrefix;
+let logPrefix;
 
 
 const init = prefix => {
