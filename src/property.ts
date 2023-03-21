@@ -52,7 +52,7 @@ type ConfigProperty = {
  * @property {any} parse -  Parse the property (all process .env vars are strings by default)
  * @property {any} #value - Property value
  */
-const newConfigProperty = (name: string, options?: ConfigPropertyOptions): ConfigProperty => {
+const nodeConfigProperty = (name: string, options?: ConfigPropertyOptions): ConfigProperty => {
 
     let defaultValue: ConfigPropertyValue = undefined;
     let propertyValue: ConfigPropertyValue = undefined;
@@ -158,5 +158,5 @@ export {
     ConfigPropertyParseValueMethod,
     ConfigPropertyParsedValue,
     ConfigPropertyValue,
-    newConfigProperty,
+    nodeConfigProperty,
 };

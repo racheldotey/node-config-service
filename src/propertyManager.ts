@@ -2,7 +2,7 @@ import {
     ConfigProperty,
     ConfigPropertyOptions,
     ConfigPropertyParsedValue,
-    newConfigProperty,
+    nodeConfigProperty,
 } from './property';
 import { DEFAULT_PROPERTIES } from './constants';
 
@@ -37,7 +37,7 @@ interface ConfigPropertyManager {
 }
 
 
-const newConfigPropertyManager = (options?: ConfigPropertyManagerOptions): ConfigPropertyManager => {
+const nodeConfigPropertyManager = (options?: ConfigPropertyManagerOptions): ConfigPropertyManager => {
 
     let properties: { [key: string]: ConfigProperty; } = {};
 
@@ -66,7 +66,7 @@ const newConfigPropertyManager = (options?: ConfigPropertyManagerOptions): Confi
         },
 
         addProperty(name: string, options: ConfigPropertyOptions, safeAdd = true): void {
-            const prop = newConfigProperty(name, options);
+            const prop = nodeConfigProperty(name, options);
 
             if (safeAdd && properties[prop.name]) throw new Error(`Can't add new property "${prop.name}", it already exists.`);
 
@@ -80,7 +80,7 @@ const newConfigPropertyManager = (options?: ConfigPropertyManagerOptions): Confi
             Object.entries(propertyOptions).forEach(([key, options]) => {
                 // If `name` is defined use that as the primary search key
                 // otherwise use the object key for the options
-                const prop = newConfigProperty(options.name || key, options);
+                const prop = nodeConfigProperty(options.name || key, options);
                 // Will override existing properties with the same name
                 properties[prop.name] = prop;
             });
@@ -140,5 +140,5 @@ export {
     ConfigPropertyDefinitionsMap,
     ConfigPropertyManager,
     ConfigPropertyManagerOptions,
-    newConfigPropertyManager,
+    nodeConfigPropertyManager,
 };

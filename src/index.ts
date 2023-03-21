@@ -1,11 +1,11 @@
-import { newConfigProperty } from './property';
-import { newConfigPropertyManager } from './propertyManager';
-import { newConfigService } from './configService';
+import { nodeConfigProperty } from './property';
+import { nodeConfigPropertyManager } from './propertyManager';
+import { nodeConfigService } from './configService';
 
 export {
-    newConfigProperty,
-    newConfigPropertyManager,
-    newConfigService,
+    nodeConfigProperty,
+    nodeConfigPropertyManager,
+    nodeConfigService,
 };
 
 export type {
@@ -28,4 +28,4 @@ export type {
 	ConfigService,
 } from './configService';
 
-export default newConfigService;
+export default nodeConfigService;

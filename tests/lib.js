@@ -61,7 +61,7 @@ const testObjectPropertiesToBeDefined = (exported = {}, start = 1) => {
   return count;
 };
 
-const testNodeConfigServiceExports = ({ defaultExport, newConfigProperty, newConfigPropertyManager, newConfigService }, start = 1) => {
+const testNodeConfigServiceExports = ({ defaultExport, nodeConfigProperty, nodeConfigPropertyManager, nodeConfigService }, start = 1) => {
   var count = start;
 
   test(`(${count++}) - Expect defaultExport to be defined`, () => {
@@ -69,27 +69,27 @@ const testNodeConfigServiceExports = ({ defaultExport, newConfigProperty, newCon
     expectConfigService(service);
   });
 
-  test(`(${count++}) - expect { newConfigProperty } to be defined`, () => {
-    const property = newConfigProperty(`anyStringValue`);
+  test(`(${count++}) - expect { nodeConfigProperty } to be defined`, () => {
+    const property = nodeConfigProperty(`anyStringValue`);
     expectConfigProperty(property);
   });
 
-  test(`(${count++}) - expect { newConfigPropertyManager } to be defined`, () => {
-    const manager = newConfigPropertyManager();
+  test(`(${count++}) - expect { nodeConfigPropertyManager } to be defined`, () => {
+    const manager = nodeConfigPropertyManager();
     expectConfigPropertyManager(manager);
   });
 
-  test(`(${count++}) - expect { newConfigService } to be defined`, () => {
-    const service = newConfigService();
+  test(`(${count++}) - expect { nodeConfigService } to be defined`, () => {
+    const service = nodeConfigService();
     expectConfigService(service);
   });
 
   return count;
 }
 
-const testNodeConfigServiceGetMethod = (newConfigService, start = 1) => {
+const testNodeConfigServiceGetMethod = (nodeConfigService, start = 1) => {
   var count = start;
-  let config = newConfigService();
+  let config = nodeConfigService();
 
   test(`(${count++}) - Expect config.get('${keyDefined}') = to be defined`, () => {
     expect(config.get(keyDefined)).toBeDefined();

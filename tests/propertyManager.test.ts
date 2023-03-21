@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { expectConfigPropertyManager } from './lib';
-import { newConfigPropertyManager } from '../src/propertyManager';
+import { nodeConfigPropertyManager } from '../src/propertyManager';
 import type {
   ConfigOnErrorCallback,
   ConfigPropertyDefinitionsArray,
@@ -26,18 +26,18 @@ const propDefs = {
 
 
 describe('Expect "propertyManager" exports to be defined', () => {
-  test('(1) - Expect file exports { newConfigPropertyManager }', () => {
-    expect(newConfigPropertyManager).toBeDefined();
-    expect(typeof newConfigPropertyManager).toBe('function');
+  test('(1) - Expect file exports { nodeConfigPropertyManager }', () => {
+    expect(nodeConfigPropertyManager).toBeDefined();
+    expect(typeof nodeConfigPropertyManager).toBe('function');
   });
 });
 
 
-describe('newConfigPropertyManager()', () => {
+describe('nodeConfigPropertyManager()', () => {
   let manager;
 
   beforeAll(() => {
-    manager = newConfigPropertyManager();
+    manager = nodeConfigPropertyManager();
   });
 
   test('(2) - Expect return value of a Config Property Manager object', () => {
@@ -58,17 +58,17 @@ describe('newConfigPropertyManager()', () => {
   });
 
   test('(4) - Property `properties` (constructor option `properties`)', () => {
-    manager = newConfigPropertyManager({ properties: {} });
+    manager = nodeConfigPropertyManager({ properties: {} });
     expect(manager.length).toBe(Object.keys(DEFAULT_PROPERTIES).length);
     Object.keys(DEFAULT_PROPERTIES).forEach(name => expect(manager.get(name)).toBeDefined());
 
     // Init with default properties
-    manager = newConfigPropertyManager({ properties: DEFAULT_PROPERTIES });
+    manager = nodeConfigPropertyManager({ properties: DEFAULT_PROPERTIES });
     expect(manager.length).toBe(Object.keys(DEFAULT_PROPERTIES).length);
     Object.keys(DEFAULT_PROPERTIES).forEach(name => expect(manager.get(name)).toBeDefined());
 
     // Init with default and defined properties
-    manager = newConfigPropertyManager({ properties: propDefs });
+    manager = nodeConfigPropertyManager({ properties: propDefs });
     expect(manager.length).toBe(Object.keys({ ...DEFAULT_PROPERTIES, ...propDefs }).length);
     Object.keys({ ...DEFAULT_PROPERTIES, ...propDefs }).forEach(name => expect(manager.get(name)).toBeDefined());
     // Reset and set new properties
@@ -84,7 +84,7 @@ describe('newConfigPropertyManager()', () => {
   });
 
   test('(5) - Method `findOne()`', () => {
-    manager = newConfigPropertyManager({ properties: propDefs });
+    manager = nodeConfigPropertyManager({ properties: propDefs });
 
     expect(manager.findOne('foo')).toBeDefined();
     expect(manager.findOne('FOO')).toBeDefined();
@@ -94,7 +94,7 @@ describe('newConfigPropertyManager()', () => {
   });
 
   test('(6) - Method `findSeveral()`', () => {
-    manager = newConfigPropertyManager({ properties: propDefs });
+    manager = nodeConfigPropertyManager({ properties: propDefs });
 
     let found = manager.findSeveral([]);
     expect(found).toBeDefined();
@@ -119,7 +119,7 @@ describe('newConfigPropertyManager()', () => {
   });
 
   test('(7) - Method `get()`', () => {
-    manager = newConfigPropertyManager({ properties: propDefs, includeDefaults: false });
+    manager = nodeConfigPropertyManager({ properties: propDefs, includeDefaults: false });
     expect(manager.length).toBe(Object.keys(propDefs).length);
 
     // String = find()
@@ -145,7 +145,7 @@ describe('newConfigPropertyManager()', () => {
   });
 
   test('(8) - Method `getAll()`', () => {
-    manager = newConfigPropertyManager({ properties: propDefs, includeDefaults: false });
+    manager = nodeConfigPropertyManager({ properties: propDefs, includeDefaults: false });
     const found = manager.getAll();
     expect(Object.keys(found).length).toBe(Object.keys(propDefs).length);
     Object.keys(propDefs).forEach(name => expect(found[name]).toBeDefined());

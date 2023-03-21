@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv';
 
-import { newConfigPropertyManager, ConfigPropertyManager, ConfigPropertyManagerOptions } from './propertyManager';
+import { nodeConfigPropertyManager, ConfigPropertyManager, ConfigPropertyManagerOptions } from './propertyManager';
 
 
 interface ConfigService extends ConfigPropertyManager {
@@ -11,9 +11,9 @@ interface ConfigService extends ConfigPropertyManager {
 }
 
 
-const newConfigService = (options?: ConfigPropertyManagerOptions, envOptions?: dotenv.DotenvConfigOptions): ConfigService => {
+const nodeConfigService = (options?: ConfigPropertyManagerOptions, envOptions?: dotenv.DotenvConfigOptions): ConfigService => {
 
-	const defaultConfig = newConfigPropertyManager(options);
+	const defaultConfig = nodeConfigPropertyManager(options);
 	const extraConfigs: {
 		[key: string]: ConfigPropertyManager;
 	} = { 'default': defaultConfig };
@@ -33,7 +33,7 @@ const newConfigService = (options?: ConfigPropertyManagerOptions, envOptions?: d
 		},
 		addConfig(key: string, options?: ConfigPropertyManagerOptions) {
 			if (this.getConfig(key)) throw new Error(`A config named "${key}" is already defined.`);
-			const newConfig = newConfigPropertyManager(options);
+			const newConfig = nodeConfigPropertyManager(options);
 			return extraConfigs[key] = newConfig;
 		},
 		getConfig(key = 'default'): ConfigPropertyManager | undefined {
@@ -58,5 +58,5 @@ const newConfigService = (options?: ConfigPropertyManagerOptions, envOptions?: d
 
 export {
 	ConfigService,
-	newConfigService,
+	nodeConfigService,
 };

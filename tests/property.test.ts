@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { expectConfigProperty } from './lib';
-import { newConfigProperty } from '../src/property';
+import { nodeConfigProperty } from '../src/property';
 import type {
   ConfigProperty,
   ConfigPropertyOptions,
@@ -17,17 +17,17 @@ const testData = {
 
 
 describe('Expect "property" exports to be defined', () => {
-  test('(1) - Expect file exports { newConfigProperty }', () => {
-    expect(newConfigProperty).toBeDefined();
-    expect(typeof newConfigProperty).toBe('function');
+  test('(1) - Expect file exports { nodeConfigProperty }', () => {
+    expect(nodeConfigProperty).toBeDefined();
+    expect(typeof nodeConfigProperty).toBe('function');
   });
 });
 
-describe('newConfigProperty()', () => {
+describe('nodeConfigProperty()', () => {
   let property: ConfigProperty;
 
   beforeAll(() => {
-    property = newConfigProperty(testData.key);
+    property = nodeConfigProperty(testData.key);
   });
 
   test('(2) - Expect return value of a Config Property object', () => {
@@ -90,19 +90,19 @@ describe('newConfigProperty()', () => {
 
   test('(8) - Properties `name` and `envKey` (description options `name`, `testData.key`, `envKey`)', () => {
     // By default the `envKey` is the same as `testData.key`
-    property = newConfigProperty(testData.key);
+    property = nodeConfigProperty(testData.key);
     expect(property.name).toMatch(testData.key);
     expect(property.envKey).toMatch(testData.key);
 
-    property = newConfigProperty(testData.key, { key: `${testData.key}_key` });
+    property = nodeConfigProperty(testData.key, { key: `${testData.key}_key` });
     expect(property.name).toMatch(testData.key);
     expect(property.envKey).toMatch(`${testData.key}_key`);
 
-    property = newConfigProperty(testData.key, { envKey: `${testData.key}_envKey` });
+    property = nodeConfigProperty(testData.key, { envKey: `${testData.key}_envKey` });
     expect(property.name).toMatch(testData.key);
     expect(property.envKey).toMatch(`${testData.key}_envKey`);
     // `envKey` takes presentence over `testData.key`
-    property = newConfigProperty(testData.key, { envKey: `${testData.key}_envKey`, key: `${testData.key}_key` });
+    property = nodeConfigProperty(testData.key, { envKey: `${testData.key}_envKey`, key: `${testData.key}_key` });
     expect(property.name).toMatch(testData.key);
     expect(property.envKey).toMatch(`${testData.key}_envKey`);
   });
@@ -111,22 +111,22 @@ describe('newConfigProperty()', () => {
     const description = 'Cupcake ipsum dolor sit amet chocolate cake biscuit candy canes chupa chups.';
     const desc = 'Cupcake ipsum dolor sit amet dessert jelly-o lemon drops halvah.';
     // By default the `description` is an empty string
-    property = newConfigProperty(testData.key);
+    property = nodeConfigProperty(testData.key);
     expect(property.description).toMatch('');
 
-    property = newConfigProperty(testData.key, { desc });
+    property = nodeConfigProperty(testData.key, { desc });
     expect(property.description).toMatch(desc);
 
-    property = newConfigProperty(testData.key, { description });
+    property = nodeConfigProperty(testData.key, { description });
     expect(property.description).toMatch(description);
     // `envKey` takes presentence over `testData.key`
-    property = newConfigProperty(testData.key, { description, desc });
+    property = nodeConfigProperty(testData.key, { description, desc });
     expect(property.description).toMatch(description);
   });
 
   test('(10) - Property `isRequired` (constructor options `isRequired`, `required`)', () => {
     // By default the `isRequired` is false
-    property = newConfigProperty(testData.key);
+    property = nodeConfigProperty(testData.key);
     expect(property.isRequired).toBeFalsy();
 
     // Setter
@@ -137,23 +137,23 @@ describe('newConfigProperty()', () => {
     expect(property.isRequired).toBeFalsy();
 
     // Constructor property
-    property = newConfigProperty(testData.key, { isRequired: true });
+    property = nodeConfigProperty(testData.key, { isRequired: true });
     expect(property.isRequired).toBeTruthy();
 
-    property = newConfigProperty(testData.key, { isRequired: false });
+    property = nodeConfigProperty(testData.key, { isRequired: false });
     expect(property.isRequired).toBeFalsy();
 
-    property = newConfigProperty(testData.key, { required: true });
+    property = nodeConfigProperty(testData.key, { required: true });
     expect(property.isRequired).toBeTruthy();
 
-    property = newConfigProperty(testData.key, { required: false });
+    property = nodeConfigProperty(testData.key, { required: false });
     expect(property.isRequired).toBeFalsy();
 
     // `isRequired` takes presentence over `required`
-    property = newConfigProperty(testData.key, { required: true, isRequired: false });
+    property = nodeConfigProperty(testData.key, { required: true, isRequired: false });
     expect(property.isRequired).toBeFalsy();
 
-    property = newConfigProperty(testData.key, { required: false, isRequired: true });
+    property = nodeConfigProperty(testData.key, { required: false, isRequired: true });
     expect(property.isRequired).toBeTruthy();
 
     // Setter
@@ -169,7 +169,7 @@ describe('newConfigProperty()', () => {
     const defaultValue = 'defaultValue - Config option';
     const setterValue = 'property.defaultValue = Set with setter';
     const resetterValue = 'property.defaultValue = RE Set with setter';
-    property = newConfigProperty(testData.key);
+    property = nodeConfigProperty(testData.key);
     expect(property.defaultValue).toBeUndefined();
     expect(property.isRequired).toBeFalsy();
     expect(property.isDefined).toBeFalsy();
@@ -189,17 +189,17 @@ describe('newConfigProperty()', () => {
     expect(property.value).toMatch(setterValue);
 
     // `defaultValue` takes presentence over `default`
-    property = newConfigProperty(testData.key, { defaultValue });
+    property = nodeConfigProperty(testData.key, { defaultValue });
     expect(property.defaultValue).toMatch(defaultValue);
     expect(property.isDefined).toBeTruthy();
     expect(property.value).toMatch(defaultValue);
 
-    property = newConfigProperty(testData.key, { default: value });
+    property = nodeConfigProperty(testData.key, { default: value });
     expect(property.defaultValue).toMatch(value);
     expect(property.isDefined).toBeTruthy();
     expect(property.value).toMatch(value);
 
-    property = newConfigProperty(testData.key, { defaultValue, default: value });
+    property = nodeConfigProperty(testData.key, { defaultValue, default: value });
     expect(property.defaultValue).toMatch(defaultValue);
     expect(property.isDefined).toBeTruthy();
     expect(property.value).toMatch(defaultValue);
@@ -209,7 +209,7 @@ describe('newConfigProperty()', () => {
     const value = 'value - Config option';
     const initValue = 'initValue - Config option';
     const setterValue = 'property.value = Set with setter';
-    property = newConfigProperty(testData.key);
+    property = nodeConfigProperty(testData.key);
     expect(property.defaultValue).toBeUndefined();
     expect(property.isDefined).toBeFalsy();
     expect(property.isRequired).toBeFalsy();
@@ -233,19 +233,19 @@ describe('newConfigProperty()', () => {
     }).toThrow();
 
     // `initValue` takes presentence over `value`
-    property = newConfigProperty(testData.key, { initValue });
+    property = nodeConfigProperty(testData.key, { initValue });
     expect(property.defaultValue).toBeUndefined();
     expect(property.isDefined).toBeTruthy();
     expect(property.isRequired).toBeFalsy();
     expect(property.value).toMatch(initValue);
 
-    property = newConfigProperty(testData.key, { value: value });
+    property = nodeConfigProperty(testData.key, { value: value });
     expect(property.defaultValue).toBeUndefined();
     expect(property.isDefined).toBeTruthy();
     expect(property.isRequired).toBeFalsy();
     expect(property.value).toMatch(value);
 
-    property = newConfigProperty(testData.key, { initValue, value });
+    property = nodeConfigProperty(testData.key, { initValue, value });
     expect(property.defaultValue).toBeUndefined();
     expect(property.isDefined).toBeTruthy();
     expect(property.isRequired).toBeFalsy();
@@ -253,19 +253,19 @@ describe('newConfigProperty()', () => {
   });
 
   test('(13) - Property `isDefined`', () => {
-    property = newConfigProperty(testData.key);
+    property = nodeConfigProperty(testData.key);
     expect(property.isDefined).toBeFalsy();
     property.value = testData.key;
     expect(property.isDefined).toBeTruthy();
     property.unsetValue();
     expect(property.isDefined).toBeFalsy();
-    property = newConfigProperty(testData.key, { defaultValue: testData.key });
+    property = nodeConfigProperty(testData.key, { defaultValue: testData.key });
     expect(property.isDefined).toBeTruthy();
-    property = newConfigProperty(testData.key, { default: testData.key });
+    property = nodeConfigProperty(testData.key, { default: testData.key });
     expect(property.isDefined).toBeTruthy();
-    property = newConfigProperty(testData.key, { initValue: testData.key });
+    property = nodeConfigProperty(testData.key, { initValue: testData.key });
     expect(property.isDefined).toBeTruthy();
-    property = newConfigProperty(testData.key, { value: testData.key });
+    property = nodeConfigProperty(testData.key, { value: testData.key });
     expect(property.isDefined).toBeTruthy();
     property.unsetValue();
     expect(property.isDefined).toBeFalsy();
@@ -275,7 +275,7 @@ describe('newConfigProperty()', () => {
     const key = 'cat';
     const envKey = 'DOG';
 
-    property = newConfigProperty(key, { envKey });
+    property = nodeConfigProperty(key, { envKey });
     expect(property.name).toMatch(key);
     expect(property.envKey).toMatch(envKey);
 
@@ -299,7 +299,7 @@ describe('newConfigProperty()', () => {
     };
     let dataString = JSON.stringify(data);
 
-    property = newConfigProperty(key, { parse });
+    property = nodeConfigProperty(key, { parse });
     expect(property.defaultValue).toBeUndefined();
     expect(property.isDefined).toBeFalsy();
     expect(property.isRequired).toBeFalsy();
@@ -325,7 +325,7 @@ describe('newConfigProperty()', () => {
     dataString = JSON.stringify(data);
 
     // Set with constructor `initValue` and parse
-    property = newConfigProperty(testData.key, { parse, initValue: dataString });
+    property = nodeConfigProperty(testData.key, { parse, initValue: dataString });
     expect(property.isDefined).toBeTruthy();
     expect(property.value).toMatch(dataString);
 
@@ -333,7 +333,7 @@ describe('newConfigProperty()', () => {
     dataString = JSON.stringify(data);
 
     // Set with constructor `defaultValue` and parse
-    property = newConfigProperty(testData.key, { parse, defaultValue: dataString });
+    property = nodeConfigProperty(testData.key, { parse, defaultValue: dataString });
     expect(property.isDefined).toBeTruthy();
     expect(property.defaultValue).toMatch(dataString);
     expect(property.value).toMatch(dataString);

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import defaultExport from '../';
-import { newConfigProperty, newConfigPropertyManager, newConfigService, } from '../';
+import { nodeConfigProperty, nodeConfigPropertyManager, nodeConfigService, } from '../';
 import type {
     ConfigProperty,
     ConfigPropertyOptions,
@@ -25,15 +25,15 @@ let numbering = 1;
 
 describe('Ensure the "package.json" defined entry points (dist & typos) are correct for TypeScript files using es6 import', () => {
     describe('Expect "node package" exports to be defined', () => {
-        numbering = testObjectPropertiesToBeDefined({ defaultExport, newConfigProperty, newConfigPropertyManager, newConfigService }, numbering);
+        numbering = testObjectPropertiesToBeDefined({ defaultExport, nodeConfigProperty, nodeConfigPropertyManager, nodeConfigService }, numbering);
     });
 
     describe('Expect exported methods and interfaces', () => {
-        numbering = testNodeConfigServiceExports({ defaultExport, newConfigProperty, newConfigPropertyManager, newConfigService }, numbering);
+        numbering = testNodeConfigServiceExports({ defaultExport, nodeConfigProperty, nodeConfigPropertyManager, nodeConfigService }, numbering);
     });
 
-    describe('Test newConfigService().get() method', () => {
-        numbering = testNodeConfigServiceGetMethod(newConfigService, numbering);
+    describe('Test nodeConfigService().get() method', () => {
+        numbering = testNodeConfigServiceGetMethod(nodeConfigService, numbering);
     });
 
     describe('Test defaultExport().get() method', () => {

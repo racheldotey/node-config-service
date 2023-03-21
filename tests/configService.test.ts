@@ -1,23 +1,23 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { expectConfigService } from './lib';
-import { newConfigService } from '../src/configService';
+import { nodeConfigService } from '../src/configService';
 import type { ConfigService } from '../src/configService';
 
 
 
 describe('Expect "configService" exports to be defined', () => {
-  test('(1) - Expect file exports { newConfigService }', () => {
-    expect(newConfigService).toBeDefined();
-    expect(typeof newConfigService).toBe('function');
+  test('(1) - Expect file exports { nodeConfigService }', () => {
+    expect(nodeConfigService).toBeDefined();
+    expect(typeof nodeConfigService).toBe('function');
   });
 });
 
 
-describe('newConfigService()', () => {
+describe('nodeConfigService()', () => {
   let service;
 
   beforeAll(() => {
-    service = newConfigService();
+    service = nodeConfigService();
   });
 
   test('(2) - Expect return value of a Config Property Service object', () => {
