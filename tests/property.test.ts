@@ -1,5 +1,12 @@
-import { newConfigProperty } from '../src/property';
 import { expectConfigProperty } from './lib';
+import { newConfigProperty } from '../src/property';
+import type {
+  ConfigProperty,
+  ConfigPropertyOptions,
+  ConfigPropertyParseValueMethod,
+  ConfigPropertyParsedValue,
+  ConfigPropertyValue
+} from '../src/property';
 
 
 const testData = {
@@ -8,8 +15,8 @@ const testData = {
 
 
 
-describe('Expect file exports', () => {
-  test('(1) - { newConfigProperty }', () => {
+describe('Expect "property" exports to be defined', () => {
+  test('(1) - Expect file exports { newConfigProperty }', () => {
     expect(newConfigProperty).toBeDefined();
     expect(typeof newConfigProperty).toBe('function');
   });

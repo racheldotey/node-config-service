@@ -3,7 +3,7 @@ import * as dotenv from 'dotenv';
 import { newConfigPropertyManager, ConfigPropertyManager, ConfigPropertyManagerOptions } from './propertyManager';
 
 
-type ConfigService = {
+interface ConfigService extends ConfigPropertyManager {
 	loadEnv(options?: dotenv.DotenvConfigOptions): void;
 	addConfig(key: string, options?: ConfigPropertyManagerOptions): ConfigPropertyManager;
 	getConfig(key?: string): ConfigPropertyManager | undefined;
@@ -13,13 +13,15 @@ type ConfigService = {
 
 const newConfigService = (options?: ConfigPropertyManagerOptions, envOptions?: dotenv.DotenvConfigOptions): ConfigService => {
 
-	let dotenvLoaded = false;
+	const defaultConfig = newConfigPropertyManager(options);
 	const extraConfigs: {
 		[key: string]: ConfigPropertyManager;
-	} = {};
+	} = { 'default': defaultConfig };
 
+	let dotenvLoaded = false;
 
 	const service: ConfigService = {
+		...defaultConfig,
 		loadEnv(options?: dotenv.DotenvConfigOptions) {
 			// Load environment variables into process.env
 			// @see https://www.npmjs.com/package/dotenv
@@ -45,7 +47,6 @@ const newConfigService = (options?: ConfigPropertyManagerOptions, envOptions?: d
 	};
 
 	service.loadEnv(envOptions);
-	service.addConfig('default', options);
 
 	return service;
 };

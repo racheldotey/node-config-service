@@ -1,10 +1,11 @@
-import { newConfigService } from '../src/configService';
 import { expectConfigService } from './lib';
+import { newConfigService } from '../src/configService';
+import type { ConfigService } from '../src/configService';
 
 
 
-describe('Expect file exports', () => {
-  test('(1) - Expect file export { newConfigService } to be defined', () => {
+describe('Expect "configService" exports to be defined', () => {
+  test('(1) - Expect file exports { newConfigService }', () => {
     expect(newConfigService).toBeDefined();
     expect(typeof newConfigService).toBe('function');
   });

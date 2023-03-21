@@ -18,7 +18,7 @@ type ConfigPropertyManagerOptions = {
     properties?: ConfigPropertyDefinitionsMap;
     includeDefaults?: boolean;
 }
-type ConfigPropertyManager = {
+interface ConfigPropertyManager {
     silenceErrors?: boolean;
     logErrors?: boolean;
     logFunction?: ConfigOnErrorCallback;
@@ -85,7 +85,7 @@ const newConfigPropertyManager = (options?: ConfigPropertyManagerOptions): Confi
             });
         },
 
-        get(find: string | string[] | boolean): ConfigPropertyParsedValue | { [name: string]: ConfigPropertyParsedValue | undefined; } | undefined {
+        get(find: string | string[] | boolean = true): ConfigPropertyParsedValue | { [name: string]: ConfigPropertyParsedValue | undefined; } | undefined {
             if (find === true) return manager.getAll();
             if (typeof find === 'string') return manager.findOne(find);
             if (Array.isArray(find)) return manager.findSeveral(find);

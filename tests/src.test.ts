@@ -1,10 +1,23 @@
-const defaultExport = require('../dist').default;
-const { newConfigProperty, newConfigPropertyManager, newConfigService, } = require('../dist');
-const {
+import defaultExport from '../src';
+import { newConfigProperty, newConfigPropertyManager, newConfigService, } from '../src';
+import type {
+    ConfigProperty,
+    ConfigPropertyOptions,
+    ConfigPropertyParseValueMethod,
+    ConfigPropertyParsedValue,
+    ConfigPropertyValue,
+    ConfigOnErrorCallback,
+    ConfigPropertyDefinitionsArray,
+    ConfigPropertyDefinitionsMap,
+    ConfigPropertyManager,
+    ConfigPropertyManagerOptions,
+    ConfigService,
+} from '../src';
+import {
     testObjectPropertiesToBeDefined,
     testNodeConfigServiceExports,
     testNodeConfigServiceGetMethod
-} = require('./lib');
+} from './lib';
 
 
 let numbering = 1;
@@ -26,3 +39,5 @@ describe('Test defaultExport().get() method', () => {
 });
 
 module.exports = {};
+
+export { };
