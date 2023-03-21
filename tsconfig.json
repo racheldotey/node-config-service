@@ -16,5 +16,5 @@
         "sourceMap": true,
         "target": "es6"
     },
-    "files": ["src/main.ts"]
+    "files": ["src/index.ts"]
 }
