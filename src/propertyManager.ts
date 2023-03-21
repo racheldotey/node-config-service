@@ -47,7 +47,7 @@ const nodeConfigPropertyManager = (options?: ConfigPropertyManagerOptions): Conf
         logFunction: console.error,
 
 
-        init(props?: ConfigPropertyDefinitionsMap, envValues = process.env): ConfigPropertyManager {
+        init(props, envValues = process.env) {
             if (props) manager.setProperties(props);
 
             const processEnv = envValues || {};
@@ -65,7 +65,7 @@ const nodeConfigPropertyManager = (options?: ConfigPropertyManagerOptions): Conf
             throw new Error('Config requested before initialization.');
         },
 
-        addProperty(name: string, options: ConfigPropertyOptions, safeAdd = true): void {
+        addProperty(name, options, safeAdd = true) {
             const prop = nodeConfigProperty(name, options);
 
             if (safeAdd && properties[prop.name]) throw new Error(`Can't add new property "${prop.name}", it already exists.`);
@@ -73,7 +73,7 @@ const nodeConfigPropertyManager = (options?: ConfigPropertyManagerOptions): Conf
             properties[prop.name] = prop;
         },
 
-        setProperties(propertyOptions: ConfigPropertyDefinitionsMap, resetProperties = false): void {
+        setProperties(propertyOptions, resetProperties = false) {
             // Optionally clear default/loaded properties
             if (resetProperties === true) properties = {};
 
@@ -86,7 +86,7 @@ const nodeConfigPropertyManager = (options?: ConfigPropertyManagerOptions): Conf
             });
         },
 
-        get(find: string | string[] | boolean = true): ConfigPropertyParsedValue | { [name: string]: ConfigPropertyParsedValue | undefined; } | undefined {
+        get(find = true) {
             if (find === true) return manager.getAll();
             if (typeof find === 'string') return manager.findOne(find);
             if (Array.isArray(find)) return manager.findSeveral(find);
@@ -94,19 +94,19 @@ const nodeConfigPropertyManager = (options?: ConfigPropertyManagerOptions): Conf
             throw new Error('Bad config get request. Check your parameters and try again.');
         },
 
-        getAll(): { [name: string]: ConfigPropertyParsedValue | undefined; } {
+        getAll() {
             return Object.fromEntries(
                 Object.values(properties).map((prop: ConfigProperty) => [prop.name, prop.value])
             );
         },
 
-        findOne(find: string): ConfigPropertyParsedValue | undefined {
+        findOne(find) {
             const found = properties?.[find] ||
                 Object.values(properties).find((prop: ConfigProperty) => prop.isMatch(find));
             return (found) ? found.value : undefined;
         },
 
-        findSeveral(find: string[]): { [name: string]: ConfigPropertyParsedValue | undefined; } {
+        findSeveral(find) {
             return Object.fromEntries(
                 find.map(name => {
                     const value = manager.findOne(name);

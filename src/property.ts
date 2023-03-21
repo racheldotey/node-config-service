@@ -6,7 +6,7 @@ type ConfigPropertyValue = any;
 type ConfigPropertyParsedValue = any;
 type ConfigPropertyParseValueMethod = (value: ConfigPropertyValue) => ConfigPropertyParsedValue;
 type ConfigPropertyOptions = {
-    name: string;
+    name?: string;
     key?: string;
     envKey?: string;
     desc?: string;
@@ -126,8 +126,8 @@ const nodeConfigProperty = (name: string, options?: ConfigPropertyOptions): Conf
     // Optional parameters
     if (options) {
         // `options.name` takes presentence over `name`
-        property.name = `${options.name}` || property.name;
-        property.envKey = `${options.name}`;
+        property.name = options.name ?? property.name;
+        property.envKey = `${property.name}`;
         // `envKey` takes presentence over `key`
         property.envKey = options.envKey || options.key || property.envKey;
         // `description` takes presentence over `desc`

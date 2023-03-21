@@ -14,20 +14,6 @@ import {
 
 
 interface ConfigService extends ConfigPropertyManager {
-	silenceErrors?: boolean;
-	logErrors?: boolean;
-	logFunction?: ConfigOnErrorCallback;
-    init(props?: ConfigPropertyDefinitionsMap, envValues?:  NodeJS.ProcessEnv | { [key: string]: string }): ConfigPropertyManager;
-	get length(): number;
-	get properties(): { [key: string]: ConfigProperty; };
-	addProperty(name: string, options: ConfigPropertyOptions, safeAdd?: boolean): void;
-	setProperties(propertyOptions: ConfigPropertyDefinitionsMap, resetProperties?: boolean): void;
-	get(find?: string | string[] | boolean): ConfigPropertyParsedValue | { [name: string]: ConfigPropertyParsedValue | undefined; } | undefined;
-	getAll(): { [name: string]: ConfigPropertyParsedValue | undefined; };
-	findOne(find: string): ConfigPropertyParsedValue | undefined;
-	findSeveral(names: string[]): {
-		[name: string]: ConfigPropertyParsedValue | undefined;
-	};
 	loadEnv(options?: dotenv.DotenvConfigOptions): void;
 	addConfig(key: string, options?: ConfigPropertyManagerOptions): ConfigPropertyManager;
 	getConfig(key?: string): ConfigPropertyManager | undefined;
@@ -47,7 +33,7 @@ const nodeConfigService = (options?: ConfigPropertyManagerOptions, envOptions?: 
 
 	const service: ConfigService = {
 		...defaultConfig,
-		loadEnv(options?: dotenv.DotenvConfigOptions) {
+		loadEnv(options) {
 			if (dotenvLoaded && JSON.stringify(dotenvOptions) === JSON.stringify(options)) return;
 			// Load environment variables into process.env
 			// @see https://www.npmjs.com/package/dotenv
@@ -55,7 +41,7 @@ const nodeConfigService = (options?: ConfigPropertyManagerOptions, envOptions?: 
 			dotenvOptions = options;
 			dotenvLoaded = true;
 		},
-		addConfig(key: string, options?: ConfigPropertyManagerOptions) {
+		addConfig(key, options) {
 			if (service.getConfig(key)) throw new Error(`A config named "${key}" is already defined.`);
 			const newConfig = nodeConfigPropertyManager(options);
 			return extraConfigs[key] = newConfig;
@@ -63,7 +49,7 @@ const nodeConfigService = (options?: ConfigPropertyManagerOptions, envOptions?: 
 		getConfig(key = 'default'): ConfigPropertyManager | undefined {
 			return extraConfigs[key] ?? undefined;
 		},
-		deleteConfig(key: string) {
+		deleteConfig(key) {
 			if (key === 'default') throw new Error("Cannot delete default config.");
 			if (extraConfigs[key]) {
 				delete extraConfigs[key];
