@@ -1,16 +1,30 @@
-const defaultExport = require('../dist').default;
-const { newConfigProperty, newConfigPropertyManager, newConfigService, } = require('../dist');
-const {
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import defaultExport from '../';
+import { newConfigProperty, newConfigPropertyManager, newConfigService, } from '../';
+import type {
+    ConfigProperty,
+    ConfigPropertyOptions,
+    ConfigPropertyParseValueMethod,
+    ConfigPropertyParsedValue,
+    ConfigPropertyValue,
+    ConfigOnErrorCallback,
+    ConfigPropertyDefinitionsArray,
+    ConfigPropertyDefinitionsMap,
+    ConfigPropertyManager,
+    ConfigPropertyManagerOptions,
+    ConfigService,
+} from '../';
+import {
     testObjectPropertiesToBeDefined,
     testNodeConfigServiceExports,
     testNodeConfigServiceGetMethod
-} = require('./lib');
+} from './lib';
 
 
 let numbering = 1;
 
-describe('Ensure the "/dist" exports are correct using commonjs "require" methods', () => {
-    describe('Expect "dist" exports to be defined', () => {
+describe('Ensure the "package.json" defined entry points (dist & typos) are correct for TypeScript files using es6 import', () => {
+    describe('Expect "node package" exports to be defined', () => {
         numbering = testObjectPropertiesToBeDefined({ defaultExport, newConfigProperty, newConfigPropertyManager, newConfigService }, numbering);
     });
 

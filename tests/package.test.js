@@ -1,5 +1,5 @@
-const defaultExport = require('../dist').default;
-const { newConfigProperty, newConfigPropertyManager, newConfigService, } = require('../dist');
+const defaultExport = require('../').default;
+const { newConfigProperty, newConfigPropertyManager, newConfigService, } = require('../');
 const {
     testObjectPropertiesToBeDefined,
     testNodeConfigServiceExports,
@@ -9,8 +9,8 @@ const {
 
 let numbering = 1;
 
-describe('Ensure the "/dist" exports are correct using commonjs "require" methods', () => {
-    describe('Expect "dist" exports to be defined', () => {
+describe('Ensure the "package.json" defined entry points (dist) is correct for JavaScript files using commonjs require()', () => {
+    describe('Expect "node package" exports to be defined', () => {
         numbering = testObjectPropertiesToBeDefined({ defaultExport, newConfigProperty, newConfigPropertyManager, newConfigService }, numbering);
     });
 
