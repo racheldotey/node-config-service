@@ -54,6 +54,7 @@ const nodeConfigService = (options?: ConfigPropertyManagerOptions, envOptions?: 
 	return service;
 };
 
+nodeConfigService.init = nodeConfigService;
 
 
 export {
