@@ -40,7 +40,7 @@ const nodeConfigService = (options?: ConfigPropertyManagerOptions, envOptions?: 
 	const defaultConfig = nodeConfigPropertyManager(options);
 	const extraConfigs: {
 		[key: string]: ConfigPropertyManager;
-	} = { 'default': defaultConfig };
+	} = {};
 
 	let dotenvLoaded = false;
 	let dotenvOptions: dotenv.DotenvConfigOptions | undefined = undefined;
@@ -56,7 +56,7 @@ const nodeConfigService = (options?: ConfigPropertyManagerOptions, envOptions?: 
 			dotenvLoaded = true;
 		},
 		addConfig(key: string, options?: ConfigPropertyManagerOptions) {
-			if (this.getConfig(key)) throw new Error(`A config named "${key}" is already defined.`);
+			if (service.getConfig(key)) throw new Error(`A config named "${key}" is already defined.`);
 			const newConfig = nodeConfigPropertyManager(options);
 			return extraConfigs[key] = newConfig;
 		},
@@ -73,6 +73,7 @@ const nodeConfigService = (options?: ConfigPropertyManagerOptions, envOptions?: 
 		}
 	};
 
+	extraConfigs.default = service;
 	service.loadEnv(envOptions);
 
 	return service;

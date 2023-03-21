@@ -23,7 +23,7 @@ interface ConfigPropertyManager {
     silenceErrors?: boolean;
     logErrors?: boolean;
     logFunction?: ConfigOnErrorCallback;
-    init(props?: ConfigPropertyDefinitionsMap, envValues?: { [key: string]: string }): ConfigPropertyManager;
+    init(props?: ConfigPropertyDefinitionsMap, envValues?:  NodeJS.ProcessEnv | { [key: string]: string }): ConfigPropertyManager;
     get length(): number;
     get properties(): { [key: string]: ConfigProperty; };
     addProperty(name: string, options: ConfigPropertyOptions, safeAdd?: boolean): void;
@@ -47,12 +47,12 @@ const nodeConfigPropertyManager = (options?: ConfigPropertyManagerOptions): Conf
         logFunction: console.error,
 
 
-        init(props?: ConfigPropertyDefinitionsMap, envValues?: { [key: string]: string }): ConfigPropertyManager {
+        init(props?: ConfigPropertyDefinitionsMap, envValues = process.env): ConfigPropertyManager {
             if (props) manager.setProperties(props);
 
             const processEnv = envValues || {};
             Object.values(properties).forEach((prop: ConfigProperty) => prop.setValue(processEnv));
-            return this;
+            return manager;
         },
 
         get length() {
@@ -125,7 +125,7 @@ const nodeConfigPropertyManager = (options?: ConfigPropertyManagerOptions): Conf
     if (options?.includeDefaults !== false) manager.setProperties({ ...DEFAULT_PROPERTIES });
 
     if (options?.properties) {
-        manager.setProperties(options.properties);
+        manager.init(options.properties);
     }
 
 
