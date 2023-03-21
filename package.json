@@ -30,7 +30,7 @@
 	},
 	"type": "commonjs",
 	"main": "./dist/index.min.js",
-	"types": "./dist/index.d.ts",
+	"types": "./types/index.d.ts",
 	"files": [
 		"dist"
 	],

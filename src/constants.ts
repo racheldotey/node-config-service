@@ -1,5 +1,4 @@
-import { ConfigPropertyManagerOptions, ConfigPropertyDefinitionsMap } from './types';
-
+import { ConfigPropertyManagerOptions, ConfigPropertyDefinitionsMap } from './propertyManager';
 
 
 const DEFAULT_PROPERTIES: ConfigPropertyDefinitionsMap = {

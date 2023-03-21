@@ -1,5 +1,6 @@
-import { DEFAULT_PROPERTIES } from './constants';
-import { newConfigPropertyManager } from './propertyManager';
+import { DEFAULT_PROPERTIES } from '../src/constants';
+import { newConfigPropertyManager } from '../src/propertyManager';
+import { expectConfigPropertyManager } from './lib';
 
 const prop = DEFAULT_PROPERTIES.environment;
 prop.parse = (value: string) => value.toString().toLowerCase();
@@ -15,28 +16,10 @@ const propDefs = {
 }
 
 
-const expectConfigPropertyManager = (manager: any) => {
-  expect(manager).toBeDefined();
-  // Properties
-  expect(manager).toHaveProperty('silenceErrors');
-  expect(manager).toHaveProperty('logErrors');
-  expect(manager).toHaveProperty('logFunction');
-  // Setters Getters
-  expect(typeof manager.length).toBe('number');
-  expect(typeof manager.properties).toBe('object');
-  // Methods
-  expect(typeof manager.addProperty).toBe('function');
-  expect(typeof manager.setProperties).toBe('function');
-  expect(typeof manager.get).toBe('function');
-  expect(typeof manager.getAll).toBe('function');
-  expect(typeof manager.findOne).toBe('function');
-  expect(typeof manager.findSeveral).toBe('function');
-};
-
 
 
 describe('Expect file exports', () => {
-  it('(1) - Expect file exports { newConfigPropertyManager }', () => {
+  test('(1) - Expect file exports { newConfigPropertyManager }', () => {
     expect(newConfigPropertyManager).toBeDefined();
     expect(typeof newConfigPropertyManager).toBe('function');
   });
@@ -50,7 +33,7 @@ describe('newConfigPropertyManager()', () => {
     manager = newConfigPropertyManager();
   });
 
-  it('(2) - Expect return value of a Config Property Manager object', () => {
+  test('(2) - Expect return value of a Config Property Manager object', () => {
     expectConfigPropertyManager(manager);
   });
 

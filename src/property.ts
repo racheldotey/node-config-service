@@ -32,9 +32,7 @@ type ConfigProperty = {
         [key: string]: string;
     };
     set defaultValue(payload: ConfigPropertyValue);
-    get value(): {
-        [key: string]: string;
-    };
+    get value(): ConfigPropertyParsedValue;
     set value(payload: ConfigPropertyValue);
     isMatch(find: string): boolean;
     setValue(envVars: NodeJS.ProcessEnv | { [key: string]: string }): void;

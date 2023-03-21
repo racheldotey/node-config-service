@@ -1,34 +1,15 @@
-import {
-  ConfigPropertyInterface,
-  ConfigPropertyOptions,
-  ConfigPropertyParseValueMethod,
-  ConfigPropertyParsedValue,
-  newConfigProperty,
-} from './property';
+import { newConfigProperty } from '../src/property';
+import { expectConfigProperty } from './lib';
 
 
 const testData = {
   key: 'bird'
 };
 
-const expectConfigProperty = (property: any) => {
-  expect(property).toBeDefined();
-  // Properties
-  expect(property).toHaveProperty('name');
-  expect(property).toHaveProperty('envKey');
-  expect(property).toHaveProperty('description');
-  expect(property).toHaveProperty('parse');
-  expect(property).toHaveProperty('isRequired');
-  // Setters Getters
-  expect(typeof property.isDefined).toBe('boolean');
-  // Methods
-  expect(typeof property.setValue).toBe('function');
-  expect(typeof property.isMatch).toBe('function');
-};
 
 
 describe('Expect file exports', () => {
-  it('(1) - { newConfigProperty }', () => {
+  test('(1) - { newConfigProperty }', () => {
     expect(newConfigProperty).toBeDefined();
     expect(typeof newConfigProperty).toBe('function');
   });
@@ -41,7 +22,7 @@ describe('newConfigProperty()', () => {
     property = newConfigProperty(testData.key);
   });
 
-  it('(2) - Expect return value of a Config Property object', () => {
+  test('(2) - Expect return value of a Config Property object', () => {
     expectConfigProperty(property);
   });
 
@@ -320,7 +301,7 @@ describe('newConfigProperty()', () => {
     property.defaultValue = dataString;
     expect(property.isDefined).toBeTruthy();
     expect(property.defaultValue).toMatch(dataString);
-    expect(JSON.stringify(property.value)).toMatch(dataString);
+    expect(property.value).toMatch(dataString);
 
     const lastDataString = '' + dataString;
     data.flavor = 'Chocolate';
@@ -338,7 +319,7 @@ describe('newConfigProperty()', () => {
     // Set with constructor `initValue` and parse
     property = newConfigProperty(testData.key, { parse, initValue: dataString });
     expect(property.isDefined).toBeTruthy();
-    expect(JSON.stringify(property.value)).toMatch(dataString);
+    expect(property.value).toMatch(dataString);
 
     data.topping = 'Sprinkles';
     dataString = JSON.stringify(data);
@@ -347,6 +328,6 @@ describe('newConfigProperty()', () => {
     property = newConfigProperty(testData.key, { parse, defaultValue: dataString });
     expect(property.isDefined).toBeTruthy();
     expect(property.defaultValue).toMatch(dataString);
-    expect(JSON.stringify(property.value)).toMatch(dataString);
+    expect(property.value).toMatch(dataString);
   });
 });

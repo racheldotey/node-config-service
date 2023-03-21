@@ -1,30 +1,50 @@
-// const { DEFAULT_PROPERTIES } = require('../src/constants');
+const defaultExport = require('../dist');
+const { newConfigProperty, newConfigPropertyManager, newConfigService, } = require('../dist');
+const {
+    expectConfigService,
+    expectConfigProperty,
+    expectConfigPropertyManager
+} = require('./lib');
 
 
-describe('Test the current `dist` build', () => {
-
-    test('(1) - Verify `dist/index.js` default export.', () => {
-        // const NodeConfigService = require('../dist/index');
-        //console.debug(NodeConfigService);
-        //expectConfigService(NodeConfigService);
+describe('Expect "dist" exports to be defined', () => {
+    test('(1) - Expect defaultExport to be defined', () => {
+        expect(defaultExport).toBeDefined();
     });
 
-    /* test('(2) - Verify `dist/index.js` named exports.', () => {
-        const { NodeConfigService } = require('../dist/index.js');
-        console.debug(NodeConfigService);
-        //expectConfigService(NodeConfigService);
-    }); */
-
-    /* test('(3) - Verify `dist/index.min.js` default export.', () => {
-        const NodeConfigService = require('../dist/index.min.js');
-        expectConfigService(NodeConfigService);
+    test('(2) - expect { newConfigProperty } to be defined', () => {
+        expect(newConfigProperty).toBeDefined();
     });
 
-    test('(4) - Verify `dist/index.min.js` exports.', () => {
-        const { NodeConfigService } = require('../dist/index.min.js');
-        expectConfigService(NodeConfigService);
-    }); */
+    test('(3) - expect { newConfigPropertyManager } to be defined', () => {
+        expect(newConfigPropertyManager).toBeDefined();
+    });
 
+    test('(4) - expect { newConfigService } to be defined', () => {
+        expect(newConfigService).toBeDefined();
+    });
+});
+
+describe('Expect exported methods and interfaces', () => {
+    test('(5) - Expect defaultExport to be defined', () => {
+        const service = defaultExport();
+        expectConfigService(service);
+    });
+
+    test('(6) - expect { newConfigProperty } to be defined', () => {
+        const property = newConfigProperty('anyStringValue');
+        expectConfigProperty(property);
+    });
+
+    test('(7) - expect { newConfigPropertyManager } to be defined', () => {
+        const manager = newConfigPropertyManager();
+        expectConfigPropertyManager(manager);
+    });
+
+    test('(8) - expect { newConfigService } to be defined', () => {
+        const service = newConfigService();
+        expectConfigService(service);
+    });
 });
 
 module.exports = {};
