@@ -1,9 +1,33 @@
 import * as dotenv from 'dotenv';
-
-import { nodeConfigPropertyManager, ConfigPropertyManager, ConfigPropertyManagerOptions } from './propertyManager';
+import {
+	ConfigProperty,
+	ConfigPropertyOptions,
+	ConfigPropertyParsedValue
+} from './property';
+import {
+	nodeConfigPropertyManager,
+	ConfigOnErrorCallback,
+	ConfigPropertyDefinitionsMap,
+	ConfigPropertyManager,
+	ConfigPropertyManagerOptions
+} from './propertyManager';
 
 
 interface ConfigService extends ConfigPropertyManager {
+	silenceErrors?: boolean;
+	logErrors?: boolean;
+	logFunction?: ConfigOnErrorCallback;
+	init(props?: ConfigPropertyDefinitionsMap, envValues?: { [key: string]: string }): ConfigPropertyManager;
+	get length(): number;
+	get properties(): { [key: string]: ConfigProperty; };
+	addProperty(name: string, options: ConfigPropertyOptions, safeAdd?: boolean): void;
+	setProperties(propertyOptions: ConfigPropertyDefinitionsMap, resetProperties?: boolean): void;
+	get(find: string | string[] | boolean): ConfigPropertyParsedValue | { [name: string]: ConfigPropertyParsedValue | undefined; } | undefined;
+	getAll(): { [name: string]: ConfigPropertyParsedValue | undefined; };
+	findOne(find: string): ConfigPropertyParsedValue | undefined;
+	findSeveral(names: string[]): {
+		[k: string]: ConfigPropertyParsedValue | undefined;
+	};
 	loadEnv(options?: dotenv.DotenvConfigOptions): void;
 	addConfig(key: string, options?: ConfigPropertyManagerOptions): ConfigPropertyManager;
 	getConfig(key?: string): ConfigPropertyManager | undefined;
@@ -53,8 +77,6 @@ const nodeConfigService = (options?: ConfigPropertyManagerOptions, envOptions?: 
 
 	return service;
 };
-
-nodeConfigService.init = nodeConfigService;
 
 
 export {
