@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
     ConfigProperty,
     ConfigPropertyOptions,
@@ -28,10 +29,10 @@ interface ConfigPropertyManager {
     get properties(): { [key: string]: ConfigProperty; };
     addProperty(name: string, options: ConfigPropertyOptions, safeAdd?: boolean): void;
     setProperties(propertyOptions: ConfigPropertyDefinitionsMap, resetProperties?: boolean): void;
-    get(find?: string | string[] | boolean): ConfigPropertyParsedValue | { [name: string]: ConfigPropertyParsedValue | undefined; } | undefined;
-    getAll(): { [name: string]: ConfigPropertyParsedValue | undefined; };
-    findOne(find: string): ConfigPropertyParsedValue | undefined;
-    findSeveral(names: string[]): {
+    get(find?: string | string[] | boolean, throwIfUnset?: boolean): ConfigPropertyParsedValue | { [name: string]: ConfigPropertyParsedValue | undefined; } | undefined;
+    getAll(throwIfUnset?: boolean): { [name: string]: ConfigPropertyParsedValue | undefined; };
+    findOne(find: string, throwIfUnset?: boolean): ConfigPropertyParsedValue | undefined;
+    findSeveral(names: string[], throwIfUnset?: boolean): {
         [name: string]: ConfigPropertyParsedValue | undefined;
     };
 }
@@ -86,27 +87,27 @@ const nodeConfigPropertyManager = (options?: ConfigPropertyManagerOptions): Conf
             });
         },
 
-        get(find = true) {
-            if (find === true) return manager.getAll();
-            if (typeof find === 'string') return manager.findOne(find);
-            if (Array.isArray(find)) return manager.findSeveral(find);
+        get(find = true, throwIfUnset) {
+            if (find === true) return manager.getAll(throwIfUnset);
+            if (typeof find === 'string') return manager.findOne(find, throwIfUnset);
+            if (Array.isArray(find)) return manager.findSeveral(find, throwIfUnset);
 
             throw new Error('Bad config get request. Check your parameters and try again.');
         },
 
-        getAll() {
+        getAll(_throwIfUnset) {
             return Object.fromEntries(
                 Object.values(properties).map((prop: ConfigProperty) => [prop.name, prop.value])
             );
         },
 
-        findOne(find) {
+        findOne(find, _throwIfUnset) {
             const found = properties?.[find] ||
                 Object.values(properties).find((prop: ConfigProperty) => prop.isMatch(find));
             return (found) ? found.value : undefined;
         },
 
-        findSeveral(find) {
+        findSeveral(find, _throwIfUnset) {
             return Object.fromEntries(
                 find.map(name => {
                     const value = manager.findOne(name);
