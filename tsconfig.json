@@ -14,7 +14,8 @@
         "noUnusedParameters": true,
         "outDir": "./types",
         "sourceMap": true,
-        "target": "es6"
+        "target": "es6",
+        "baseUrl": "."
     },
     "files": ["src/index.ts"]
 }
