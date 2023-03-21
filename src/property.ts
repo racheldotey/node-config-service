@@ -1,5 +1,46 @@
-import { ConfigPropertyOptions } from './types';
 import { getSafeBoolean } from './utils/getSafeBoolean';
+
+
+
+type ConfigPropertyValue = any;
+type ConfigPropertyParsedValue = any;
+type ConfigPropertyParseValueMethod = (value: ConfigPropertyValue) => ConfigPropertyParsedValue;
+type ConfigPropertyOptions = {
+    name?: string;
+    key?: string;
+    envKey?: string;
+    desc?: string;
+    description?: string;
+    default?: string;
+    defaultValue?: string;
+    required?: boolean;
+    isRequired?: boolean;
+    parse?: ConfigPropertyParseValueMethod;
+    value?: any;
+    initValue?: any;
+}
+type ConfigProperty = {
+    name: string;
+    envKey: string;
+    description: string;
+    parse: ConfigPropertyParseValueMethod;
+    isRequired: boolean;
+    errors?: Error[];
+
+    get isDefined(): boolean;
+    get defaultValue(): {
+        [key: string]: string;
+    };
+    set defaultValue(payload: ConfigPropertyValue);
+    get value(): {
+        [key: string]: string;
+    };
+    set value(payload: ConfigPropertyValue);
+    isMatch(find: string): boolean;
+    setValue(envVars: NodeJS.ProcessEnv | { [key: string]: string }): void;
+    unsetValue(): void;
+}
+
 
 /**
  * A single property value for the config.
@@ -13,45 +54,49 @@ import { getSafeBoolean } from './utils/getSafeBoolean';
  * @property {any} parse -  Parse the property (all process .env vars are strings by default)
  * @property {any} #value - Property value
  */
-const newConfigProperty = (name: string, options?: ConfigPropertyOptions) => {
+const newConfigProperty = (name: string, options?: ConfigPropertyOptions): ConfigProperty => {
 
-    let defaultValue = undefined;
-    let value = undefined;
+    let defaultValue: ConfigPropertyValue = undefined;
+    let propertyValue: ConfigPropertyValue = undefined;
 
-    const property = {
+    const property: ConfigProperty = {
         name: `${name}`,
         envKey: `${name}`,
         description: '',
-        parse: (value: any): any => value,
+        parse: (value: ConfigPropertyValue): ConfigPropertyParsedValue => value,
         isRequired: false,
         errors: [],
 
         get isDefined() {
-            return Boolean(value !== undefined);
+            return Boolean(propertyValue !== undefined);
         },
 
         get defaultValue() {
             return defaultValue;
         },
 
-        set defaultValue(payload: any) {
+        set defaultValue(payload: ConfigPropertyValue) {
             defaultValue = payload;
-            if (!property.isDefined) property.value = property.defaultValue;
+            if (!property.isDefined) propertyValue = property.defaultValue;
         },
 
         get value() {
             if (!property.isDefined && property.isRequired) {
-                return property.onError('Value isRequired and was requested before it was set.');
+                return onError('Value isRequired and was requested before it was set.');
             }
-            return value;
+            return propertyValue;
         },
 
-        set value(payload: any) {
-            value = property.parse(payload);
+        set value(payload: ConfigPropertyValue) {
+            propertyValue = property.parse(payload);
         },
 
-        setValue(envVars: { [key: string]: string }): void {
-            let value = property.defaultValue;
+        isMatch(find: string): boolean {
+            return Boolean(find === property.name || find === property.envKey);
+        },
+
+        setValue(envVars: NodeJS.ProcessEnv | { [key: string]: string }): void {
+            let value: ConfigPropertyValue = property.defaultValue;
 
             // Is the property set in the environment
             if (property.envKey && envVars[property.envKey]) {
@@ -61,30 +106,26 @@ const newConfigProperty = (name: string, options?: ConfigPropertyOptions) => {
             }
 
             if (value) {
-                property.value = value;
+                propertyValue = value;
             } else if (property.isRequired) {
-                return property.onError('Value isRequired but could not be set.');
+                return onError('Value isRequired but could not be set.');
             }
         },
 
         unsetValue(): void {
-            value = undefined;
+            propertyValue = undefined;
         },
-
-        isMatch(find: string): boolean {
-            return Boolean(find === property.name || find === property.envKey);
-        },
-
-        onError(cause: string): void {
-            const message = `${property.constructor.name} "${property.name}": ${cause}`;
-            if (!property.errors) property.errors = [];
-
-            const error = new Error(message);
-            //property.errors.push(error);
-
-            throw error;
-        }
     };
+
+    const onError = (cause: string): void => {
+        const message = `${property.constructor.name} "${property.name}": ${cause}`;
+        if (!property.errors) property.errors = [];
+
+        const error = new Error(message);
+        //property.errors.push(error);
+
+        throw error;
+    }
 
     // Optional parameters
     if (options) {
@@ -104,11 +145,20 @@ const newConfigProperty = (name: string, options?: ConfigPropertyOptions) => {
         else if (Object.hasOwn(options, 'default')) property.defaultValue = options.default;
 
         // `initValue` takes presentence over `value`
-        if (Object.hasOwn(options, 'initValue')) property.value = options.initValue;
-        else if (Object.hasOwn(options, 'value')) property.value = options.value;
+        if (Object.hasOwn(options, 'initValue')) propertyValue = options.initValue;
+        else if (Object.hasOwn(options, 'value')) propertyValue = options.value;
     }
 
     return property;
 };
 
-export { newConfigProperty }
+
+
+export {
+    ConfigProperty,
+    ConfigPropertyOptions,
+    ConfigPropertyParseValueMethod,
+    ConfigPropertyParsedValue,
+    ConfigPropertyValue,
+    newConfigProperty,
+};
