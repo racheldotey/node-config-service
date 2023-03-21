@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import defaultExport from '../src';
 import { newConfigProperty, newConfigPropertyManager, newConfigService, } from '../src';
 import type {

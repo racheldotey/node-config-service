@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { expectConfigService } from './lib';
 import { newConfigService } from '../src/configService';
 import type { ConfigService } from '../src/configService';

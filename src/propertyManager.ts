@@ -10,6 +10,7 @@ import { DEFAULT_PROPERTIES } from './constants';
 
 type ConfigPropertyDefinitionsArray = ConfigPropertyOptions[];
 type ConfigPropertyDefinitionsMap = { [key: string]: ConfigPropertyOptions; }
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type ConfigOnErrorCallback = (...data: any[]) => void;
 type ConfigPropertyManagerOptions = {
     silenceErrors?: boolean;

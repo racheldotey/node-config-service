@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { expectConfigProperty } from './lib';
 import { newConfigProperty } from '../src/property';
 import type {
@@ -23,7 +24,7 @@ describe('Expect "property" exports to be defined', () => {
 });
 
 describe('newConfigProperty()', () => {
-  let property;
+  let property: ConfigProperty;
 
   beforeAll(() => {
     property = newConfigProperty(testData.key);
@@ -290,9 +291,9 @@ describe('newConfigProperty()', () => {
 
   test('(15) - Property and Method `parse` (constructor options `parse`)', () => {
     const key = 'dessert';
-    const parse = (val: any) => JSON.parse(val);
+    const parse: ConfigPropertyParseValueMethod = (val: ConfigPropertyValue): ConfigPropertyParsedValue => JSON.parse(val);
 
-    const data: { [key: string]: any } = {
+    const data: { [key: string]: ConfigPropertyValue } = {
       type: 'Birthday cake',
       layers: [1, 2, 3]
     };

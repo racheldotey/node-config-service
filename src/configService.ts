@@ -19,13 +19,16 @@ const newConfigService = (options?: ConfigPropertyManagerOptions, envOptions?: d
 	} = { 'default': defaultConfig };
 
 	let dotenvLoaded = false;
+	let dotenvOptions: dotenv.DotenvConfigOptions | undefined = undefined;
 
 	const service: ConfigService = {
 		...defaultConfig,
 		loadEnv(options?: dotenv.DotenvConfigOptions) {
+			if (dotenvLoaded && JSON.stringify(dotenvOptions) === JSON.stringify(options)) return;
 			// Load environment variables into process.env
 			// @see https://www.npmjs.com/package/dotenv
 			dotenv.config(options);
+			dotenvOptions = options;
 			dotenvLoaded = true;
 		},
 		addConfig(key: string, options?: ConfigPropertyManagerOptions) {

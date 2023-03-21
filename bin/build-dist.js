@@ -23,7 +23,7 @@ const NAME = 'node-config-service';//npmPackage.name;
 const VERSION = '0.9.0';//npmPackage.version;
 const DIR_ROOT = getPackageRootDir();
 const DIR_SOURCE = path.join(DIR_ROOT, 'src');
-const FILES_TO_COPY = ['index.d.ts'];
+const FILES_TO_COPY = [];//['index.d.ts'];
 
 tl.info(`           > ${NAME} v${VERSION} ...`);
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { expectConfigPropertyManager } from './lib';
 import { newConfigPropertyManager } from '../src/propertyManager';
 import type {

@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { getSafeBoolean } from './utils/getSafeBoolean';
-
 
 
 type ConfigPropertyValue = any;
@@ -16,8 +16,8 @@ type ConfigPropertyOptions = {
     required?: boolean;
     isRequired?: boolean;
     parse?: ConfigPropertyParseValueMethod;
-    value?: any;
-    initValue?: any;
+    value?: ConfigPropertyValue;
+    initValue?: ConfigPropertyValue;
 }
 type ConfigProperty = {
     name: string;
